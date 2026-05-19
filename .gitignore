@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+
+# VitePress build output and dev cache
+**/.vitepress/cache/
+**/.vitepress/dist/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test and coverage
+coverage/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite / bundler
+.vite/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# VS Code (keep shared settings if you add them later)
+.vscode/*
+!.vscode/extensions.json
+
+# Cursor local state
+.cursor/plans/
+.cursor/projects/
+
+# Deploy previews
+.vercel/
+.netlify/
+
+# Optional local overrides
+*.local
