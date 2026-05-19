@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  // Required for GitHub Pages project site: https://her-ai-studio.github.io/curriculum/
+  base: '/curriculum/',
   title: 'Her AI Studio Courses',
   description: 'Women learning AI together. Course materials for the Her AI Studio program.',
   head: [
