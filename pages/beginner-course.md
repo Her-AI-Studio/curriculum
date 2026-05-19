@@ -2,48 +2,18 @@
 outline: deep
 ---
 
-# Runtime API Examples
+# Get Started Building AI
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+Just getting started? Let's take this journey together.
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+In this course, you'll build a **Plant Journal**: train a classifier on your own plants, save check-ins with photos, and get care tips with optional local AI (Ollama). 
+
 
 ```md
-<script setup>
-import { useData } from 'vitepress'
-
-const { theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+code block
 ```
 
-<script setup>
-import { useData } from 'vitepress'
 
-const { site, theme, page, frontmatter } = useData()
-</script>
+## H2
 
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-
-## More
-
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+### H3

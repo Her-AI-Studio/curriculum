@@ -27,6 +27,7 @@ coverage/
 
 # Vite / bundler
 .vite/
+plant-journal/dist/
 
 # OS files
 .DS_Store

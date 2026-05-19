@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plant Journal</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Plant Journal</h1>
+      <p>Train a plant classifier, identify your plants, and save check-ins with care tips.</p>
+    </header>
+
+    <main class="layout">
+      <section class="camera-panel" aria-label="Camera">
+        <div class="webcam-wrap">
+          <video id="video" playsinline muted autoplay width="280" height="280"></video>
+        </div>
+        <p class="hint">Allow camera access when prompted.</p>
+      </section>
+
+      <section class="controls-panel">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab is-active" data-tab="train" role="tab" aria-selected="true">Train</button>
+          <button type="button" class="tab" data-tab="identify" role="tab" aria-selected="false">Identify</button>
+          <button type="button" class="tab" data-tab="journal" role="tab" aria-selected="false">Journal</button>
+        </div>
+
+        <div id="panel-train" class="panel" role="tabpanel">
+          <p id="status" class="status">Loading MobileNet…</p>
+          <div class="field">
+            <label for="class-name">Plant class name</label>
+            <div class="row">
+              <input id="class-name" type="text" placeholder="e.g. Fern" maxlength="32" />
+              <button type="button" id="btn-add-class" class="btn btn--secondary">Add class</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="class-select">Active class</label>
+            <select id="class-select" disabled>
+              <option value="">Add a class first</option>
+            </select>
+          </div>
+          <div class="counts" id="sample-counts"></div>
+          <div class="row">
+            <button type="button" id="btn-capture" class="btn btn--primary" disabled>Capture sample</button>
+            <button type="button" id="btn-train" class="btn btn--primary" disabled>Train model</button>
+          </div>
+          <button type="button" id="btn-clear" class="btn btn--ghost">Clear all samples</button>
+        </div>
+
+        <div id="panel-identify" class="panel" role="tabpanel" hidden>
+          <p id="identify-status" class="status">Point your plant at the camera, then identify.</p>
+          <div class="result" id="result" hidden>
+            <p class="result__label">Prediction</p>
+            <p class="result__value" id="result-label">—</p>
+            <p class="result__conf" id="result-conf"></p>
+          </div>
+          <div class="row">
+            <button type="button" id="btn-identify" class="btn btn--primary" disabled>Identify plant</button>
+            <button type="button" id="btn-identify-loop" class="btn btn--secondary" disabled>Live identify</button>
+          </div>
+          <div class="field">
+            <label for="journal-note">Note (optional)</label>
+            <input id="journal-note" type="text" placeholder="e.g. Repotted today, leaves look healthy" maxlength="200" />
+          </div>
+          <button type="button" id="btn-save-journal" class="btn btn--primary" disabled>Save to journal</button>
+        </div>
+
+        <div id="panel-journal" class="panel" role="tabpanel" hidden>
+          <p id="ollama-status" class="status ollama-status">Checking Ollama…</p>
+          <div id="journal-gallery" class="journal-gallery" aria-label="Journal entries"></div>
+          <div id="journal-detail" class="journal-detail" hidden></div>
+          <div class="field">
+            <label for="care-plant-select">View care for</label>
+            <select id="care-plant-select">
+              <option value="">Choose a plant…</option>
+            </select>
+          </div>
+          <p class="care-plant-title">Care for <strong id="care-plant-display">—</strong></p>
+          <article id="care-card" class="care-card">Select a journal entry or plant to see care tips.</article>
+          <div class="row">
+            <button type="button" id="btn-care-refresh" class="btn btn--secondary">Refresh card</button>
+            <button type="button" id="btn-care-llm" class="btn btn--primary" disabled>Generate with Ollama</button>
+          </div>
+          <details class="ollama-settings">
+            <summary>Ollama settings (local LLM)</summary>
+            <div class="field">
+              <label for="ollama-base">Base URL</label>
+              <input id="ollama-base" type="url" value="http://localhost:11434" />
+            </div>
+            <div class="field">
+              <label for="ollama-model">Model</label>
+              <input id="ollama-model" type="text" value="qwen2.5" placeholder="qwen2.5" />
+            </div>
+            <button type="button" id="btn-save-ollama" class="btn btn--ghost">Save settings</button>
+          </details>
+          <div class="care-chips">
+            <button type="button" class="chip" data-care-chip="How often should I water?">Watering</button>
+            <button type="button" class="chip" data-care-chip="How much light does it need?">Light</button>
+            <button type="button" class="chip" data-care-chip="Any care tips for this plant?">Care tips</button>
+          </div>
+          <div id="care-messages" class="care-messages"></div>
+          <div class="row">
+            <input id="care-question" type="text" placeholder="Ask about your plant…" />
+            <button type="button" id="btn-care-ask" class="btn btn--primary">Ask</button>
+          </div>
+          <div class="row journal-actions">
+            <button type="button" id="btn-delete-entry" class="btn btn--ghost" disabled>Delete entry</button>
+            <button type="button" id="btn-clear-journal" class="btn btn--ghost">Clear journal</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

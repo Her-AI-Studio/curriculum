@@ -1,0 +1,26 @@
+{
+  "fern": {
+    "label": "Fern",
+    "tip": "Indirect light; keep soil lightly moist.",
+    "watering": "Water when the top inch of soil feels dry. Mist leaves 2 to 3 times per week.",
+    "light": "Bright indirect light. Avoid hot afternoon sun on the leaves.",
+    "mistakes": ["Letting soil dry out completely", "Placing in direct blazing sun"],
+    "funFact": "Ferns love steady moisture and have been around since before dinosaurs."
+  },
+  "succulent": {
+    "label": "Succulent",
+    "tip": "Bright light; let soil dry between waterings.",
+    "watering": "Water deeply, then wait until soil is fully dry. Usually every 1 to 2 weeks.",
+    "light": "Bright light, including some direct sun.",
+    "mistakes": ["Overwatering", "Keeping in a dark, damp corner"],
+    "funFact": "Succulents store water in their leaves, so they are built for dry spells."
+  },
+  "moss": {
+    "label": "Moss",
+    "tip": "Humid spot; mist often.",
+    "watering": "Keep evenly moist. Mist daily if the air is dry.",
+    "light": "Low to medium indirect light. Too much sun can dry moss quickly.",
+    "mistakes": ["Letting moss turn crispy brown", "Too much direct sun"],
+    "funFact": "Moss has no roots; it drinks through its leaves."
+  }
+}
