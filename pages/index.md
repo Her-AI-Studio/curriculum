@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Her AI Studio Courses
   text: Women learning AI together
-  tagline: Build fun and secret projects in a supportive studio. Show up curious, imagine it, build it.
+  tagline: Build fun and personalized projects in a supportive studio. Show up curious, imagine it, build it.
   image:
     src: /logo.png
     alt: Her AI Studio
