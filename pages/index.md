@@ -18,6 +18,9 @@ hero:
     - theme: brand
       text: Advanced Course
       link: /advanced-course
+    - theme: brand
+      text: Capstone
+      link: /capstone-instructions
 
 features:
   - title: Get Started on Your Own Machine
@@ -32,4 +35,8 @@ features:
     details: Design and assemble a cyberdeck, a portable studio for coding, prompting, and creating on the go. This capstone brings your skills together in one build you can show off at home, school, or showcase night.
     link: /advanced-course
     linkText: Advanced course
+  - title: Capstone
+    details: Ready to show off your final build? Plan your capstone presentation using this course, and prepare to teach others.
+    link: /capstone-instructions
+    linkText: Capstone
 ---
