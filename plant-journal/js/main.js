@@ -2,7 +2,8 @@ import * as tf from '@tensorflow/tfjs'
 import * as mobilenet from '@tensorflow-models/mobilenet'
 import { loadPlantsMeta, findMeta } from './plants-meta.js'
 import { setCurrentPlant, clearCurrentPlant } from './state.js'
-import { captureVideoFrameDataUrl } from './capture.js'
+import { captureVideoFrameDataUrl, sourceToFrameTensor, blobToFrameTensor } from './capture.js'
+import { VideoRecorder } from './video-recorder.js'
 import {
   addEntry,
   clearAllEntries,
@@ -32,6 +33,9 @@ let classIndexMap = []
 let liveLoopId = null
 let lastIdentification = null
 let selectedJournalId = null
+const videoRecorder = new VideoRecorder()
+/** @type {Blob | null} */
+let recordedVideoBlob = null
 
 const classes = []
 const samples = []
@@ -53,11 +57,28 @@ async function loadMobileNet() {
 }
 
 function getFrameTensor() {
-  return tf.tidy(() => {
-    const img = tf.browser.fromPixels(video)
-    const resized = tf.image.resizeBilinear(img, [224, 224])
-    return resized.expandDims(0)
-  })
+  return sourceToFrameTensor(video)
+}
+
+function addEmbeddingSample(classId, embedding) {
+  samples.push({ classId, embedding: embedding.clone() })
+}
+
+async function importFrameBlobs(frameBlobs, classId, onProgress) {
+  if (!mobileNetModel || !classId) return 0
+
+  let added = 0
+  for (let i = 0; i < frameBlobs.length; i++) {
+    onProgress?.(`Embedding frame ${i + 1} / ${frameBlobs.length}…`)
+    const frame = await blobToFrameTensor(frameBlobs[i])
+    const embedding = mobileNetModel.infer(frame, true)
+    frame.dispose()
+    addEmbeddingSample(classId, embedding)
+    embedding.dispose()
+    added++
+  }
+  updateCounts()
+  return added
 }
 
 function syncCarePlantList() {
@@ -73,6 +94,7 @@ function updateClassSelect() {
     opt.textContent = 'Add a class first'
     classSelect.append(opt)
     syncCarePlantList()
+    updateVideoUi()
     return
   }
   classSelect.disabled = false
@@ -83,6 +105,7 @@ function updateClassSelect() {
     classSelect.append(opt)
   }
   syncCarePlantList()
+  updateVideoUi()
 }
 
 function updateCounts() {
@@ -123,9 +146,131 @@ function captureSample() {
   const frame = getFrameTensor()
   const embedding = mobileNetModel.infer(frame, true)
   frame.dispose()
-  samples.push({ classId: classSelect.value, embedding: embedding.clone() })
+  addEmbeddingSample(classSelect.value, embedding)
+  embedding.dispose()
   updateCounts()
   statusEl.textContent = `Captured sample for "${classes.find((c) => c.classId === classSelect.value)?.name}".`
+}
+
+function updateVideoUi() {
+  const hasVideo = Boolean(recordedVideoBlob)
+  $('btn-extract-frames').disabled = !hasVideo || !classSelect.value || !mobileNetModel
+  $('video-preview-wrap').hidden = !hasVideo
+  if (hasVideo && recordedVideoBlob) {
+    const preview = $('video-preview')
+    if (preview.src && preview.src.startsWith('blob:')) {
+      URL.revokeObjectURL(preview.src)
+    }
+    preview.src = URL.createObjectURL(recordedVideoBlob)
+  }
+}
+
+async function toggleRecordVideo() {
+  const btn = $('btn-record-video')
+  if (videoRecorder.isRecording) {
+    btn.disabled = true
+    statusEl.textContent = 'Stopping recording…'
+    try {
+      recordedVideoBlob = await videoRecorder.stop()
+      btn.textContent = 'Record video'
+      btn.classList.remove('btn--danger')
+      statusEl.textContent = `Recorded ${Math.round(recordedVideoBlob.size / 1024)} KB. Extract frames to add training samples.`
+      updateVideoUi()
+    } catch (err) {
+      statusEl.textContent = `Recording failed: ${err.message}`
+    } finally {
+      btn.disabled = false
+    }
+    return
+  }
+
+  if (!video.srcObject) {
+    statusEl.textContent = 'Camera is not ready.'
+    return
+  }
+
+  try {
+    videoRecorder.start(video.srcObject)
+    btn.textContent = 'Stop recording'
+    btn.classList.add('btn--danger')
+    statusEl.textContent = 'Recording… Move slowly around your potted plant, then stop.'
+  } catch (err) {
+    statusEl.textContent = `Could not start recording: ${err.message}`
+  }
+}
+
+async function handleVideoUpload(event) {
+  const file = event.target.files?.[0]
+  event.target.value = ''
+  if (!file) return
+
+  recordedVideoBlob = file
+  statusEl.textContent = `Loaded "${file.name}". Extract frames to add training samples.`
+  updateVideoUi()
+}
+
+async function extractAndImportFrames() {
+  if (!recordedVideoBlob || !classSelect.value || !mobileNetModel) return
+
+  const fps = Math.max(0.25, Number($('frame-fps').value) || 1)
+  const maxFrames = Math.min(120, Math.max(3, Number($('frame-max').value) || 30))
+  const classId = classSelect.value
+  const className = classes.find((c) => c.classId === classId)?.name ?? 'class'
+
+  $('btn-extract-frames').disabled = true
+  $('btn-record-video').disabled = true
+  $('btn-import-images').disabled = true
+
+  try {
+    statusEl.textContent = 'Loading ffmpeg and extracting frames…'
+    const { extractFrames } = await import('./ffmpeg-frames.js')
+    const frames = await extractFrames(recordedVideoBlob, {
+      fps,
+      maxFrames,
+      onProgress: (msg) => {
+        statusEl.textContent = msg
+      },
+    })
+
+    if (frames.length === 0) {
+      statusEl.textContent = 'No frames extracted. Try a longer video or lower fps.'
+      return
+    }
+
+    const added = await importFrameBlobs(frames, classId, (msg) => {
+      statusEl.textContent = msg
+    })
+    statusEl.textContent = `Added ${added} sample(s) for "${className}" from video frames.`
+  } catch (err) {
+    statusEl.textContent = `Frame extraction failed: ${err.message}`
+    console.error(err)
+  } finally {
+    $('btn-record-video').disabled = false
+    $('btn-import-images').disabled = false
+    updateVideoUi()
+  }
+}
+
+async function handleImageUpload(event) {
+  const files = [...(event.target.files ?? [])].filter((f) => f.type.startsWith('image/'))
+  event.target.value = ''
+  if (files.length === 0 || !classSelect.value || !mobileNetModel) return
+
+  const classId = classSelect.value
+  const className = classes.find((c) => c.classId === classId)?.name ?? 'class'
+
+  $('btn-import-images').disabled = true
+  try {
+    const added = await importFrameBlobs(files, classId, (msg) => {
+      statusEl.textContent = msg
+    })
+    statusEl.textContent = `Added ${added} sample(s) for "${className}" from uploaded images.`
+  } catch (err) {
+    statusEl.textContent = `Image import failed: ${err.message}`
+    console.error(err)
+  } finally {
+    $('btn-import-images').disabled = false
+  }
 }
 
 function clearSamples() {
@@ -143,6 +288,7 @@ function clearSamples() {
   $('btn-save-journal').disabled = true
   updateCounts()
   statusEl.textContent = 'Samples cleared.'
+  updateVideoUi()
 }
 
 async function trainModel() {
@@ -371,6 +517,11 @@ $('btn-train').addEventListener('click', () =>
   }),
 )
 $('btn-clear').addEventListener('click', clearSamples)
+$('btn-record-video')?.addEventListener('click', () => toggleRecordVideo().catch(console.error))
+$('btn-extract-frames')?.addEventListener('click', () => extractAndImportFrames().catch(console.error))
+$('video-upload')?.addEventListener('change', (e) => handleVideoUpload(e).catch(console.error))
+$('image-upload')?.addEventListener('change', (e) => handleImageUpload(e).catch(console.error))
+classSelect.addEventListener('change', updateVideoUi)
 $('btn-identify').addEventListener('click', () => identifyOnce().catch(console.error))
 $('btn-identify-loop').addEventListener('click', toggleLiveIdentify)
 $('btn-save-journal').addEventListener('click', () => saveToJournal())

@@ -48,6 +48,41 @@
             <button type="button" id="btn-train" class="btn btn--primary" disabled>Train model</button>
           </div>
           <button type="button" id="btn-clear" class="btn btn--ghost">Clear all samples</button>
+
+          <details class="video-training" open>
+            <summary>Train from video (ffmpeg)</summary>
+            <p class="hint">
+              Record or upload a short clip of your potted plant. ffmpeg extracts frames; each frame becomes a training sample for the active class.
+            </p>
+            <div class="row">
+              <button type="button" id="btn-record-video" class="btn btn--secondary">Record video</button>
+              <label class="btn btn--secondary file-btn">
+                Upload video
+                <input id="video-upload" type="file" accept="video/*" hidden />
+              </label>
+            </div>
+            <div id="video-preview-wrap" class="video-preview-wrap" hidden>
+              <video id="video-preview" playsinline muted controls width="280"></video>
+            </div>
+            <div class="field-row">
+              <div class="field field--compact">
+                <label for="frame-fps">Frames per second</label>
+                <input id="frame-fps" type="number" min="0.25" max="5" step="0.25" value="1" />
+              </div>
+              <div class="field field--compact">
+                <label for="frame-max">Max frames</label>
+                <input id="frame-max" type="number" min="3" max="120" step="1" value="30" />
+              </div>
+            </div>
+            <div class="row">
+              <button type="button" id="btn-extract-frames" class="btn btn--primary" disabled>Extract frames &amp; add samples</button>
+              <label class="btn btn--secondary file-btn">
+                Import images
+                <input id="image-upload" type="file" accept="image/*" multiple hidden />
+              </label>
+            </div>
+            <p class="hint hint--small">Or run <code>npm run extract-frames -- your-plant.mp4</code> locally, then import the JPEG folder.</p>
+          </details>
         </div>
 
         <div id="panel-identify" class="panel" role="tabpanel" hidden>
