@@ -10,11 +10,13 @@ _Beginner Course · Week 2_
 
 ## Learning Objectives
 
-By the end of this lesson you will be able to:
+By the end of this week you will be able to:
 
-- Explain what training data is and why it matters for AI
-- Identify potential biases in a dataset
-- Apply responsible AI principles to your own project
+- Explain the difference between cloud-hosted AI and locally-running AI, including the privacy trade-offs of each
+- Define data sovereignty and give a real-world example of why it matters to you personally
+- Install and run an open-source AI model on your own machine without a cloud account or internet connection
+- Train a small custom image classifier using data you collected yourself
+- Describe what a model "guardrail" is and explain why someone would add one
 
 ---
 
