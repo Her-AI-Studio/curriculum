@@ -6,7 +6,7 @@ hero:
   text: Women learning AI together
   tagline: Build fun and personalized projects in a supportive studio. Show up curious, imagine it, build it.
   image:
-    src: /logo.png
+    src: /reading.png
     alt: Her AI Studio
   actions:
     - theme: brand

@@ -6,14 +6,6 @@ outline: deep
 
 Just getting started? Let's take this journey together.
 
-In this course, you'll build a **Plant Journal**: train a classifier on your own plants, save check-ins with photos, and get care tips with optional local AI (Ollama). 
+In this course, you'll work with a pre-built web site called **My Room**. This is a web site that you can use to classify items in your room - for example your crystal collection, makeup stash, pens, notebooks, or most recent haul. Train a custom local image model and use a locally-downloaded Large Language Model (LLM) to write journal entries about it.
 
-
-```md
-code block
-```
-
-
-## H2
-
-### H3
+During these first weeks, we'll cover some basics about artificial intelligence; what it is, who built it, and start focusing on some fundamental aspects like model training, guardrails, privacy, and security, and how you can think about handling these while working locally, or even offline.

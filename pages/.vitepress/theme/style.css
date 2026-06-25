@@ -362,6 +362,16 @@ h4,
   background-color: var(--has-purple-dark-hover) !important;
 }
 
+.VPHome .VPHero .actions .action:nth-child(4) .VPButton.brand {
+  border-color: transparent !important;
+  color: oklch(99% 0.004 270) !important;
+  background-color: oklch(65% 0.19 50) !important;
+}
+
+.VPHome .VPHero .actions .action:nth-child(4) .VPButton.brand:hover {
+  background-color: oklch(60% 0.19 50) !important;
+}
+
 /* Logo column: override VitePress absolute positioning that hides the image */
 .VPHome .VPHero .image {
   margin: 0 !important;
