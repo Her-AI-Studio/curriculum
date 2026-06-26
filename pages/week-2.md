@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Understanding Training Data
+# Understanding Training Data and Models
 
 _Beginner Course · Week 2_
 

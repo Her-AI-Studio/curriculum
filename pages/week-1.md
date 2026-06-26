@@ -6,37 +6,19 @@ outline: deep
 
 _Beginner Course · Week 1_
 
-## What You Will Learn
-
-By the end of this week you will be able to:
-
-- Describe in your own words what a machine learning model is and how it learns from data
-- Name at least three women who made foundational contributions to AI and computing, and explain why that history matters today
-- Identify at least two ways that AI systems reflect the biases of the people and data behind them
-- Articulate why your own perspective as a young woman — especially as a skeptic — is an asset, not a liability, in AI development
-- Ask informed critical questions about any AI tool you encounter: who built it, what data trained it, and who benefits
-
 ![Sketchnotes, week 1](/week-1.png)
 
-## Expectations
-
-### What you need before you start
-
-- No prior AI experience required
-- Curiosity and a willingness to question what you think you know about AI
-
-### What you will have when you finish
-
-- A completed "AI Audit" card for a tool you use every day
-- A personal statement about why your perspective matters in tech
-
-### Time
-
-~2.5 hours in-person session
+| **Lesson Goal**            | What is AI? Who built it? Why should you care?                                                                                                                                   |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **What you’ll learn**       | By the end of this week you will be able to:<br>- Describe in your own words what a machine learning model is and how it learns from data<br>- Name at least three women who made foundational contributions to AI and computing, and explain why that history matters today<br>- Identify at least two ways that AI systems reflect the biases of the people and data behind them<br>- Articulate why your own perspective as a young woman — especially as a skeptic — is an asset, not a liability, in AI development<br>- Ask informed critical questions about any AI tool you encounter: who built it, what data trained it, and who benefits |
+| **Tools you’ll need**       | Notebook or paper and pencil and your curiosity and willingness to think about your relationship with AI |
+| **End result**       |  A completed "AI Audit" card for a tool you use every day and a personal statement about why your perspective matters in tech |
+| **Time needed to complete** | 60 minutes |
+| **Further reading** | ... |
 
 ## Session Plan
 
-### Part 1 — What Even Is AI? (30 min)
+### Part 1 — What Even Is AI? (10 min)
 
 **Warm-up: Two Truths and a Lie — AI Edition (10 min)**
 
@@ -50,8 +32,6 @@ Example set:
 Repeat with 2–3 sets. The goal is to surface assumptions and start a conversation, not to test knowledge.
 
 **Mini-lecture: How AI Models Actually Work (15 min)**
-
-Key ideas to cover — keep it concrete, skip the math:
 
 **What is a model?**
 
@@ -94,7 +74,6 @@ Divide into small groups (3–4 students). Each group is assigned one of the fol
 | Timnit Gebru | Co-authored landmark research on bias in facial recognition; co-founded DAIR Institute |
 | Joy Buolamwini | Founded Algorithmic Justice League; documented racial and gender bias in AI systems |
 | Fei-Fei Li | Created ImageNet, the dataset that launched the modern deep learning era |
-| Katherine Johnson | NASA mathematician whose orbital calculations sent astronauts to the moon |
 
 Groups can use their phones or any available laptops to research. After 15 minutes, each group presents (2 min each).
 
@@ -110,7 +89,7 @@ Facilitator-led discussion:
 
 **Demo: Ask the model something biased (10 min)**
 
-If devices are available, open a chat interface (Claude, ChatGPT, or a local model). Run these prompts as a group and observe the outputs together:
+Open a chat interface (Claude, ChatGPT, or a local model). Run these prompts as a group and observe the outputs together:
 
 ```
 Describe a typical software engineer.
