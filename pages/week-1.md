@@ -16,7 +16,7 @@ By the end of this week you will be able to:
 - Articulate why your own perspective as a young woman — especially as a skeptic — is an asset, not a liability, in AI development
 - Ask informed critical questions about any AI tool you encounter: who built it, what data trained it, and who benefits
 
-![Sketchnotes, week 1](./week-1.png)
+![Sketchnotes, week 1](/week-1.png)
 
 ## Expectations
 
