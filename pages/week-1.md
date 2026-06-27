@@ -21,19 +21,11 @@ _Beginner Course · Week 1_
 
 **Warm-up: Two Truths and a Lie — AI Edition (10 min)**
 
-Here are some statements about AI. Pick one of these sets of questions and determine which is true, and which is false?
-
-1. AI models learn new information every time you use them.
-2. Some AI models can run entirely on your laptop with no internet.
-3. An AI model trained mostly on English text will perform worse on other languages.
+Here are some statements about AI. Which is true, and which is false?
 
 1. AI learns patterns from data rather than "thinking" like a human.
 2. Using AI guarantees faster and more accurate work in every situation.
-3. AI models can reflect biases present in their training data.
-
-1. AI can generate text, images, and computer code.
-2. AI systems can sometimes produce confident but incorrect answers.
-3. If an AI sounds confident, its answer is probably correct.
+3. AI models learn from your input each time you enter information into a chatbot.
 
 **Mini-lecture: How AI Models Actually Work (10 min)**
 
