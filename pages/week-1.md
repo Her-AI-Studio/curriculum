@@ -217,14 +217,19 @@ Try a sentence starter:
 3. Give two examples of where bias can enter an AI system.
 4. What does it mean to ask "who benefits?" when evaluating an AI tool?
 
+**Assignment**
+
 - Keep your AI Audit Card — bring it to Week 2
 - Reading: [_Gender Shades_](https://www.media.mit.edu/projects/gender-shades/overview/) — the Joy Buolamwini study that documented facial recognition bias
 - Watch Joy Buolamwini's spoken word piece, "AI, Ain't I a Woman?": https://www.youtube.com/watch?v=HZxV9w2o0FM
 - Find one more woman in AI history not covered in class and bring her name to Week 2
-- Optional: download a free zine that explains topics in machine learning: https://zines.jenlooper.com/ 
-- Optional: read Pope Leo's encyclical, Magnifica Humanitas: https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html
-- Optional: read about some of the challenges around copyright in AI. An example is Hayao Miyazaki (Studio Ghibli's animator)'s "disgust" for AI: https://www.the-independent.com/arts-entertainment/films/news/hayao-miyazaki-studio-ghibli-ai-trend-b2723358.html
-- Optional: Watch [this interview](https://www.cbsnews.com/news/how-kenya-became-the-silicon-savannah-60-minutes/) on CBS News on the conditions of data labellers in Kenya.
+
+**Optional Supplemental Reading** 
+
+- Download a free zine that explains topics in machine learning: https://zines.jenlooper.com/ 
+- Read Pope Leo's encyclical, Magnifica Humanitas: https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html
+- Read about some of the challenges around copyright in AI. An example is Hayao Miyazaki (Studio Ghibli's animator)'s "disgust" for AI: https://www.the-independent.com/arts-entertainment/films/news/hayao-miyazaki-studio-ghibli-ai-trend-b2723358.html
+- Watch [this interview](https://www.cbsnews.com/news/how-kenya-became-the-silicon-savannah-60-minutes/) on CBS News on the conditions of data labellers in Kenya.
 
 ## Next Steps
 
