@@ -69,3 +69,5 @@ This curriculum is **facilitated, project-based, and community-minded**. Every l
 The progression is intentional: students begin by examining AI critically — as users and skeptics — before they ever write a line of code. By the end of the beginner course they have built a working local AI app. By the end of the advanced course, they have a cyberdeck: a small, portable, offline-capable computer they built themselves.
 
 We believe the field of AI needs more voices, not fewer — and that young women who ask hard questions are exactly who should be building these systems.
+
+![Teaching AI](/teaching.png)
