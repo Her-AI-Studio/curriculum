@@ -37,29 +37,28 @@ The curriculum starts not with setup instructions, but with the question that ma
 
 ---
 
-## Beginner Course — Weeks at a Glance
-
-The beginner course works with our **My Room** app: a web app that classifies items from your own collections (crystals, makeup, notebooks — anything you care about), runs a local AI assistant, and manages your data — all without a cloud account.
-
-|  Week  | Title | Concepts | Learning Objectives | Lesson |
-| :----: | ----- | -------- | ------------------- | ------ |
-| 01 | Understanding AI: Who Built It, Who It's For, and Why You Belong Here | What is a model? Women in AI history. Bias as a mirror. Skepticism as a skill. | Describe how a language model learns · Name women who shaped AI · Identify where bias enters a system · Articulate why your perspective matters | [Week 1](pages/week-1.md) |
-| 02 | Taking Control: Training Data and Local AI | Training data, data sovereignty, local vs. cloud AI, model guardrails | Explain cloud vs. local AI trade-offs · Install and run a local open-source model · Train a small custom image classifier the the My Room app | [Week 2](pages/week-2.md) |
-| 03 | Software to Hardware | Getting used to the hardware | [Week 3](pages/week-3.md) |
-| 04 | Hybrid Project Build: App TBD | Building an app using the board | [Week 4](pages/week-4.md) |
-| 05 | Working towards offline: Creating a Fully Local Computer | TBD | [Week 5](pages/week-5.md) |
-| 06 | My Cyberdeck — Final Build | TBD | [Week 6](pages/week-6.md) |
-
----
-
 ## Each Lesson Includes
 
 - Sketchnote
-- Written lesson with facilitator notes
+- Written lesson
+- Separate facilitator notes
 - Step-by-step project guides (for project-based weeks)
 - Discussion prompts and activities
 - Check your understanding questions
 - Take-home challenge and supplemental reading
+
+---
+
+## Lessons
+
+| Project Name | Concepts Taught | Learning Objectives | Linked Lesson | Sketchnote | Author |
+| ------------ | --------------- | ------------------- | :-----------: | :--------: | ------ |
+| Understanding AI: Who Built It, Who It's For, and Why You Belong Here | What is a model? Women in AI history. Bias as a mirror. Skepticism as a skill. | Describe how a language model learns · Name women who shaped AI · Identify where bias enters a system · Articulate why your perspective matters | [Week 1](pages/week-1.md) | ✅ | Jen Looper |
+| Taking Control: Training Data and Local AI | Training data, data sovereignty, local vs. cloud AI, model guardrails | Explain cloud vs. local AI trade-offs · Install and run a local open-source model · Train a small custom image classifier with the My Room app | [Week 2](pages/week-2.md) |  | Jen Looper |
+| Software to Hardware | Getting used to the hardware | TBD | [Week 3](pages/week-3.md) | | Jen Looper |
+| Hybrid Project Build: App TBD | Building an app using the board | TBD | [Week 4](pages/week-4.md) | | Jen Looper |
+| Working Towards Offline: Creating a Fully Local Computer | TBD | TBD | [Week 5](pages/week-5.md) | | Jen Looper |
+| My Cyberdeck — Final Build | TBD | TBD | [Week 6](pages/week-6.md) | | Jen Looper |
 
 ---
 
