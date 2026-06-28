@@ -222,7 +222,7 @@ Try a sentence starter:
 - Keep your AI Audit Card — bring it to Week 2
 - Reading: [_Gender Shades_](https://www.media.mit.edu/projects/gender-shades/overview/) — the Joy Buolamwini study that documented facial recognition bias
 - Watch Joy Buolamwini's spoken word piece, "[AI, Ain't I a Woman?](https://www.youtube.com/watch?v=HZxV9w2o0FM)"
-- Find one more woman in AI history not covered in class and bring her name to Week 2
+- Find one more woman in AI history not covered in class
 
 **Optional Supplemental Reading** 
 
