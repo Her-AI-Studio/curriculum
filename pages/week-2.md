@@ -17,7 +17,7 @@ _Beginner Course · Week 2_
 
 ## Session Plan
 
-### Lesson 1 — Cloud vs. Local: Where Does Your AI Live?
+### Part 1 — Cloud vs. Local: Where Does Your AI Live?
 
 **Warm-up: Where Did Your Last AI Query Go? (5 min)**
 
