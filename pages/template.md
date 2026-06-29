@@ -6,7 +6,7 @@ outline: deep
 
 _Beginner / Intermediate / Advanced Course · Week N_
 
-![Sketchnotes, week N](/week-N.png)
+![Sketchnotes, week N]()
 
 | **Lesson Goal**            | One sentence: what question does this lesson answer?                                                    |
 | --------------------------- | ------------------------------------------------------------------------------------------------------- |
