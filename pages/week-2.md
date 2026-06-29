@@ -6,7 +6,7 @@ outline: deep
 
 _Beginner Course · Week 2_
 
-![Sketchnotes, week 2](/week-1.png)
+![Sketchnotes, week 2]()
 
 | **Lesson Goal**            | Where does AI live? How do you choose the right model and keep your data secure or even private?                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -43,7 +43,7 @@ This means your data **leaves your device**. It travels over networks you don't 
 
 **How most AI today runs on cloud servers**
 
-Almost every AI tool you've used — ChatGPT, Claude, Gemini, Grammarly, Snapchat filters, TikTok's recommendation algorithm — runs on cloud servers. You send data out, the server processes it, and the result comes back. This is convenient because:
+Almost every AI tool you've used (ChatGPT, Claude, Gemini, Grammarly, Snapchat filters, TikTok's recommendation algorithm) runs on cloud servers. You send data out, the server processes it, and the result comes back. This is convenient because:
 
 - The company's servers are powerful (you don't need an expensive in-house computer)
 - The model is always up to date
@@ -64,18 +64,18 @@ Every time you use a cloud AI tool, you're trading a piece of your privacy for c
 
 **What is data sovereignty?**
 
-Data sovereignty is the idea that data is subject to the laws of the country where it's stored. If you're in the US and your data is processed on a server in Ireland, Irish and EU law (like GDPR) applies to it — not just US law.
+Data sovereignty is the idea that data is subject to the laws of the country where it's stored. If you're in the US and your data is processed on a server in Ireland, Irish and EU law (like GDPR) applies to it, not just US law.
 
 This matters when you wonder:
 
-- **Who controls your data?** — Can you request it be deleted? Can you see what data is kept?
-- **Where is it stored?** — Is it in your country? Another country? Multiple countries?
-- **What laws govern it?** — Does the local government have the right to access it? What about other people? What privacy protections apply?
+- **Who controls your data?**: Can you request it be deleted? Can you see what data is kept?
+- **Where is it stored?**: Is it in your country? Another country? Multiple countries?
+- **What laws govern it?**: Does the local government have the right to access it? What about other people? What privacy protections apply?
 
 **Real-world examples**
 
 - **School policies banning ChatGPT uploads:** Many schools now prohibit uploading student work to AI tools because of privacy concerns — your homework could become training data and your personal information exposed.
-- **GDPR (General Data Protection Regulation):** A European law that gives people the right to know what data companies hold on them, and the right to have it deleted. If a company processes EU citizens' data, GDPR applies — even if the company is based elsewhere.
+- **GDPR (General Data Protection Regulation):** A European law that gives people the right to know what data companies hold on them, and the right to have it deleted. If a company processes EU citizens' data, GDPR applies, even if the company is based elsewhere.
 - **Data leaks:** In 2023, Samsung employees accidentally leaked confidential data by pasting it into ChatGPT. The company banned the tool internally. Your private data can become part of a model's training set without your knowledge.
 
 **Discussion prompt (10 min):** _"When is cloud AI OK? When would you insist on local?"_
@@ -90,13 +90,11 @@ Split into small groups. For each scenario, decide: cloud or local? Why?
 
 Share your group's answers with the class. Where did people draw the line differently?
 
----
-
 ### Part 2 — Open and Closed: Model Choice (20 min)
 
 **Warm-up: What Does "Open" Mean to You? (3 min)**
 
-When you hear "open source," what comes to mind? Write down one word or phrase. Now imagine an "open" AI model — what would that look like compared to a "closed" one?
+When you hear "open source," what comes to mind? Write down one word or phrase. Now imagine an "open" AI model. What would that look like compared to a "closed" one?
 
 Open Source means that software under given open source licenses are "distributed under terms that guarantee users the freedom to freely share, modify, and use the software for any purpose. It strictly requires providing accessible, non-obfuscated source code and forbids discrimination against any person, group, or field of endeavor." [source](https://opensource.org/osd)
 
@@ -148,28 +146,26 @@ Now consider: Who decided that this topic should be guarded? What if the guardra
 
 **Discussion prompt:** _"Is a model with guardrails truly open? Should open models have guardrails at all — and who should decide what they block?"_
 
----
-
 ### Part 3 — "My Room": Train a Vision Model on Your Own Data (25 min)
 
 **Introduction: What is MobileNet? (5 min)**
 
-Let's move from theory to practice. We're going to work with an app built for Her AI Studio called "My Room" — and right off, you can see how an app that uses your camera might create a privacy concern. So let's look at how this app handles that.
+Let's move from theory to practice. We're going to work with an app built for Her AI Studio called "My Room". Right off, you can see how an app that uses your camera might create a privacy concern. So let's look at how this app handles that.
 
-The My Room app uses **MobileNet**, a lightweight image classification model designed to run on phones and browsers — not data centers. It was created by Google researchers to bring AI to devices with limited computing power.
+The My Room app uses **MobileNet**, a lightweight image classification model designed to run on phones and browsers, not data centers. It was created by Google researchers to bring AI to devices with limited computing power.
 
-> Fun fact: MobileNet was designed to perform well on ImageNet's benchmark while being efficient enough for mobile devices. ImageNet is the dataset created by Fei-Fei Li, who we learned about last week. MobileNet's pre-trained "base knowledge" — the ability to recognize edges, shapes, and objects — came from training on her dataset.
+> Fun fact: MobileNet was designed to perform well on ImageNet's benchmark while being efficient enough for mobile devices. ImageNet is the dataset created by Fei-Fei Li, who we learned about last week. MobileNet's pre-trained "base knowledge" (the ability to recognize edges, shapes, and objects) came from training on her dataset.
 
 What makes MobileNet special:
-- It's **small** — a fraction of the size of models like GPT-4
-- It's **fast** — can classify images in milliseconds
-- It's **local** — designed to run on your device, not in the cloud
+- It's **small**: a fraction of the size of models like GPT-4
+- It's **fast**: can classify images in milliseconds
+- It's **local**: designed to run on your device, not in the cloud
 
 Today, you're not just *using* MobileNet. You're going to **train** it on your own data.
 
 **A note on "local" vs. "cloud"**
 
-The My Room app is served to you from GitHub Pages — it's a web app, so its code lives on a server. But here's the key distinction: **the app comes from the cloud, but your data never leaves your device.**
+The My Room app is served to you from GitHub Pages. It's a web app, so its code lives on a server. But here's the key distinction: **the app comes from the cloud, but your data never leaves your device.**
 
 Your images, labels, and the model you train all stay in your browser. They never get uploaded to a server, stored in a database, or used to train someone else's AI. The model runs on your machine, using your computer's own hardware.
 
@@ -203,23 +199,21 @@ This makes My Room a **hybrid** — a useful middle ground between fully cloud-b
 
 **Activity: Train and Test (5 min)**
 
-1. Click "Train" — the model will now learn to distinguish groups if your objects
+1. Click "Train". The model will now learn to distinguish groups if your objects
 2. Once training completes, hold up each object to the camera
 3. Does the model recognize them? What does the confidence score look like (e.g., 95% sure it's a water bottle)?
-4. Try showing the model something it hasn't seen — another object, or your hand. What does it predict?
+4. Try showing the model something it hasn't seen: another object, or your hand. What does it predict?
 
 **Reflection: What Just Happened?**
 
 You just completed the full ML pipeline:
-1. **Data collection** — you gathered and labeled images
-2. **Training** — the model learned patterns for each label
-3. **Inference** — it classified new images it had never seen
+1. **Data collection**: you gathered and labeled images
+2. **Training**: the model learned patterns for each label
+3. **Inference**: it classified new images it had never seen
 
 This is the same process that powers everything from photo tagging to medical imaging — except you did it with your own data, without sending anything to a cloud server.
 
 **Discussion prompt:** _"How does training a model on your own stuff change how you think about AI? Does it feel more trustworthy? Less magical? More like a tool you control?"_
-
----
 
 ### Part 4 — Moving Offline: Run a Local LLM with Ollama (20 min + independent practice)
 
@@ -229,11 +223,11 @@ So far you've trained a vision model in the browser. But what about language mod
 
 **Yes — and here's why you'd want to:**
 
-- **Complete privacy** — your conversations stay on your machine, period
-- **No censorship** — no company-imposed guardrails (though you can add your own)
-- **No cost** — no API fees, no subscription
-- **Offline access** — works anywhere, even without WiFi
-- **Learning** — you get to see what's actually inside an AI model
+- **Complete privacy**: your conversations stay on your machine, period
+- **No censorship**: no company-imposed guardrails (though you can add your own)
+- **No cost**: no API fees, no subscription
+- **Offline access**: works anywhere, even without WiFi
+- **Learning**: you get to see what's actually inside an AI model
 
 **Activity: Install Ollama (10 min)**
 
@@ -286,8 +280,6 @@ Try these challenges on your own after the lesson:
 
 **Discussion prompt:** _"When would you choose a local model over ChatGPT? What would you give up? What would you gain?"_
 
----
-
 ## Check Your Understanding
 
 1. In your own words, explain the difference between cloud-based AI and local AI. Give one advantage of each.
@@ -303,6 +295,7 @@ Try these challenges on your own after the lesson:
 - Install Ollama on your personal machine if you haven't already
 - Try at least one additional model (e.g., `ollama run phi` or `ollama run mistral`)
 - Write a short comparison: when would you use a local model vs. a cloud model? Bring your thoughts to Week 3
+- Personalize the 'My Room' app with your own collections. Ask an LLM on Ollama about your items. Do you learn anything new?
 
 **Optional Supplemental Reading**
 - Read about [data sovereignty and why it matters](https://en.wikipedia.org/wiki/Data_sovereignty)
@@ -312,4 +305,4 @@ Try these challenges on your own after the lesson:
 
 ## Next Steps
 
-- [Week 3 — Prompting and Ethics: How to Talk to AI](/week-3)
+- [Week 3 — TBD](/week-3)
