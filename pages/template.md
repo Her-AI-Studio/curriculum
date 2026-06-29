@@ -81,10 +81,10 @@ Reflection prompt and instructions.
 4. Question 4?
 
 - Action item or deliverable to bring to the next session
-- Required reading: [Title](url)
-- Required watch: [Title](url)
-- Optional: [Title](url)
+- Required reading: [Title]()
+- Required watch: [Title]()
+- Optional: [Title]()
 
 ## Next Steps
 
-- [Week N+1 — Lesson Title](/week-N+1)
+- [Week N+1 — Lesson Title]()
