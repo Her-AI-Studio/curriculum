@@ -6,7 +6,7 @@ outline: deep
 
 _Beginner Course · Week 2_
 
-![Sketchnotes, week 2]()
+<!-- Image needed: placeholder for week-2 sketchnotes -->
 
 | **Lesson Goal**            | Where does AI live? How do you choose the right model and keep your data secure or even private?                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -90,6 +90,8 @@ Split into small groups. For each scenario, decide: cloud or local? Why?
 
 Share your group's answers with the class. Where did people draw the line differently?
 
+> Now that you've thought deeply about where data lives, let's turn our attention to how it works to train various types of AI and ML models.
+
 ### Part 2 — Open and Closed: Model Choice (20 min)
 
 **Warm-up: What Does "Open" Mean to You? (3 min)**
@@ -111,7 +113,7 @@ Some LLMs are open source because they check the following boxes:
 | **Who can modify it?** | Anyone with the skills to fine-tune it | Only the company |
 | **Guardrails** | Often minimal or removable | Built-in by the company |
 
-*Llama is often called open source but it does not fit the open source definition listed above (source)[https://opensource.org/blog/metas-llama-license-is-still-not-open-source]. Licensing is tricky and the domain of legal departments, but in general look for classic open source licenses when using downloadable models. Apache (like [Gemma4's](https://ai.google.dev/gemma/docs/core/model_card_4)) and MIT licenses are good signals.
+*Llama is often called open source but it does not fit the open source definition listed above [source](https://opensource.org/blog/metas-llama-license-is-still-not-open-source). Licensing is tricky and the domain of legal departments, but in general look for classic open source licenses when using downloadable models. Apache (like [Gemma4's](https://ai.google.dev/gemma/docs/core/model_card_4)) and MIT licenses are good signals.
 
 **Getting a view of training data is one of the trickiest parts of determining whether a model is really open source or not. 
 
@@ -224,10 +226,8 @@ So far you've trained a vision model in the browser. But what about language mod
 **Yes — and here's why you'd want to:**
 
 - **Complete privacy**: your conversations stay on your machine, period
-- **No censorship**: no company-imposed guardrails (though you can add your own)
 - **No cost**: no API fees, no subscription
 - **Offline access**: works anywhere, even without WiFi
-- **Learning**: you get to see what's actually inside an AI model
 
 **Activity: Install Ollama (10 min)**
 
