@@ -6,7 +6,7 @@ outline: deep
 
 _Beginner Course · Week 2_
 
-<!-- Image needed: placeholder for week-2 sketchnotes -->
+![Sketchnotes, week 2](/week-2.png)
 
 | **Lesson Goal**            | Where does AI live? How do you choose the right model and keep your data secure or even private?                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
