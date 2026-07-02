@@ -23,7 +23,7 @@ _Beginner Course · Week 2_
 
 Think about the last time you used ChatGPT, Claude, or any AI tool. Where do you think your question went? Take 30 seconds to draw a simple diagram showing what you imagine happens after you hit "enter."
 
-Share your drawings with a partner — what's similar? What's different?
+Share your drawings with a partner. What's similar? What's different?
 
 **Mini-lecture: What Does "The Cloud" Actually Mean? (10 min)**
 
@@ -35,7 +35,7 @@ When you use a cloud-based AI tool like ChatGPT or Claude, here's what actually 
 
 1. You type a prompt and hit enter
 2. That text is split into packets and sent across the internet
-3. It arrives at a data center — a warehouse full of servers, possibly in another country
+3. It arrives at a data center: a warehouse full of servers, possibly in another country
 4. The company's model processes your input on their hardware
 5. The response is sent back to you
 
@@ -74,7 +74,7 @@ This matters when you wonder:
 
 **Real-world examples**
 
-- **School policies banning ChatGPT uploads:** Many schools now prohibit uploading student work to AI tools because of privacy concerns — your homework could become training data and your personal information exposed.
+- **School policies banning ChatGPT uploads:** Many schools now prohibit uploading student work to AI tools because of privacy concerns, because your homework could become training data and your personal information exposed.
 - **GDPR (General Data Protection Regulation):** A European law that gives people the right to know what data companies hold on them, and the right to have it deleted. If a company processes EU citizens' data, GDPR applies, even if the company is based elsewhere.
 - **Data leaks:** In 2023, Samsung employees accidentally leaked confidential data by pasting it into ChatGPT. The company banned the tool internally. Your private data can become part of a model's training set without your knowledge.
 
@@ -107,9 +107,9 @@ Some LLMs are open source because they check the following boxes:
 | | (Mostly) Open Model | Closed Model |
 |---|---|---|
 | **Examples** | Llama 3 (Meta)*, Mistral, Phi (Microsoft), Gemma4 (Google), [Deepseek](https://deepseeklicense.github.io/) | GPT-4 (OpenAI), Claude (Anthropic), Gemini (Google) |
-| **Can you see the code?** | Usually yes — weights and architecture are published | No — the model is accessed via API only |
-| **Can you run it yourself?** | Yes — download and run locally | No — only accessible through the company's servers |
-| **Can you audit the training data?** | Sometimes — varies by model** | Almost never — considered proprietary |
+| **Can you see the code?** | Usually yes; weights and architecture are published | No, the model is accessed via API only |
+| **Can you run it yourself?** | Yes, download and run locally | No, only accessible through the company's servers |
+| **Can you audit the training data?** | Sometimes, varies by model** | Almost never, considered proprietary |
 | **Who can modify it?** | Anyone with the skills to fine-tune it | Only the company |
 | **Guardrails** | Often minimal or removable | Built-in by the company |
 
@@ -146,7 +146,7 @@ Notice what happens. Does the model refuse? Does it explain the theory but not g
 
 Now consider: Who decided that this topic should be guarded? What if the guardrail were set by a government, a corporation, or a community? How might those differ?
 
-**Discussion prompt:** _"Is a model with guardrails truly open? Should open models have guardrails at all — and who should decide what they block?"_
+**Discussion prompt:** _"Is a model with guardrails truly open? Should open models have guardrails at all, and who should decide what they block?"_
 
 ### Part 3 — "My Room": Train a Vision Model on Your Own Data (25 min)
 
@@ -171,7 +171,7 @@ The My Room app is served to you from GitHub Pages. It's a web app, so its code 
 
 Your images, labels, and the model you train all stay in your browser. They never get uploaded to a server, stored in a database, or used to train someone else's AI. The model runs on your machine, using your computer's own hardware.
 
-This makes My Room a **hybrid** — a useful middle ground between fully cloud-based AI (like ChatGPT) and fully local AI (like Ollama, which we'll try next):
+This makes My Room a **hybrid**, a useful middle ground between fully cloud-based AI (like ChatGPT) and fully local AI (like Ollama, which we'll try next):
 
 | | Cloud AI (ChatGPT) | My Room App (Hybrid) | Fully Local (Ollama) |
 |---|---|---|---|
@@ -183,10 +183,10 @@ This makes My Room a **hybrid** — a useful middle ground between fully cloud-b
 **Activity: Set Up My Room (5 min)**
 
 1. Open the [My Room web app](https://her-ai-studio.github.io/my-room/)
-2. Look around the interface — you'll see a camera/viewfinder, a label input, and a "train" button
+2. Look around the interface. You'll see a camera/viewfinder, a label input, and a "train" button
 3. Notice: there's no login, no account, no data upload. Everything stays in your browser.
 
-> Fun fact: The My Room app uses TensorFlow.js to run MobileNet entirely in your browser. Your data never touches a server — it's processed using your computer's own hardware (CPU or GPU).
+> Fun fact: The My Room app uses TensorFlow.js to run MobileNet entirely in your browser. Your data never touches a server, it's processed using your computer's own hardware (CPU or GPU).
 
 **Activity: Collect and Label Your Data (10 min)**
 
@@ -213,7 +213,7 @@ You just completed the full ML pipeline:
 2. **Training**: the model learned patterns for each label
 3. **Inference**: it classified new images it had never seen
 
-This is the same process that powers everything from photo tagging to medical imaging — except you did it with your own data, without sending anything to a cloud server.
+This is the same process that powers everything from photo tagging to medical imaging, except you did it with your own data, without sending anything to a cloud server.
 
 **Discussion prompt:** _"How does training a model on your own stuff change how you think about AI? Does it feel more trustworthy? Less magical? More like a tool you control?"_
 
@@ -223,7 +223,7 @@ This is the same process that powers everything from photo tagging to medical im
 
 So far you've trained a vision model in the browser. But what about language models? Can you run an LLM without an internet connection?
 
-**Yes — and here's why you'd want to:**
+**Yes, and here's why you'd want to:**
 
 - **Complete privacy**: your conversations stay on your machine, period
 - **No cost**: no API fees, no subscription
@@ -241,14 +241,14 @@ Ollama is a free, open-source tool that makes it easy to download and run LLMs l
 ollama run llama3.2
 ```
 
-> **Note:** Llama 3.2 is a 3B parameter model — small enough to run on most laptops but surprisingly capable. The download is a few GB, so make sure you're on WiFi.
+> **Note:** Llama 3.2 is a 3B parameter model, small enough to run on most laptops but surprisingly capable. The download is a few GB, so make sure you're on WiFi.
 
 4. Wait for the model to download (this may take a few minutes)
 5. Once it's ready, you'll see a prompt. Type a message and see the response.
 
 **Activity: Take It Offline (5 min)**
 
-1. **Disconnect from WiFi** — turn off your internet connection
+1. **Disconnect from WiFi**: turn off your internet connection
 2. Type another message to the model
 3. Notice: **it still works!** The model is running entirely on your machine.
 
@@ -275,7 +275,7 @@ Try these challenges on your own after the lesson:
 
 1. **Try a different model:** Run `ollama run phi` or `ollama run mistral` and compare the responses
 2. **Test the limits:** What does this smaller model do well? Where does it struggle?
-3. **Create a custom assistant:** Ollama supports system prompts — try `ollama run llama3.2 --system "You are a tutor who explains things like you're talking to a 10-year-old."`
+3. **Create a custom assistant:** Ollama supports system prompts; try `ollama run llama3.2 --system "You are a tutor who explains things like you're talking to a 10-year-old."`
 4. **Use Ollama from code:** Visit the Ollama documentation to see how you can call the model from Python or JavaScript
 
 **Discussion prompt:** _"When would you choose a local model over ChatGPT? What would you give up? What would you gain?"_
@@ -299,10 +299,10 @@ Try these challenges on your own after the lesson:
 
 **Optional Supplemental Reading**
 - Read about [data sovereignty and why it matters](https://en.wikipedia.org/wiki/Data_sovereignty)
-- Explore the [Ollama model library](https://ollama.com/library) — what other models are available?
-- Read about [TensorFlow.js](https://www.tensorflow.org/js) — the library that powers in-browser ML
-- Learn about [MobileNet](https://arxiv.org/abs/1704.04861) — the architecture behind the My Room vision model
+- Explore the [Ollama model library](https://ollama.com/library). What other models are available?
+- Read about [TensorFlow.js](https://www.tensorflow.org/js). The library that powers in-browser ML
+- Learn about [MobileNet](https://arxiv.org/abs/1704.04861). The architecture behind the My Room vision model
 
 ## Next Steps
 
-- [Week 3 — TBD](/week-3)
+- [Week 3: TBD](/week-3)
