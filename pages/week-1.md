@@ -10,7 +10,7 @@ _Beginner Course · Week 1_
 
 | **Lesson Goal**            | What is AI? Who built it? Why should you care?                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **What you’ll learn**       | By the end of this week you will be able to:<br>- Describe in your own words what a machine learning model is and how it learns from data<br>- Name at least three women who made foundational contributions to AI and computing, and explain why that history matters today<br>- Identify at least two ways that AI systems reflect the biases of the people and data behind them<br>- Articulate why your own perspective as a young woman — especially as a skeptic — is an asset, not a liability, in AI development<br>- Ask informed critical questions about any AI tool you encounter: who built it, what data trained it, and who benefits |
+| **What you’ll learn**       | By the end of this week you will be able to:<br>- Describe in your own words what a machine learning model is and how it learns from data<br>- Name at least three women who made foundational contributions to AI and computing, and explain why that history matters today<br>- Identify at least two ways that AI systems reflect the biases of the people and data behind them<br>- Articulate why your own perspective as a young woman, especially as a skeptic, is an asset, not a liability, in AI development<br>- Ask informed critical questions about any AI tool you encounter: who built it, what data trained it, and who benefits |
 | **Tools you’ll need**       | Notebook or paper and pencil and your curiosity and willingness to think about your relationship with AI |
 | **End result**       |  A completed "AI Audit" card for a well-known AI tool and a personal statement about your perspective on these topics |
 | **Time needed to complete** | 90 minutes |
@@ -19,7 +19,7 @@ _Beginner Course · Week 1_
 
 ### Part 1 — What Even Is AI? (25 min)
 
-**Warm-up: Two Truths and a Lie — AI Edition (10 min)**
+**Warm-up: Two Truths and a Lie, AI Edition (10 min)**
 
 Here are some statements about AI. Which is true, and which is false?
 
@@ -31,9 +31,9 @@ Here are some statements about AI. Which is true, and which is false?
 
 **What is a model?**
 
-A machine learning (ML) model is a statistical program that finds patterns in examples. It doesn't follow rules a human wrote — it figures out its own rules by looking at a huge amount of data.
+A machine learning (ML) model is a statistical program that finds patterns in examples. It doesn't follow rules a human wrote; it figures out its own rules by looking at a huge amount of data.
 
-Analogy: Imagine learning what a "good" essay looks like by reading ten thousand essays. You'd start to notice patterns — strong openings, clear arguments, specific examples. A language model does the same thing, but with billions of documents. 
+Analogy: Imagine learning what a "good" essay looks like by reading ten thousand essays. You'd start to notice patterns: strong openings, clear arguments, specific examples. A language model does the same thing, but with billions of documents. 
 
 A large language model (LLM) is a program trained on vast amounts of text that predicts the most likely next word or phrase, generating human-sounding responses without truly understanding meaning. 
 
@@ -49,11 +49,11 @@ This happens billions of times until the model gets good at predicting patterns 
 
 **Training a ML model**
 
-1. Training data in — raw text, images, audio, or other data is fed to a model during training
-2. The model finds patterns — through repeated prediction and correction (billions of iterations), it builds an internal representation of those patterns as numerical weights
-3. The weights are frozen — once training ends, the model's knowledge is locked in place; it no longer learns
-4. Inference at runtime — when you interact with an AI product, your input is passed to the model, which runs it through those learned weights to generate a response
-5. The AI product wraps the model — the app or service (ChatGPT, a spam filter, a photo tagger) adds the interface, guardrails, and business logic; the model itself is just one component
+1. Training data in: raw text, images, audio, or other data is fed to a model during training
+2. The model finds patterns: through repeated prediction and correction (billions of iterations), it builds an internal representation of those patterns as numerical weights
+3. The weights are frozen: once training ends, the model's knowledge is locked in place; it no longer learns
+4. Inference at runtime: when you interact with an AI product, your input is passed to the model, which runs it through those learned weights to generate a response
+5. The AI product wraps the model: the app or service (ChatGPT, a spam filter, a photo tagger) adds the interface, guardrails, and business logic; the model itself is just one component
 
 So "AI" is the product layer; the ML model is the pattern-matching core doing the actual work underneath it. Most AI systems you use day-to-day combine one or more trained models with traditional software around them.
 
@@ -149,7 +149,7 @@ Notice: who does the model imagine? What assumptions are baked in?
 
 **Concept: Where does bias come from? (5 min)**
 
-Bias in AI is not a glitch — it is a reflection. The model learned from human-generated data, and humans have biases. Here are three places bias enters:
+Bias in AI is not a glitch, it is a reflection. The model learned from human-generated data, and humans have biases. Here are three places bias enters:
 
 **1. The data**
 If the training data has more articles written by and about men, the model will "know" more about men's experiences.
@@ -158,13 +158,13 @@ If the training data has more articles written by and about men, the model will 
 Teams that lack diversity tend to miss blind spots. If everyone on the team has the same background, they share the same assumptions.
 
 **3. The people who label it**
-Many AI systems are trained using human feedback — raters who mark outputs as good or bad. Who those raters are shapes what "good" means to the model.
+Many AI systems are trained using human feedback: raters who mark outputs as good or bad. Who those raters are shapes what "good" means to the model.
 
 > Note: There are recent efforts at MIT and other places to "debias" datasets by using AI to balance datasets, watching as well for unfounded patterns to emerge in unlabeled data. This data is flagged for debiasing. [source](https://news.mit.edu/2024/researchers-reduce-bias-ai-models-while-preserving-improving-accuracy-1211) 
 
 **Activity: The AI Audit Card (10 min)**
 
-Each student picks an AI tool they actually use (a recommendation algorithm, a search engine, a photo filter, a writing assistant, a spell checker — anything counts).
+Each student picks an AI tool they actually use (a recommendation algorithm, a search engine, a photo filter, a writing assistant, a spell checker...anything counts).
 
 Fill out an index card:
 
@@ -178,7 +178,7 @@ Who might it work less well for?
 One question you still have about it:
 ```
 
-Students pair up and share their cards. Facilitator collects cards — these will be revisited in Week 2.
+Students pair up and share their cards. Facilitator collects cards. These will be revisited in Week 2.
 
 ### Part 4 — Your Skepticism Is a Skill (15 min)
 
@@ -188,9 +188,9 @@ Tech culture often treats skepticism as an obstacle. ("You just don't understand
 
 Three things a healthy AI skeptic does:
 
-1. **Asks "who benefits?"** — every AI system was built by someone with goals. Understanding those goals helps you evaluate the system.
-2. **Notices what's missing** — what voices, languages, or experiences are absent from this system's training data?
-3. **Demands accountability** — when AI gets it wrong, who is responsible?
+1. **Asks "who benefits?"**: every AI system was built by someone with goals. Understanding those goals helps you evaluate the system.
+2. **Notices what's missing**: what voices, languages, or experiences are absent from this system's training data?
+3. **Demands accountability**: when AI gets it wrong, who is responsible?
 
 These are not anti-technology positions. They are the foundation of building technology that actually works for everyone.
 
@@ -213,14 +213,14 @@ Try a sentence starter:
 **Check Your Understanding**
 
 1. In your own words explain: how does a language model learn?
-2. Name three women who shaped AI or computing — what did each one do?
+2. Name three women who shaped AI or computing. What did each one do?
 3. Give two examples of where bias can enter an AI system.
 4. What does it mean to ask "who benefits?" when evaluating an AI tool?
 
 **Assignment**
 
-- Keep your AI Audit Card — bring it to Week 2
-- Reading: [_Gender Shades_](https://www.media.mit.edu/projects/gender-shades/overview/) — the Joy Buolamwini study that documented facial recognition bias
+- Keep your AI Audit Card and bring it to Week 2
+- Reading: [_Gender Shades_](https://www.media.mit.edu/projects/gender-shades/overview/),the Joy Buolamwini study that documented facial recognition bias
 - Watch Joy Buolamwini's spoken word piece, "[AI, Ain't I a Woman?](https://www.youtube.com/watch?v=HZxV9w2o0FM)"
 - Find one more woman in AI history not covered in class
 
@@ -233,4 +233,4 @@ Try a sentence starter:
 
 ## Next Steps
 
-- [Week 2 — Taking Control: Building AI Locally and Owning Your Data](/week-2)
+- [Week 2: Taking Control: Building AI Locally and Owning Your Data](/week-2)
