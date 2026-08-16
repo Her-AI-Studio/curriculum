@@ -10,16 +10,16 @@ hero:
     alt: Her AI Studio
   actions:
     - theme: brand
-      text: Beginner Course
+      text: "Beginner Course: Discover"
       link: /beginner-course
     - theme: brand
-      text: Intermediate Course
+      text: "Intermediate Course: Create"
       link: /intermediate-course
     - theme: brand
-      text: Advanced Course
+      text: "Advanced Course: Engineer"
       link: /advanced-course
     - theme: brand
-      text: Capstone
+      text: "Capstone: Showcase"
       link: /capstone-instructions
 
 features:
