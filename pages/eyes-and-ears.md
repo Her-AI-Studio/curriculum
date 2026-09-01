@@ -675,4 +675,4 @@ You've built something that didn't exist before: a custom AI-powered device that
 
 ## Next Steps
 
-- [Week 5 — Going Standalone: SBC Mode and All Peripherals](/week-5)
+- [Capstone — Build Your Cyberdeck](/cyberdeck-instructions)

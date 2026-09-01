@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   // Required for GitHub Pages project site: https://her-ai-studio.github.io/curriculum/
   base: '/curriculum/',
-  title: 'Her AI Studio Courses',
+  title: 'Her AI Studio Builds',
   description: 'Women learning AI together. Course materials for the Her AI Studio program.',
   head: [
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
@@ -15,23 +15,27 @@ export default defineConfig({
     siteTitle: 'Her AI Studio',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Courses', link: '/beginner-course' },
+      { text: 'Sessions', link: '/week-1' },
     ],
     sidebar: [
       {
-        text: 'Courses',
+        text: 'Sessions',
         items: [
-          { text: 'Beginner Course', link: '/beginner-course',
-            items: [{text: 'Week 1', link: '/week-1'},{text: 'Week 2', link: '/week-2'}],
+          { text: 'Week 1: Discover', link: '/week-1',
+            items: [
+              { text: 'Session 1: Understanding AI', link: '/understanding-ai' },
+              { text: 'Session 2: Working with Data', link: '/working-with-data' },
+            ],
            },
-          { text: 'Intermediate Course', link: '/intermediate-course',
-            items: [{text: 'Week 3', link: '/week-3'},{text: 'Week 4', link: '/week-4'}],
-
+          { text: 'Week 2: Create', link: '/week-2',
+            items: [
+              { text: 'Session 3: Building with Arduino', link: '/building-with-arduino' },
+              { text: 'Session 4: Eyes and Ears', link: '/eyes-and-ears' },
+            ],
           },
-          { text: 'Advanced Course', link: '/advanced-course',
-            items: [{text: 'Week 5', link: '/week-5'},{text: 'Week 6', link: '/week-6'}],
-          },
-          { text: 'Capstone', link: '/capstone-instructions'          },
+          { text: 'Capstone', link: '/cyberdeck-instructions',
+            items: [{text: 'Final Project', link: '/cyberdeck-instructions'}],
+          }
         ],
       },
     ],

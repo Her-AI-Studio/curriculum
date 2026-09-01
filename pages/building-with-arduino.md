@@ -474,4 +474,4 @@ This is a complete **AI-powered physical computing pipeline**. Every step from W
 
 ## Next Steps
 
-- [Week 4 — Can You See Me Now? Adding Computer Vision to Your Arduino](/week-4)
+- [Week 4 — Can You See Me Now? Adding Computer Vision to Your Arduino](/eyes-and-ears)

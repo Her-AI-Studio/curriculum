@@ -1,45 +1,58 @@
 /**
  * Her AI Studio: VitePress theme
- * Design tokens aligned with https://heraistudio.org
+ * Design tokens aligned with https://heraistudio.org's actual brand kit:
+ * cream paper, charcoal ink, navy blue, hot pink, acid lime, orange. No purple.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  /* Studio palette (from heraistudio.org) */
-  --has-background: oklch(98% 0.008 270);
-  --has-foreground: oklch(20% 0.05 275);
+  /* Studio palette (from heraistudio.org's brand kit + live nav/footer CSS) */
+  --has-background: oklch(96.3% 0.019 92);
+  --has-foreground: oklch(19% 0.012 60);
   --has-card: oklch(100% 0 0);
-  --has-primary: oklch(56% 0.23 291);
-  --has-primary-hover: oklch(52% 0.22 268);
-  --has-secondary: oklch(68% 0.13 218);
-  --has-accent: oklch(68% 0.16 145);
-  --has-muted: oklch(95% 0.012 270);
-  --has-muted-foreground: oklch(50% 0.06 270);
-  --has-border: oklch(90% 0.016 270);
+  --has-primary: oklch(52% 0.253 268);
+  --has-primary-hover: oklch(45% 0.24 268);
+  --has-secondary: oklch(68% 0.229 6);
+  --has-accent: oklch(91.8% 0.208 122);
+  --has-flare: oklch(68.5% 0.216 38);
+  --has-flare-hover: oklch(60% 0.2 38);
+  --has-muted: oklch(92.1% 0.03 90);
+  --has-muted-foreground: oklch(46% 0.02 70);
+  --has-border: oklch(19% 0.012 60 / 0.14);
   --has-radius: 0.875rem;
 
   --has-gradient-hero: linear-gradient(
     135deg,
-    oklch(56% 0.23 291) 0%,
-    oklch(52% 0.22 268) 50%,
-    oklch(62% 0.17 232) 100%
+    oklch(56% 0.24 268) 0%,
+    oklch(46% 0.25 268) 55%,
+    oklch(60% 0.18 245) 100%
   );
   --has-gradient-soft: linear-gradient(
     180deg,
-    oklch(98% 0.008 270) 0%,
-    oklch(95% 0.014 275) 100%
+    oklch(96.3% 0.019 92) 0%,
+    oklch(92.1% 0.03 90) 100%
   );
-  --has-shadow-card: 0 2px 16px oklch(56% 0.23 291 / 0.09);
-  --has-shadow-lift: 0 8px 32px oklch(52% 0.22 268 / 0.18);
-  --has-shadow-glow: 0 0 48px oklch(56% 0.23 291 / 0.28);
+  --has-shadow-card: 0 2px 16px oklch(52% 0.253 268 / 0.09);
+  --has-shadow-lift: 0 8px 32px oklch(45% 0.24 268 / 0.18);
+  --has-shadow-glow: 0 0 48px oklch(52% 0.253 268 / 0.28);
 
-  --has-purple-light: oklch(82% 0.1 291);
-  --has-purple-light-hover: oklch(76% 0.13 291);
-  --has-purple-medium: oklch(56% 0.23 291);
-  --has-purple-medium-hover: oklch(52% 0.22 268);
-  --has-purple-dark: oklch(40% 0.22 291);
-  --has-purple-dark-hover: oklch(35% 0.21 291);
+  --has-brand-light: oklch(85% 0.07 235);
+  --has-brand-light-hover: oklch(79% 0.09 235);
+  --has-brand-medium: var(--has-primary);
+  --has-brand-medium-hover: var(--has-primary-hover);
+  --has-brand-dark: oklch(19% 0.012 60);
+  --has-brand-dark-hover: oklch(28% 0.02 60);
+
+  /* Nav/footer "workshop" chrome (from heraistudio.org's actual nav + footer) */
+  --has-font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --has-font-logo: 'Archivo Black', 'Arial Black', sans-serif;
+  --has-font-nav: 'Space Mono', ui-monospace, monospace;
+  --has-studio-paper: var(--has-background);
+  --has-studio-ink: var(--has-foreground);
+  --has-studio-ink-muted: var(--has-muted-foreground);
+  --has-studio-border: var(--has-border);
+  --has-studio-blue: var(--has-primary);
 
   --vp-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --vp-font-family-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
@@ -47,7 +60,7 @@
   --vp-c-bg: var(--has-background);
   --vp-c-bg-alt: var(--has-muted);
   --vp-c-bg-elv: var(--has-card);
-  --vp-c-bg-soft: oklch(96.5% 0.01 275);
+  --vp-c-bg-soft: oklch(94% 0.025 90);
 
   --vp-c-border: var(--has-border);
   --vp-c-divider: var(--has-border);
@@ -55,39 +68,39 @@
 
   --vp-c-text-1: var(--has-foreground);
   --vp-c-text-2: var(--has-muted-foreground);
-  --vp-c-text-3: oklch(65% 0.04 270);
+  --vp-c-text-3: oklch(60% 0.03 70);
 
-  --vp-c-brand-1: oklch(48% 0.22 291);
+  --vp-c-brand-1: oklch(42% 0.24 268);
   --vp-c-brand-2: var(--has-primary-hover);
   --vp-c-brand-3: var(--has-primary);
-  --vp-c-brand-soft: oklch(56% 0.23 291 / 0.12);
+  --vp-c-brand-soft: oklch(52% 0.253 268 / 0.12);
 
-  --vp-c-tip-1: oklch(42% 0.14 145);
-  --vp-c-tip-2: oklch(52% 0.15 145);
+  --vp-c-tip-1: oklch(38% 0.14 122);
+  --vp-c-tip-2: oklch(46% 0.16 122);
   --vp-c-tip-3: var(--has-accent);
-  --vp-c-tip-soft: oklch(68% 0.16 145 / 0.14);
+  --vp-c-tip-soft: oklch(91.8% 0.208 122 / 0.18);
 
   --vp-c-default-1: var(--has-muted-foreground);
   --vp-c-default-2: var(--has-muted);
-  --vp-c-default-3: oklch(92% 0.012 270);
-  --vp-c-default-soft: oklch(95% 0.012 270 / 0.8);
+  --vp-c-default-3: oklch(88% 0.025 90);
+  --vp-c-default-soft: oklch(90% 0.025 90 / 0.8);
 
   --vp-button-brand-border: transparent;
-  --vp-button-brand-text: oklch(99% 0.004 270);
+  --vp-button-brand-text: oklch(99% 0.01 92);
   --vp-button-brand-bg: var(--has-primary);
   --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: oklch(99% 0.004 270);
+  --vp-button-brand-hover-text: oklch(99% 0.01 92);
   --vp-button-brand-hover-bg: var(--has-primary-hover);
   --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: oklch(99% 0.004 270);
-  --vp-button-brand-active-bg: oklch(44% 0.21 291);
+  --vp-button-brand-active-text: oklch(99% 0.01 92);
+  --vp-button-brand-active-bg: oklch(40% 0.24 268);
 
   --vp-button-alt-border: var(--has-border);
   --vp-button-alt-text: var(--has-foreground);
   --vp-button-alt-bg: var(--has-card);
   --vp-button-alt-hover-border: var(--has-primary);
   --vp-button-alt-hover-text: var(--has-primary);
-  --vp-button-alt-hover-bg: oklch(56% 0.23 291 / 0.06);
+  --vp-button-alt-hover-bg: oklch(52% 0.253 268 / 0.06);
 
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: var(--has-gradient-hero);
@@ -102,35 +115,42 @@
   --vp-nav-logo-height: 28px;
   --vp-nav-height: 64px;
   --has-footer-height: 5.5rem;
-
-  --vp-c-bg-soft: oklch(97% 0.01 275);
 }
 
 .dark {
-  --has-background: oklch(18% 0.04 275);
-  --has-foreground: oklch(96% 0.01 270);
-  --has-card: oklch(22% 0.045 275);
-  --has-muted: oklch(24% 0.04 275);
-  --has-muted-foreground: oklch(72% 0.04 270);
-  --has-border: oklch(32% 0.04 275);
+  --has-background: oklch(18% 0.02 60);
+  --has-foreground: oklch(96% 0.015 90);
+  --has-card: oklch(22% 0.02 60);
+  --has-muted: oklch(24% 0.02 60);
+  --has-muted-foreground: oklch(72% 0.02 80);
+  --has-border: oklch(96% 0.015 90 / 0.14);
+  --has-primary: oklch(72% 0.18 268);
+  --has-primary-hover: oklch(78% 0.16 268);
+  --has-gradient-soft: linear-gradient(180deg, oklch(18% 0.02 60) 0%, oklch(22% 0.02 60) 100%);
+
+  --has-studio-paper: var(--has-background);
+  --has-studio-ink: var(--has-foreground);
+  --has-studio-ink-muted: var(--has-muted-foreground);
+  --has-studio-border: var(--has-border);
+  --has-studio-blue: var(--has-primary);
 
   --vp-c-bg: var(--has-background);
   --vp-c-bg-alt: var(--has-muted);
   --vp-c-bg-elv: var(--has-card);
-  --vp-c-bg-soft: oklch(20% 0.04 275);
+  --vp-c-bg-soft: oklch(20% 0.02 60);
 
   --vp-c-border: var(--has-border);
   --vp-c-divider: var(--has-border);
-  --vp-c-gutter: oklch(14% 0.03 275);
+  --vp-c-gutter: oklch(14% 0.015 60);
 
   --vp-c-text-1: var(--has-foreground);
   --vp-c-text-2: var(--has-muted-foreground);
-  --vp-c-text-3: oklch(58% 0.04 270);
+  --vp-c-text-3: oklch(58% 0.02 80);
 
-  --vp-c-brand-1: oklch(78% 0.16 291);
-  --vp-c-brand-2: oklch(68% 0.2 291);
-  --vp-c-brand-3: oklch(62% 0.22 291);
-  --vp-c-brand-soft: oklch(56% 0.23 291 / 0.2);
+  --vp-c-brand-1: oklch(80% 0.14 268);
+  --vp-c-brand-2: oklch(72% 0.18 268);
+  --vp-c-brand-3: oklch(65% 0.2 268);
+  --vp-c-brand-soft: oklch(65% 0.2 268 / 0.2);
 
   --vp-home-hero-image-filter: blur(72px);
 }
@@ -149,35 +169,45 @@ h4,
 .VPHero .text,
 .VPDoc h1,
 .VPDoc h2 {
+  font-family: var(--has-font-display);
   letter-spacing: -0.025em;
   font-weight: 800;
   line-height: 1.1;
 }
 
-/* Nav: glass bar + pill CTA feel */
+/* Nav: heraistudio.org's workshop chrome (paper + ink border + mono links) */
 .VPNav {
-  border-bottom: 1px solid var(--has-border);
-  background: oklch(99% 0.01 270 / 0.92) !important;
-  backdrop-filter: blur(12px);
-}
-
-.dark .VPNav {
-  background: oklch(18% 0.04 275 / 0.92) !important;
+  border-bottom: 2px solid var(--has-studio-ink) !important;
+  background: var(--has-studio-paper) !important;
+  background-image:
+    linear-gradient(var(--has-studio-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--has-studio-border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  backdrop-filter: none;
 }
 
 .VPNavBarTitle .title {
+  font-family: var(--has-font-logo);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--has-foreground);
+  letter-spacing: -0.01em;
+  color: var(--has-studio-ink);
+}
+
+.VPNavBarMenu .VPNavBarMenuLink {
+  font-family: var(--has-font-nav);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--has-studio-ink);
 }
 
 .VPNavBarMenu .VPNavBarMenuLink.active {
-  color: var(--has-primary);
-  font-weight: 600;
+  color: var(--has-studio-blue);
 }
 
 .VPNavBarMenu .VPNavBarMenuLink:hover {
-  color: var(--has-primary);
+  opacity: 0.6;
 }
 
 .VPButton.brand {
@@ -330,46 +360,46 @@ h4,
   border-radius: 999px;
 }
 
-/* Hero course buttons: light, medium, dark purple */
+/* Hero course buttons: light blue, navy, ink dark */
 .VPHome .VPHero .actions .action:nth-child(1) .VPButton.brand {
   border-color: transparent !important;
-  color: oklch(32% 0.14 291) !important;
-  background-color: var(--has-purple-light) !important;
+  color: oklch(28% 0.15 268) !important;
+  background-color: var(--has-brand-light) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(1) .VPButton.brand:hover {
-  color: oklch(28% 0.14 291) !important;
-  background-color: var(--has-purple-light-hover) !important;
+  color: oklch(24% 0.16 268) !important;
+  background-color: var(--has-brand-light-hover) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(2) .VPButton.brand {
   border-color: transparent !important;
-  color: oklch(99% 0.004 270) !important;
-  background-color: var(--has-purple-medium) !important;
+  color: oklch(99% 0.01 92) !important;
+  background-color: var(--has-brand-medium) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(2) .VPButton.brand:hover {
-  background-color: var(--has-purple-medium-hover) !important;
+  background-color: var(--has-brand-medium-hover) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(3) .VPButton.brand {
   border-color: transparent !important;
-  color: oklch(99% 0.004 270) !important;
-  background-color: var(--has-purple-dark) !important;
+  color: oklch(97% 0.01 90) !important;
+  background-color: var(--has-brand-dark) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(3) .VPButton.brand:hover {
-  background-color: var(--has-purple-dark-hover) !important;
+  background-color: var(--has-brand-dark-hover) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(4) .VPButton.brand {
   border-color: transparent !important;
-  color: oklch(99% 0.004 270) !important;
-  background-color: oklch(65% 0.19 50) !important;
+  color: var(--has-foreground) !important;
+  background-color: var(--has-flare) !important;
 }
 
 .VPHome .VPHero .actions .action:nth-child(4) .VPButton.brand:hover {
-  background-color: oklch(60% 0.19 50) !important;
+  background-color: var(--has-flare-hover) !important;
 }
 
 /* Logo column: override VitePress absolute positioning that hides the image */
@@ -407,6 +437,8 @@ h4,
   max-height: min(340px, 42vh) !important;
   object-fit: contain;
   margin: 0 auto;
+  border-radius: calc(var(--has-radius) + 0.25rem);
+  box-shadow: var(--has-shadow-card);
 }
 
 @media (min-width: 768px) {
@@ -438,13 +470,13 @@ h4,
 }
 
 .VPHome .VPFeature:hover {
-  background: oklch(99.5% 0.012 320);
+  background: oklch(97% 0.025 245);
   box-shadow: var(--has-shadow-lift);
   transform: translateY(-2px);
 }
 
 .dark .VPHome .VPFeature:hover {
-  background: oklch(26% 0.05 275);
+  background: oklch(25% 0.05 268);
 }
 
 .VPHome .VPFeature .title {
@@ -469,6 +501,7 @@ h4,
 }
 
 .VPSidebarItem.level-0 > .item > .text {
+  font-family: var(--has-font-nav);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -532,20 +565,29 @@ h4,
   position: sticky;
   bottom: 0;
   z-index: calc(var(--vp-z-index-footer) + 1);
-  border-top: 1px solid var(--has-border);
-  background: oklch(99% 0.01 270 / 0.96);
-  backdrop-filter: blur(10px);
+  border-top: 2px solid var(--has-studio-ink);
+  background: var(--has-studio-paper);
+  background-image:
+    linear-gradient(var(--has-studio-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--has-studio-border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  backdrop-filter: none;
   padding: 1rem 1.5rem !important;
 }
 
-.dark .VPFooter {
-  background: oklch(18% 0.04 275 / 0.96);
+.VPFooter .message {
+  font-family: 'Archivo', system-ui, sans-serif;
+  color: var(--has-studio-ink-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
-.VPFooter .message,
 .VPFooter .copyright {
-  color: var(--has-muted-foreground);
-  font-size: 0.8rem;
+  font-family: var(--has-font-nav);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--has-studio-ink-muted);
+  font-size: 0.7rem;
   line-height: 1.4;
 }
 
