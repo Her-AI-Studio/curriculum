@@ -2,6 +2,83 @@
 outline: deep
 ---
 
+<script setup lang="ts">
+const warmupQuestions = [
+  {
+    id: 'ttl-1',
+    prompt: '"AI learns patterns from data rather than \'thinking\' like a human." True or false?',
+    choices: ['True', 'False'],
+    correctIndex: 0,
+    explanation: 'Right — a model finds statistical patterns in its training data; it doesn\'t reason the way a person does.',
+  },
+  {
+    id: 'ttl-2',
+    prompt: '"Using AI guarantees faster and more accurate work in every situation." True or false?',
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: 'False — AI can speed things up, but it can also be wrong, biased, or a worse fit than doing the task yourself.',
+  },
+  {
+    id: 'ttl-3',
+    prompt: '"AI models learn from your input each time you enter information into a chatbot." True or false?',
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — once training ends, a model's weights are frozen. Chatting with it doesn't retrain it in real time.",
+  },
+]
+
+const knowledgeCheckQuestions = [
+  {
+    id: 'kc-1',
+    prompt: 'How does a language model actually learn?',
+    choices: [
+      'It memorizes exact sentences from its training data',
+      'It adjusts internal weights through repeated prediction and correction',
+      'It looks up answers in a live database',
+      'It reasons step by step the way a person does',
+    ],
+    correctIndex: 1,
+    explanation: 'Training is prediction + correction, repeated billions of times, until the pattern gets baked into the weights.',
+  },
+  {
+    id: 'kc-2',
+    prompt: 'Where can bias enter an AI system?',
+    choices: [
+      'Only in the code engineers write',
+      'In the training data and who is or isn\'t represented in it',
+      'AI systems are inherently neutral',
+      'Only if someone programs discrimination on purpose',
+    ],
+    correctIndex: 1,
+    explanation: 'Bias usually enters through the data (and who collected/labeled it), not through an explicit line of "biased" code.',
+  },
+  {
+    id: 'kc-3',
+    prompt: "What happens to a model's knowledge after training ends?",
+    choices: [
+      'It keeps learning from every new conversation',
+      'The weights are frozen — it stops learning',
+      'It re-trains itself automatically every night',
+      'It forgets everything and starts from scratch',
+    ],
+    correctIndex: 1,
+    explanation: 'Once training stops, the weights are locked in. Inference (using the model) never changes those weights.',
+  },
+  {
+    id: 'kc-4',
+    prompt: 'Why does asking "who benefits?" matter when evaluating an AI tool?',
+    choices: [
+      "It doesn't matter if the tool works well",
+      "It reveals whose interests and perspectives shaped the tool",
+      'Only investors need to ask this',
+      "It's a legal formality, not a meaningful question",
+    ],
+    correctIndex: 1,
+    explanation: 'Every AI tool reflects choices someone made about data, priorities, and tradeoffs — "who benefits" surfaces those choices.',
+  },
+]
+</script>
+
 # Understanding AI: Who Built It, Who It's For, and Why You Belong Here
 
 _Beginner Course · Week 1_
@@ -23,9 +100,7 @@ _Beginner Course · Week 1_
 
 Here are some statements about AI. Which is true, and which is false?
 
-1. AI learns patterns from data rather than "thinking" like a human.
-2. Using AI guarantees faster and more accurate work in every situation.
-3. AI models learn from your input each time you enter information into a chatbot.
+<Quiz id="week1-warmup" title="Warm-up: Two Truths and a Lie" :questions="warmupQuestions" />
 
 **Mini-lecture: How AI Models Actually Work (10 min)**
 
@@ -216,6 +291,10 @@ Try a sentence starter:
 2. Name three women who shaped AI or computing. What did each one do?
 3. Give two examples of where bias can enter an AI system.
 4. What does it mean to ask "who benefits?" when evaluating an AI tool?
+
+**Quick Knowledge Check**
+
+<Quiz id="week1-knowledge-check" title="Post-Session Knowledge Check" :questions="knowledgeCheckQuestions" />
 
 **Assignment**
 

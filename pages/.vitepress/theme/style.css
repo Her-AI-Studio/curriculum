@@ -605,3 +605,103 @@ h4,
 .VPLocalSearch .result.selected {
   border-color: var(--has-primary);
 }
+
+/* Quiz: WebMCP-addressable warmup / knowledge-check block */
+.quiz {
+  border: 1px solid var(--has-border);
+  border-radius: var(--has-radius);
+  background: var(--has-card);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.quiz__title {
+  font-family: var(--has-font-nav);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--has-muted-foreground);
+  margin: 0 0 1rem;
+}
+
+.quiz__question + .quiz__question {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--has-border);
+}
+
+.quiz__prompt {
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.quiz__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz__choice {
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  border-radius: calc(var(--has-radius) - 0.35rem);
+  border: 1.5px solid var(--has-border);
+  background: var(--has-background);
+  color: var(--has-foreground);
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s;
+}
+
+.quiz__choice:hover:not(:disabled) {
+  border-color: var(--has-primary);
+  transform: translateY(-1px);
+}
+
+.quiz__choice:disabled {
+  cursor: default;
+}
+
+.quiz__choice--selected {
+  border-color: var(--has-primary);
+}
+
+.quiz__choice--correct {
+  border-color: oklch(48% 0.15 122);
+  background: oklch(91.8% 0.208 122 / 0.22);
+}
+
+.quiz__choice--incorrect {
+  border-color: var(--has-secondary);
+  background: oklch(68% 0.229 6 / 0.14);
+}
+
+.quiz__explanation {
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: calc(var(--has-radius) - 0.35rem);
+  background: var(--vp-c-brand-soft);
+  color: var(--has-foreground);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.quiz__feedback {
+  margin: 1.25rem 0 0;
+  padding: 0.75rem 1rem;
+  border-radius: calc(var(--has-radius) - 0.25rem);
+  background: var(--has-muted);
+  color: var(--has-muted-foreground);
+  font-family: var(--has-font-nav);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.quiz__feedback--complete {
+  background: var(--has-accent);
+  color: var(--has-foreground);
+}
