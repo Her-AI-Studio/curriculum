@@ -9,7 +9,7 @@ outline: deep
 | **Lesson Goal**            | Give Kiku real AI senses: a screen for its face, a microphone that wakes it up, and a camera that teaches it to tell good food from junk food. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **What you'll learn**       | By the end of this week you will be able to:<br>- Move Kiku's display from the LED array to the screen that ships with your AI kit<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Connect a camera and train a lightweight local classifier to recognize "good food" vs. "junk food"<br>- Combine screen, microphone, and camera into Kiku's full multi-sensory pipeline<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
-| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), the screen that ships with your AI kit, a USB microphone, a USB camera, laptop with Arduino App Lab installed |
+| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen that ships with your AI kit, a USB microphone, a USB camera, laptop with Arduino App Lab installed |
 | **End result**              | Kiku v2 — a pet with a face on screen, ears that listen for its name, and eyes that can tell good food from junk food |
 | **Time needed to complete** | 90 minutes |
 
@@ -23,46 +23,35 @@ Recall from Week 3: the Uno Q actually has two "brains" on one board — an STM3
 
 Last week, Kiku's only "face" was the LED array, driven by the microcontroller. Today we move Kiku's face to the screen that ships with your kit — driven by the Linux side, which can draw much richer graphics than a grid of LEDs.
 
-**Activity: Connect Kiku's Screen (5 min)**
+**Activity: Connect Your Cyberdeck (10 min)**
 
-1. Connect your kit's screen to the Uno Q (via the USB hub, if that's how your kit is wired).
-2. Power everything on and confirm the screen is detected — you should see the Arduino login/desktop appear.
-3. Open App Lab from the screen (or from your laptop, connected to the same board).
+This is the week Kiku becomes a real cyberdeck. Connect the pieces:
 
-**Activity: Build Kiku's Face (10 min)**
+1. Connect the USB hub to your Uno Q.
+2. Connect the monitor to the hub.
+3. Make sure your Bluetooth keyboard (paired back in Week 3) is on and ready — you'll use it both to log in and to keep controlling Kiku.
+4. Power everything on. You should see the Arduino login/desktop appear on the monitor.
+5. Log in, then open App Lab from the screen (or from your laptop, connected to the same board).
 
-In App Lab, add a new **Python app** alongside your sketch. Start simple: three faces, one per mood.
+> **Troubleshooting:** If the monitor stays blank, check the hub's power connection first — a hub that isn't getting enough power often fails to pass video through to a display.
+
+**Activity: Build Kiku's Face (5 min)**
+
+In App Lab, add a new **Python app** alongside your sketch — this is Kiku's UI, running on the Linux side of the board.
+
+> **Note for facilitators:** This section is a placeholder. Paste the actual Kiku UI code here — it should render Kiku's face/expression based on its current mood (happy, hungry, sleepy, etc.) and update whenever that mood changes.
 
 ```python
-import tkinter as tk
-
-root = tk.Tk()
-root.title("Kiku")
-canvas = tk.Canvas(root, width=240, height=240, bg="black")
-canvas.pack()
-
-def draw_face(mood):
-    canvas.delete("all")
-    if mood == "happy":
-        canvas.create_oval(60, 90, 90, 120, fill="white")   # eyes
-        canvas.create_oval(150, 90, 180, 120, fill="white")
-        canvas.create_arc(80, 140, 160, 180, start=200, extent=140, style="arc", outline="white", width=4)  # smile
-    elif mood == "hungry":
-        canvas.create_oval(60, 90, 90, 120, fill="white")
-        canvas.create_oval(150, 90, 180, 120, fill="white")
-        canvas.create_line(90, 160, 150, 160, fill="white", width=4)  # flat mouth
-    elif mood == "sleepy":
-        canvas.create_line(55, 105, 95, 105, fill="white", width=4)  # closed eyes
-        canvas.create_line(145, 105, 185, 105, fill="white", width=4)
-        canvas.create_text(200, 60, text="z z z", fill="white", font=("Arial", 16))
-
-draw_face("happy")
-root.mainloop()
+# TODO: Replace this placeholder with the real Kiku UI code.
+# It should:
+#   - draw Kiku's face on screen, with a different expression per mood
+#   - read Kiku's current mood (via the Bridge, from the sketch)
+#   - redraw whenever the mood changes
+#
+# Paste the actual UI code here once it's ready.
 ```
 
-> **Note:** This is intentionally simple — three faces are enough to start. Feel free to make them more expressive once the basics work.
-
-**How does the sketch tell this app what mood Kiku is in?** App Lab includes a built-in Bridge for passing values between the microcontroller side and the Linux side. Check your App Lab version's docs for the current Bridge syntax — the idea is: your Kiku sketch updates a `mood` value whenever hunger, energy, or an `F`/`P`/`S` key press changes it, and this Python app reads that value and calls `draw_face(mood)` whenever it changes.
+**How does the sketch tell this app what mood Kiku is in?** App Lab includes a built-in Bridge for passing values between the microcontroller side and the Linux side. Check your App Lab version's docs for the current Bridge syntax — the idea is: your Kiku sketch updates a `mood` value whenever hunger, energy, or an `F`/`P`/`S` key press changes it, and this Python app reads that value and redraws Kiku's face whenever it changes.
 
 ### Part 2 — Kiku Wakes Up: Microphone and Wake Word (25 min)
 

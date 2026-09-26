@@ -222,7 +222,7 @@ Everything Kiku does right now comes from `if`/`else` logic you (or the sketch y
 - Add a fourth need or mood to Kiku (e.g., "boredom," "cleanliness") and give it its own LED pattern and key
 - Try changing how quickly hunger or energy decays — what does that do to how "high-maintenance" Kiku feels?
 - Keep Kiku alive and check in on it at least three times before the next session
-- Bring your Uno Q and Bluetooth keyboard to the next session
+- Bring your Uno Q and Bluetooth keyboard to the next session — you'll also connect a USB hub and screen to turn this into a full cyberdeck
 
 **Optional Supplemental Reading**
 
