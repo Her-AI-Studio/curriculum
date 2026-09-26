@@ -220,4 +220,4 @@ Think back across all four weeks:
 
 ## Next Steps
 
-- [Capstone — Build Your Cyberdeck](/cyberdeck-instructions)
+- [Capstone — Build Your Cyberdeck](/5-cyberdeck-instructions)

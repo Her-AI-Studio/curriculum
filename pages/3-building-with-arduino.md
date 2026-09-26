@@ -9,8 +9,8 @@ outline: deep
 | **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: LEDs for a body, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **What you'll learn**       | By the end of this week you will be able to:<br>- Set up the Arduino Uno Q with Arduino App Lab and upload your first sketch<br>- Write Arduino code to control the built-in LED array<br>- Pair a Bluetooth keyboard with the board and read key presses in your code<br>- Explain how a simple state machine tracks Kiku's hunger, energy, and mood over time<br>- Use F, P, and S key presses to feed, play with, and put Kiku to sleep, and watch its LED patterns respond |
-| **Tools you'll need**       | Arduino Uno Q board, USB cable, laptop with Arduino App Lab installed, a Bluetooth keyboard |
-| **End result**              | A working Kiku v1 — an Arduino pet with a heartbeat-like LED pattern that changes based on hunger, energy, and mood, all controlled with a paired Bluetooth keyboard |
+| **Tools you'll need**       | Arduino Uno Q board, USB cable, laptop with Arduino App Lab installed, your AI Kit's Bluetooth keyboard, USB Hub, and small monitor |
+| **End result**              | A working Kiku v1 — an Arduino pet whose behavior changes based on hunger, energy, and mood, all controlled with a paired Bluetooth keyboard |
 | **Time needed to complete** | 90 minutes |
 
 ## Session Plan
@@ -22,7 +22,7 @@ outline: deep
 Arduino App Lab is the software environment you'll use to write and upload code to your Uno Q. It runs in your browser and connects to your board over USB.
 
 1. Go to the [Arduino App Lab getting-started page](https://docs.arduino.cc/software/app-lab/) and follow the instructions to install the App Lab agent on your laptop.
-2. Connect your Arduino Uno Q to your laptop using the USB cable.
+2. Connect your Arduino Uno Q to your laptop using a USB cable and follow the instructions to get it online.
 3. Open App Lab in your browser. You should see it detect your board.
 4. Select your board from the list and confirm the connection.
 
@@ -48,7 +48,7 @@ The Uno Q has a built-in **LED array**, a grid of individually controllable LEDs
 
 **Activity: Blink the LED Array (10 min)**
 
-Let's write your first sketch. In App Lab, create a new sketch and enter this code:
+Let's write your first sketch. In App Lab, create a new app called Kiku and enter this code into `sketch.ino`:
 
 ```cpp
 #include "Arduino_LED_Matrix.h"  // Library for the built-in LED array
@@ -80,11 +80,19 @@ Upload this sketch to your board by clicking the upload button in App Lab. Watch
 
 ### Part 2 — Give Kiku a Body: Pair the Bluetooth Keyboard (20 min)
 
-**Mini-lecture: How a Bluetooth Keyboard Talks to Your Board (5 min)**
+**Mini-lecture: How a Bluetooth Keyboard Talks to Your Arduino (5 min)**
 
-Kiku needs a way to hear from you. Instead of a wired button, we'll pair a Bluetooth keyboard directly with the Uno Q — the board acts as a Bluetooth **host**, listening for key presses from a device that's paired to it, the same way your laptop listens for a wireless keyboard.
+Kiku needs a way to hear from you. Let's move Kiku from the Arduino to your mini monitor. This is the first step in using the peripherals included in your AI kit; you'll set up your Arduino as a "SBC" - a single board computer.
 
-Rather than squeezing three different actions (feed, play, sleep) out of one button's press patterns, a keyboard gives us three distinct, unambiguous keys: `F`, `P`, and `S`.
+1. Disconnect the Arduino from your computer
+2. Connect the USB Hub's built-in USB C cable to the Arduino
+3. Connect your other USB C cable to a power source (could be a plug, or your computer)
+4. Connect the mini monitor to the USB hub using your HDMI cable and a USB cable
+5. Boot the Arduino and enter your board's password into the Linux login screen on your mini monitor
+6. App Lab should launch. Find your Kiku app and run it.
+7. You can now enter code in App Lab on your laptop and watch it run on the mini computer you just created, since they are both now on the same network.
+
+In order to interact with Kiku, you'll build a way for the app to listen to keyboard presses. We'll pair a Bluetooth keyboard directly with the Uno Q. The board acts as a Bluetooth **host**, listening for key presses from a device that's paired to it, the same way your laptop listens for a wireless keyboard.
 
 **Activity: Pair the Bluetooth Keyboard (5 min)**
 
@@ -232,4 +240,4 @@ Everything Kiku does right now comes from `if`/`else` logic you (or the sketch y
 
 ## Next Steps
 
-- [Week 4 — Kiku Wakes Up: Giving Your Pet Eyes, Ears, and a Face](/eyes-and-ears)
+- [Week 4 — Kiku Wakes Up: Giving Your Pet Eyes, Ears, and a Face](/4-eyes-and-ears)

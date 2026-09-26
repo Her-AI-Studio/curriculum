@@ -310,4 +310,4 @@ Try a sentence starter:
 
 ## Next Steps
 
-- [Week 2: Understanding Training Data and Models](/working-with-data)
+- [Week 2: Understanding Training Data and Models](/2-working-with-data)
