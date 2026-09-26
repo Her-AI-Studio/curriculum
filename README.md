@@ -30,16 +30,18 @@ The curriculum starts not with setup instructions, but with the question that ma
 
 | Course | Focus | Outcome |
 |--------|-------|---------|
-| [Beginner](pages/beginner-course.md) | Local AI, training data, responsible AI — all in software | Working with the **My Room** app with image classification and a local AI model |
-| [Intermediate](pages/intermediate-course.md) | From software to device — boards, sensors, and hardware | Physical builds using microcontrollers wired to your software projects |
-| [Advanced](pages/advanced-course.md) | Assembling a cyberdeck | A portable, self-contained computing and AI studio to call your own |
-| [Capstone](pages/capstone-instructions.md) | Present and teach | A polished final build and the skills to explain it to others |
+| [Understanding AI](pages/1-understanding-ai.md) | AI foundations, critical thinking, and bias in systems | A clear understanding of how models learn and why your perspective matters |
+| [Working with Data](pages/2-working-with-data.md) | Training data, local AI, and responsible model choices | A locally running AI workflow and a small custom image classifier |
+| [Building with Arduino: Meet Kiku](pages/3-building-with-arduino.md) | From software to device with boards, sensors, and hardware | A working Arduino sketch, LED interactions, and a WiFi-connected AI companion |
+| [Kiku Wakes Up](pages/4-eyes-and-ears.md) | Computer vision, cameras, and multimodal AI | A camera-enabled project that sees, classifies, and responds using local AI |
+| [Cyberdeck](pages/5-cyberdeck-instructions.md) | Designing and assembling a portable AI system | A complete cyberdeck build and final showcase |
 
 ---
 
 ## Each Lesson Includes
 
 - Sketchnote
+- Warm-up and Cool-down Quizzes
 - Written lesson
 - Separate facilitator notes
 - Step-by-step project guides (for project-based weeks)

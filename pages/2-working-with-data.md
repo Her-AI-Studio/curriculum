@@ -2,9 +2,84 @@
 outline: deep
 ---
 
-# Understanding Training Data and Models
+<script setup lang="ts">
+const warmupQuestions = [
+  {
+    id: 'ttl-1',
+    prompt: 'When you use a cloud AI tool like ChatGPT, your data is processed entirely on your own device.',
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — your input travels to the company's servers, gets processed there, and the response is sent back to you.",
+  },
+  {
+    id: 'ttl-2',
+    prompt: 'An open-source AI model, like Llama or Mistral, can be downloaded and run completely offline on your own computer.',
+    choices: ['True', 'False'],
+    correctIndex: 0,
+    explanation: 'True — open models publish their weights, so tools like Ollama let you download and run them with no internet connection required.',
+  },
+  {
+    id: 'ttl-3',
+    prompt: 'Once you close the tab or app, everything you typed into a cloud AI tool disappears completely and is never stored anywhere.',
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — companies may log conversations and sometimes use them for training. What's kept depends on the company's policies and where your data is legally governed.",
+  },
+]
 
-_Beginner Course · Week 2_
+const knowledgeCheckQuestions = [
+  {
+    id: 'kc-1',
+    prompt: 'What happens to your data when you use a cloud-based AI tool?',
+    choices: [
+      'It stays entirely on your device',
+      "It's sent to the company's servers for processing, then a response is sent back",
+      "It's only processed if you pay for a subscription",
+      "It's automatically encrypted so no one can ever access it",
+    ],
+    correctIndex: 1,
+    explanation: 'Cloud AI means your input leaves your device, gets processed on the company\'s hardware, and the result travels back to you.',
+  },
+  {
+    id: 'kc-2',
+    prompt: "What's the main practical difference between an open-source model and a closed model?",
+    choices: [
+      'Open models can never be run locally',
+      'Open models usually publish their weights and architecture, so you can inspect or run them yourself',
+      'Open models always have more guardrails than closed models',
+      'Open models are only accessible through a company\'s API',
+    ],
+    correctIndex: 1,
+    explanation: 'Being able to see and run the model yourself is what makes auditing, customization, and offline use possible.',
+  },
+  {
+    id: 'kc-3',
+    prompt: "Why did training the 'My Room' model on your own images matter, compared to just using a pre-trained model?",
+    choices: [
+      "It proved that AI models don't need any training data at all",
+      'It let you see the full ML pipeline — data collection, training, and inference — using data that never left your device',
+      'It made the model permanently available to everyone else in the class',
+      'It required an internet connection to complete',
+    ],
+    correctIndex: 1,
+    explanation: "My Room runs entirely in your browser, so you experienced the whole pipeline (collect, train, infer) without any data leaving your device.",
+  },
+  {
+    id: 'kc-4',
+    prompt: 'What does it mean when a local LLM (via Ollama) still works after you disconnect from WiFi?',
+    choices: [
+      'The model was actually just cached from an earlier cloud session',
+      "The model's weights are already downloaded and it runs using your own machine's hardware",
+      "It's a trick that only works for demonstration purposes",
+      'Local models require Bluetooth instead of WiFi',
+    ],
+    correctIndex: 1,
+    explanation: 'Once downloaded, the model and all its weights live on your machine — inference happens locally, so no network connection is needed.',
+  },
+]
+</script>
+
+# Understanding Training Data and Models
 
 ![Sketchnotes, week 2](/week-2.png)
 
@@ -19,11 +94,15 @@ _Beginner Course · Week 2_
 
 ### Part 1 — Cloud vs. Local: Where Does Your AI Live?
 
-**Warm-up: Where Did Your Last AI Query Go? (5 min)**
+**Warm-up: Where Did Your Last AI Query Go? (8 min)**
 
 Think about the last time you used ChatGPT, Claude, or any AI tool. Where do you think your question went? Take 30 seconds to draw a simple diagram showing what you imagine happens after you hit "enter."
 
 Share your drawings with a partner. What's similar? What's different?
+
+Now check your instincts against a few quick true/false statements:
+
+<Quiz id="week2-warmup" title="Warm-up: True or False?" :questions="warmupQuestions" />
 
 **Mini-lecture: What Does "The Cloud" Actually Mean? (10 min)**
 
@@ -39,7 +118,7 @@ When you use a cloud-based AI tool like ChatGPT or Claude, here's what actually 
 4. The company's model processes your input on their hardware
 5. The response is sent back to you
 
-This means your data **leaves your device**. It travels over networks you don't control, to servers you don't own, governed by laws that may not be your own.
+This means your data **leaves your device**. It travels over networks you don't control, to servers you don't own, in areas governed by laws that may not be your own.
 
 **How most AI today runs on cloud servers**
 
@@ -49,11 +128,9 @@ Almost every AI tool you've used (ChatGPT, Claude, Gemini, Grammarly, Snapchat f
 - The model is always up to date
 - You don't need to install anything
 
-But there's a trade-off.
-
 **The privacy trade-off: convenience vs. data leaving your machine**
 
-Every time you use a cloud AI tool, you're trading a piece of your privacy for convenience. The question is: are you making that trade intentionally, or by default?
+Every time you use a cloud AI tool, you're trading a piece of your privacy for convenience.
 
 | Convenience | Privacy Cost |
 |---|---|
@@ -156,7 +233,7 @@ Let's move from theory to practice. We're going to work with an app built for He
 
 The My Room app uses **MobileNet**, a lightweight image classification model designed to run on phones and browsers, not data centers. It was created by Google researchers to bring AI to devices with limited computing power.
 
-> Fun fact: MobileNet was designed to perform well on ImageNet's benchmark while being efficient enough for mobile devices. ImageNet is the dataset created by Fei-Fei Li, who we learned about last week. MobileNet's pre-trained "base knowledge" (the ability to recognize edges, shapes, and objects) came from training on her dataset.
+> 💡 MobileNet was designed to perform well on ImageNet's benchmark while being efficient enough for mobile devices. ImageNet is the dataset created by Fei-Fei Li, who we learned about last week. MobileNet's pre-trained "base knowledge" (the ability to recognize edges, shapes, and objects) came from training on her dataset.
 
 What makes MobileNet special:
 - It's **small**: a fraction of the size of models like GPT-4
@@ -186,7 +263,7 @@ This makes My Room a **hybrid**, a useful middle ground between fully cloud-base
 2. Look around the interface. You'll see a camera/viewfinder, a label input, and a "train" button
 3. Notice: there's no login, no account, no data upload. Everything stays in your browser.
 
-> Fun fact: The My Room app uses TensorFlow.js to run MobileNet entirely in your browser. Your data never touches a server, it's processed using your computer's own hardware (CPU or GPU).
+> 💡 The My Room app uses TensorFlow.js to run MobileNet entirely in your browser. Your data never touches a server, it's processed using your computer's own hardware (CPU or GPU).
 
 **Activity: Collect and Label Your Data (10 min)**
 
@@ -289,6 +366,10 @@ Try these challenges on your own after the lesson:
 5. Describe the three steps you followed in the My Room app (collect, train, infer). How does this mirror the way large AI models are built?
 6. When would you choose to use a local LLM over a cloud-based AI assistant? What trade-off are you making?
 
+**Quick Knowledge Check**
+
+<Quiz id="week2-knowledge-check" title="Post-Session Knowledge Check" :questions="knowledgeCheckQuestions" />
+
 ## Take-Home Challenges
 
 **Assignment**
@@ -305,4 +386,4 @@ Try these challenges on your own after the lesson:
 
 ## Next Steps
 
-- [Week 3: Hello, Arduino Uno Q: From PC Control to Networked AI](/building-with-arduino)
+- [Week 2: Meet Kiku: Building Your Blinking, Button-Powered Pet](/3-building-with-arduino)

@@ -4,7 +4,7 @@ outline: deep
 
 # Get Started Building: AI and Data
 
-Just getting started? Let's take this journey together.
+## Week 1
 
 This week, you'll work with a pre-built web site called **My Room**. This is a web site that you can use to classify items in your room - for example your crystal collection, makeup stash, pens, notebooks, or most recent haul. Train a custom local image model and use a locally-downloaded Large Language Model (LLM) to write journal entries about it.
 
@@ -12,6 +12,6 @@ During these two sessions, we'll cover some basics about artificial intelligence
 
 ## Sessions
 
-- [Session 1: Understanding AI](/understanding-ai)
-- [Session 2: Working with Data](/working-with-data)
+- [Session 1: Understanding AI](/1-understanding-ai)
+- [Session 2: Understanding Training Data and Models](/2-working-with-data)
 

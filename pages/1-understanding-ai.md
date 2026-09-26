@@ -6,21 +6,21 @@ outline: deep
 const warmupQuestions = [
   {
     id: 'ttl-1',
-    prompt: '"AI learns patterns from data rather than \'thinking\' like a human." True or false?',
+    prompt: 'AI learns patterns from data rather than \'thinking\' like a human.',
     choices: ['True', 'False'],
     correctIndex: 0,
     explanation: 'Right — a model finds statistical patterns in its training data; it doesn\'t reason the way a person does.',
   },
   {
     id: 'ttl-2',
-    prompt: '"Using AI guarantees faster and more accurate work in every situation." True or false?',
+    prompt: 'Using AI guarantees faster and more accurate work in every situation.',
     choices: ['True', 'False'],
     correctIndex: 1,
     explanation: 'False — AI can speed things up, but it can also be wrong, biased, or a worse fit than doing the task yourself.',
   },
   {
     id: 'ttl-3',
-    prompt: '"AI models learn from your input each time you enter information into a chatbot." True or false?',
+    prompt: 'AI models learn from your input each time you enter information into a chatbot.',
     choices: ['True', 'False'],
     correctIndex: 1,
     explanation: "False — once training ends, a model's weights are frozen. Chatting with it doesn't retrain it in real time.",
@@ -80,8 +80,6 @@ const knowledgeCheckQuestions = [
 </script>
 
 # Understanding AI: Who Built It, Who It's For, and Why You Belong Here
-
-_Beginner Course · Week 1_
 
 ![Sketchnotes, week 1](/week-1.png)
 
@@ -144,7 +142,7 @@ Read the Pope's encyclical [here](https://www.vatican.va/content/leo-xiv/en/ency
 
 It takes a lot of data (images, sounds, text) to train one of these big models. This data comes from all over the internet. It's important to know that training data is scraped, not licensed. If a machine can find data, it will probably be ingested into a ML model. 
 
-> Fun fact, scraping bots that gather data outnumbered human internet surfers for the first time in June 2026.
+> 💡 Scraping bots that gather data outnumbered human internet surfers for the first time in June 2026.
 
 **Student use of AI**
 
