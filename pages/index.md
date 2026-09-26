@@ -23,7 +23,7 @@ features:
   - title: Get Started on Your Own Machine
     details: Install and run open-source AI models locally, with no cloud account required. Learn how the tools actually work, keep your experiments private, and finish your first small project on hardware you control.
     link: /week-1
-    linkText: Week 2
+    linkText: Week 1
   - title: Leveling up with Hardware
     details: Move from software-only to hands-on builds. Explore boards, sensors, and the components that turn a prompt into something physical you can wire, test, and remix.
     link: /week-2

@@ -23,14 +23,14 @@ export default defineConfig({
         items: [
           { text: 'Week 1: Discover', link: '/week-1',
             items: [
-              { text: 'Session 1: Understanding AI', link: '/understanding-ai' },
-              { text: 'Session 2: Working with Data', link: '/working-with-data' },
+              { text: 'Session 1: Understanding AI', link: '/1-understanding-ai' },
+              { text: 'Session 2: Working with Data', link: '/2-working-with-data' },
             ],
            },
           { text: 'Week 2: Create', link: '/week-2',
             items: [
-              { text: 'Session 3: Building with Arduino', link: '/building-with-arduino' },
-              { text: 'Session 4: Eyes and Ears', link: '/eyes-and-ears' },
+              { text: 'Session 3: Building with Arduino', link: '/3-building-with-arduino' },
+              { text: 'Session 4: Eyes and Ears', link: '/4-eyes-and-ears' },
             ],
           },
           { text: 'Capstone', link: '/cyberdeck-instructions',
