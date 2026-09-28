@@ -242,7 +242,7 @@ What makes MobileNet special:
 
 Today, you're not just *using* MobileNet. You're going to **train** it on your own data.
 
-**A note on "local" vs. "cloud"**
+**💡 A note on "local" vs. "cloud"**
 
 The My Room app is served to you from GitHub Pages. It's a web app, so its code lives on a server. But here's the key distinction: **the app comes from the cloud, but your data never leaves your device.**
 
@@ -318,7 +318,7 @@ Ollama is a free, open-source tool that makes it easy to download and run LLMs l
 ollama run llama3.2
 ```
 
-> **Note:** Llama 3.2 is a 3B parameter model, small enough to run on most laptops but surprisingly capable. The download is a few GB, so make sure you're on WiFi.
+> 💡 Llama 3.2 is a 3B parameter model, small enough to run on most laptops but surprisingly capable. The download is a few GB, so make sure you're on WiFi.
 
 4. Wait for the model to download (this may take a few minutes)
 5. Once it's ready, you'll see a prompt. Type a message and see the response.

@@ -6,11 +6,11 @@ outline: deep
 
 ![Sketchnotes, session 3]()
 
-| **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: LEDs for a body, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. |
+| **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an Arduino LED array for a face, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| **What you'll learn**       | By the end of this week you will be able to:<br>- Set up the Arduino Uno Q with Arduino App Lab and upload your first sketch<br>- Write Arduino code to control the built-in LED array<br>- Pair a Bluetooth keyboard with the board and read key presses in your code<br>- Explain how a simple state machine tracks Kiku's hunger, energy, and mood over time<br>- Use F, P, and S key presses to feed, play with, and put Kiku to sleep, and watch its LED patterns respond |
+| **What you'll learn**       | By the end of this week you will be able to:<br>- Set up the Arduino Uno Q with Arduino App Lab and upload your first sketch to your board<br>- Read and edit Arduino code to control the built-in LED array<br>- Pair a Bluetooth keyboard with the board and read key presses in your code<br>- Explain how a simple state machine tracks Kiku's hunger, energy, and mood over time<br>- Use F, P, and S key presses to feed, play with, and put Kiku to sleep, and watch its LED patterns respond |
 | **Tools you'll need**       | Arduino Uno Q board, USB cable, laptop with Arduino App Lab installed, your AI Kit's Bluetooth keyboard, USB Hub, and small monitor |
-| **End result**              | A working Kiku v1 — an Arduino pet whose behavior changes based on hunger, energy, and mood, all controlled with a paired Bluetooth keyboard |
+| **End result**              | A working Kiku — an Arduino pet whose behavior changes based on hunger, energy, and mood, all controlled with a paired Bluetooth keyboard |
 | **Time needed to complete** | 90 minutes |
 
 ## Session Plan
@@ -19,14 +19,19 @@ outline: deep
 
 **Activity: Install App Lab and Connect Your Board (10 min)**
 
-Arduino App Lab is the software environment you'll use to write and upload code to your Uno Q. It runs in your browser and connects to your board over USB.
+Arduino App Lab is the software environment you'll use to write and upload code to your Uno Q. It runs in your browser and connects to your board over USB. Here's a diagram of the board's various pins (called a "pinout" diagram):
 
-1. Go to the [Arduino App Lab getting-started page](https://docs.arduino.cc/software/app-lab/) and follow the instructions to install the App Lab agent on your laptop.
-2. Connect your Arduino Uno Q to your laptop using a USB cable and follow the instructions to get it online.
-3. Open App Lab in your browser. You should see it detect your board.
+![pinout](/uno-q-pinout.png)
+
+We're going to start by blinking some LED lights (the ones at the bottom right of this diagram)
+
+1. Go to the [Arduino App Lab getting-started page](https://docs.arduino.cc/software/app-lab/) and follow the instructions to install the App Lab software on your laptop.
+> 💡 Since you may be taking part in a workshop room where many Arduinos are on the same network, give your board a meaningful name to you so that you can be sure to flash only to it when working through this session.
+2. Connect your Arduino Uno Q to your laptop using a USB cable and follow the instructions to get it online. Check with your instructor on your wifi credentials or use your own (you can also tether to your phone's hotspot)
+3. Open App Lab in your browser. You should see it detect your board with the name you gave it.
 4. Select your board from the list and confirm the connection.
 
-> **Troubleshooting:** If your board isn't detected, try a different USB cable (some cables are power-only). Make sure the App Lab agent is running in the background.
+> **Troubleshooting:** If your board isn't detected, try a different USB cable (some cables are power-only). Make sure that App Lab is running in the background.
 
 **Mini-lecture: How an Arduino Sketch Works (5 min)**
 
@@ -44,65 +49,97 @@ void loop() {
 }
 ```
 
-The Uno Q has a built-in **LED array**, a grid of individually controllable LEDs. In App Lab, you control them by writing to specific pins or using the board's LED library. Today, this LED array is going to become Kiku's heartbeat — proof of life, before we give it a personality.
+![App Lab](/app-lab.png)
 
-**Activity: Blink the LED Array (10 min)**
+The Uno Q has some built-in LED lights plus a blue **LED array**, a grid of individually controllable LEDs. In App Lab, you control them by writing to specific pins or using the board's LED library. To start, let's use make one of the individual LEDs become Kiku's heartbeat — a proof of life before we give it a personality.
 
-Let's write your first sketch. In App Lab, create a new app called Kiku and enter this code into `sketch.ino`:
+**Activity: A Heartbeat (10 min)**
+
+Let's write your first sketch. Once your board is connected to your computer and wifi, you can upload code to it via Arduino App Lab. In App Lab, create a new app called Kiku. Open this new app and take a look at the files that were created. Go to the `sketch.ino` file and overwrite it with the following code:
 
 ```cpp
-#include "Arduino_LED_Matrix.h"  // Library for the built-in LED array
+// SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
+//
+// SPDX-License-Identifier: MPL-2.0
 
-ArduinoLEDMatrix matrix;  // Create an object to control the LEDs
+// Example sketch to blink an LED connected to the board. 
+// The LED_BUILTIN is turned on for 1 second, then off for 1 second, repeatedly.
 
 void setup() {
-  Serial.begin(9600);     // Start serial communication (for debugging)
-  matrix.begin();         // Initialize the LED matrix
+  pinMode(LED_BUILTIN, OUTPUT);      // initialize digital pin LED_BUILTIN as an output.
 }
 
 void loop() {
-  // Turn all LEDs on
-  matrix.fill(1);         // 1 = on, 0 = off
-  delay(500);             // Wait 500 milliseconds
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED_BUILTIN on (LOW is the voltage level)
+  delay(1000);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
 
-  // Turn all LEDs off
-  matrix.fill(0);
-  delay(500);
+  /* Note that the logic is inverted (LOW for on, HIGH for off), which is typical for 
+     built-in LEDs that are wired with the cathode connected to the pin.
+  */
+}
+
+```
+
+Run this sketch on your board by clicking "run" in App Lab. Watch the red LED in the bottom right corner of the board (as seen with the cord facing up). It should blink on and off — Kiku's first heartbeat. 
+
+You can turn Kiku's heartbeat green by changing the sketch and re-running it:
+
+```cpp
+void setup() {
+  pinMode(LED3_G, OUTPUT);      // initialize the LED3 green pin as an output
+}
+
+void loop() {
+  digitalWrite(LED3_G, LOW);    // turn the green LED on
+  delay(1000);
+  digitalWrite(LED3_G, HIGH);   // turn it off
+  delay(1000);
 }
 ```
 
-Upload this sketch to your board by clicking the upload button in App Lab. Watch the LED array on the board. It should blink on and off every half second — Kiku's first heartbeat.
-
 **Challenge:**
 - Change the delay time to make the heartbeat faster or slower
-- Use `matrix.fill(0.5)` to set half brightness
-- Try `matrix.rect(0, 0, 4, 4, 1)` to light up just the top-left quarter of the grid
+- Change the LED light color; try LED3_B or LED3_R
 
-### Part 2 — Give Kiku a Body: Pair the Bluetooth Keyboard (20 min)
+> 💡 `LED_BUILTIN` is a simple single-color indicator meant for basic on/off status, while `LED3` (and `LED4`) are full RGB LEDs — and it's no accident that there are four RGB LEDs total: two (`LED3`, `LED4`) are wired to the MCU (Uno Q's microcontroller unit that directly controls the hardware), so your .ino sketch can control them directly. The other two (`LED1`, `LED2`) are wired to the MPU (microprocessor unit), the board's Qualcomm chip or Linux side, reflecting the Uno Q's dual-brain design. You'd program the MPU with Python code.
 
-**Mini-lecture: How a Bluetooth Keyboard Talks to Your Arduino (5 min)**
+### Part 2 — Give Kiku a Home 
 
-Kiku needs a way to hear from you. Let's move Kiku from the Arduino to your mini monitor. This is the first step in using the peripherals included in your AI kit; you'll set up your Arduino as a "SBC" - a single board computer.
+Pair the Bluetooth Keyboard (20 min)
+
+**Activity: Connecting Peripherals (5 min)**
+
+Kiku needs a better place to live. Let's move them from the Arduino to your mini monitor. This is the first step in using the peripherals included in your AI kit; you'll set up your Arduino as a "SBC" - a single board computer, the base architecture of a cyberdeck.
+
+Some of your peripherals are simple plugs you need to connect, so let's do those first:
 
 1. Disconnect the Arduino from your computer
 2. Connect the USB Hub's built-in USB C cable to the Arduino
-3. Connect your other USB C cable to a power source (could be a plug, or your computer)
-4. Connect the mini monitor to the USB hub using your HDMI cable and a USB cable
-5. Boot the Arduino and enter your board's password into the Linux login screen on your mini monitor
-6. App Lab should launch. Find your Kiku app and run it.
+3. Connect your other USB C cable to a power source (could be a plug, or your computer) and to the USB Hub
+4. Connect the mini monitor to the USB hub using your HDMI cable and a micro USB to USB cable
+5. Reconnect the board to a power source and boot it. 
+
+Now you need to work with the keyboard, which is [connected to your board via Bluetooth](https://commandmasters.com/commands/bluetoothctl-linux/).
+
+On your laptop, in App Lab, find your board's name at the bottom left and press the `>` icon next to it to connect to the board's shell, or terminal. This is how you control your board remotely.
+
+1. With your small keyboard powered on, put it in pairing mode. Depending on the model, it may be pressing <function> and <ctrl> buttons. A light should blink quickly when it's in pairing mode.
+2. Once connected, type `bluetoothctl` in the shell.
+3. Type `scan on` to scan for pairable devices
+4. Look for the name of your keyboard and copy its ID.
+5. Type `pair <the id you just copied>` to pair
+6. You'll see some text, and then hopefully a notice that the pairing was successful. Now you can use your keyboard to login to the mini monitor.
+
+Enter your board's password into the Linux login screen on your mini monitor. 
+
+6. App Lab should launch on your mini monitor. Find your Kiku app and run it.
 7. You can now enter code in App Lab on your laptop and watch it run on the mini computer you just created, since they are both now on the same network.
 
-In order to interact with Kiku, you'll build a way for the app to listen to keyboard presses. We'll pair a Bluetooth keyboard directly with the Uno Q. The board acts as a Bluetooth **host**, listening for key presses from a device that's paired to it, the same way your laptop listens for a wireless keyboard.
-
-**Activity: Pair the Bluetooth Keyboard (5 min)**
-
-1. Put your Bluetooth keyboard into pairing mode (usually a key combo or a switch on the underside — check the keyboard's manual).
-2. Open App Lab's Bluetooth settings and pair it with your Uno Q.
-3. Confirm the pairing succeeded before moving on.
-
-> **Troubleshooting:** If the keyboard won't pair, make sure it's not still paired to another device (like your laptop) — most Bluetooth keyboards can only be actively connected to one device at a time.
-
 **Activity: Read Key Presses and Light Up (10 min)**
+
+Now you have a fully functional SBC with a microcontroller board, a small monitor and keyboard, and the cables to connect them all. This is the core of your cyberdeck. We're going to create your Kiku pet within a small web app run from your board that you can feed, pet, play with, and let sleep.
 
 Write a sketch that reads key presses from the paired keyboard and lights up a different part of the LED array for `F`, `P`, and `S`:
 
@@ -112,6 +149,29 @@ Write a sketch that reads key presses from the paired keyboard and lights up a d
 
 ArduinoLEDMatrix matrix;
 BLEHIDHost keyboard;
+
+// The LED array is 8 rows x 12 columns. 1 = on, 0 = off.
+byte leftHalf[8][12] = {
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0},
+  {1,1,1,1,1,1,0,0,0,0,0,0}
+};
+byte rightHalf[8][12] = {
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1},
+  {0,0,0,0,0,0,1,1,1,1,1,1}
+};
+byte allOff[8][12] = {0};
 
 void setup() {
   Serial.begin(9600);
@@ -128,13 +188,13 @@ void loop() {
     char key = keyboard.read();
 
     if (key == 'f') {
-      matrix.rect(0, 0, 4, 8, 1);  // left half on: "feed"
+      matrix.renderBitmap(leftHalf, 8, 12);  // left half on: "feed"
       Serial.println("F pressed: feed!");
     } else if (key == 'p') {
-      matrix.rect(4, 0, 4, 8, 1);  // right half on: "play"
+      matrix.renderBitmap(rightHalf, 8, 12);  // right half on: "play"
       Serial.println("P pressed: play!");
     } else if (key == 's') {
-      matrix.fill(0);  // all off: "sleep"
+      matrix.renderBitmap(allOff, 8, 12);  // all off: "sleep"
       Serial.println("S pressed: sleep!");
     }
   }

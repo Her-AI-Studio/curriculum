@@ -233,7 +233,7 @@ Teams that lack diversity tend to miss blind spots. If everyone on the team has 
 **3. The people who label it**
 Many AI systems are trained using human feedback: raters who mark outputs as good or bad. Who those raters are shapes what "good" means to the model.
 
-> Note: There are recent efforts at MIT and other places to "debias" datasets by using AI to balance datasets, watching as well for unfounded patterns to emerge in unlabeled data. This data is flagged for debiasing. [source](https://news.mit.edu/2024/researchers-reduce-bias-ai-models-while-preserving-improving-accuracy-1211) 
+> 💡 There are recent efforts at MIT and other places to "debias" datasets by using AI to balance datasets, watching as well for unfounded patterns to emerge in unlabeled data. This data is flagged for debiasing. [source](https://news.mit.edu/2024/researchers-reduce-bias-ai-models-while-preserving-improving-accuracy-1211) 
 
 **Activity: The AI Audit Card (10 min)**
 
