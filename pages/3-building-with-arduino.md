@@ -4,7 +4,7 @@ outline: deep
 
 # Building with Arduino: Meet Kiku
 
-![Sketchnotes, session 3]()
+_Sketchnote coming soon_
 
 | **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an blinking heartbeat, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |

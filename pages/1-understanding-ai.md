@@ -94,11 +94,11 @@ const knowledgeCheckQuestions = [
 
 ### Part 1 — What Even Is AI? (25 min)
 
-**Warm-up: Two Truths and a Lie, AI Edition (10 min)**
+**Warm-up: Some Basics, AI Edition (10 min)**
 
 Here are some statements about AI. Which is true, and which is false?
 
-<Quiz id="week1-warmup" title="Warm-up: Two Truths and a Lie" :questions="warmupQuestions" />
+<Quiz id="week1-warmup" title="Warm-up: Some Basics" :questions="warmupQuestions" />
 
 **Mini-lecture: How AI Models Actually Work (10 min)**
 
