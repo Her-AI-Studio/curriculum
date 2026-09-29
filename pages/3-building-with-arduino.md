@@ -119,7 +119,7 @@ Now you need to work with the keyboard, which is [connected to your board via Bl
 
 On your laptop, in App Lab, find your board's name at the bottom left and press the `>` icon next to it to connect to the board's shell, or terminal. This is how you control your board remotely.
 
-1. With your small keyboard powered on, put it in pairing mode. Depending on the model, it may be pressing <function> and <shift> buttons. A light should blink quickly when it's in pairing mode.
+1. With your small keyboard powered on, put it in pairing mode. Depending on the model, it may be pressing `function` and `shift` buttons. A light should blink quickly when it's in pairing mode.
 2. Once connected, type `bluetoothctl` in the shell you launched from App Lab.
 3. Type `scan on` to scan for pairable devices
 4. Look for the name of your keyboard and copy its ID
