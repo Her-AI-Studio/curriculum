@@ -2,9 +2,86 @@
 outline: deep
 ---
 
+<script setup lang="ts">
+const warmupQuestions = [
+  {
+    id: 'ttl-1',
+    prompt: "An Arduino sketch's loop() function runs once and then stops.",
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — setup() runs once, but loop() runs over and over, forever, as long as the board has power.",
+  },
+  {
+    id: 'ttl-2',
+    prompt: 'The Arduino Uno Q has two separate "brains": an MCU for real-time hardware control, and an MPU running Linux for things like Python apps and web pages.',
+    choices: ['True', 'False'],
+    correctIndex: 0,
+    explanation: "True — the STM32 microcontroller (MCU) runs your sketch, while the Qualcomm processor (MPU) runs a full Linux environment alongside it.",
+  },
+  {
+    id: 'ttl-3',
+    prompt: 'LED_BUILTIN and LED3 are controlled the exact same way, since they\'re really the same LED.',
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — LED_BUILTIN is a separate single-color indicator, while LED3 is a full RGB LED with its own R/G/B pins you control individually.",
+  },
+]
+
+const knowledgeCheckQuestions = [
+  {
+    id: 'kc-1',
+    prompt: 'Why are there four RGB LEDs on the Uno Q, split two-and-two?',
+    choices: [
+      "It's arbitrary — any of them can be controlled from anywhere",
+      'Two (LED3, LED4) are wired to the MCU for your sketch to control directly; two (LED1, LED2) are wired to the MPU, controlled from Python',
+      'All four are only controllable from Python',
+      "They're spares in case one burns out",
+    ],
+    correctIndex: 1,
+    explanation: 'The 2-and-2 split mirrors the board\'s dual-brain design: the MCU-side LEDs are yours in the sketch, the MPU-side LEDs belong to the Linux/Python side.',
+  },
+  {
+    id: 'kc-2',
+    prompt: 'Where does the Bluetooth keyboard actually pair with the Uno Q?',
+    choices: [
+      'Directly with the sketch, using the ArduinoBLE library',
+      "With the board's Linux side (the MPU), the same way a keyboard pairs with any Linux computer",
+      "It doesn't pair — it connects over USB",
+      'With the LED matrix controller',
+    ],
+    correctIndex: 1,
+    explanation: 'Pairing happens at the OS level via bluetoothctl on the Linux/MPU side, not through custom code on the sketch/MCU side.',
+  },
+  {
+    id: 'kc-3',
+    prompt: "When you press a key in Kiku's web app, what's the actual path that makes LED3 change color?",
+    choices: [
+      'The browser controls the LED directly through the webpage',
+      "The keypress is handled by JavaScript, sent over the Web UI brick's WebSocket to Python, which calls Bridge to reach the sketch",
+      'The LED changes automatically on a timer, unrelated to key presses',
+      'The sketch reads the keyboard directly over Bluetooth',
+    ],
+    correctIndex: 1,
+    explanation: 'Browser (JS) → WebUI WebSocket → Python (main.py) → Bridge.call() → sketch. Each layer hands off to the next.',
+  },
+  {
+    id: 'kc-4',
+    prompt: "Why isn't Kiku's current behavior considered \"AI\"?",
+    choices: [
+      "It's too simple to run on real hardware",
+      "It runs on if/else logic you can read and predict — it doesn't perceive its environment or learn from data",
+      "It doesn't use Python",
+      "It's actually AI, just very basic AI",
+    ],
+    correctIndex: 1,
+    explanation: 'Kiku follows hand-written rules with no perception or learning involved — the defining ingredients of a rule-based system, not an AI one.',
+  },
+]
+</script>
+
 # Building with Arduino: Meet Kiku
 
-_Sketchnote coming soon_
+![Sketchnote coming soon](/coming-soon.png)
 
 | **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an blinking heartbeat, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -15,7 +92,13 @@ _Sketchnote coming soon_
 
 ## Session Plan
 
-### Part 1 — Setup & Blink: Giving Kiku a Heartbeat (25 min)
+### Part 1 — Setup & Blink: Giving Kiku a Heartbeat (30 min)
+
+**Warm-up: True or False? (5 min)**
+
+Before you touch the hardware, check your instincts against a few statements about what you're about to build:
+
+<Quiz id="week3-warmup" title="Warm-up: True or False?" :questions="warmupQuestions" />
 
 **Activity: Install App Lab and Connect Your Board (10 min)**
 
@@ -99,9 +182,7 @@ void loop() {
 
 > 💡 `LED_BUILTIN` is a simple single-color indicator meant for basic on/off status, while `LED3` (and `LED4`) are full RGB LEDs — and it's no accident that there are four RGB LEDs total: two (`LED3`, `LED4`) are wired to the MCU (Uno Q's microcontroller unit that directly controls the hardware), so your .ino sketch can control them directly. The other two (`LED1`, `LED2`) are wired to the MPU (microprocessor unit), the board's Qualcomm chip or Linux side, reflecting the Uno Q's dual-brain design. You'd program the MPU with Python code.
 
-### Part 2 — Give Kiku a Home 
-
-Pair the Bluetooth Keyboard (20 min)
+### Part 2 — Give Kiku a Home: Pair the Bluetooth Keyboard (35 min)
 
 **Activity: Connecting Peripherals (5 min)**
 
@@ -906,19 +987,19 @@ Facilitator-led discussion:
 - This is the last piece of "plumbing" before Kiku gets a personality. What do you think happens next? 
 - We'll be adding AI elements into this app in the next session. What would you add, and how could AI enhance it?
 
-**Activity: Test All Three Actions (5 min)**
+**Activity: Test All Three Actions (10 min)**
 
 Upload the sketch. Press `F` to feed Kiku, `P` to play with it, and `S` to put it to sleep. Watch how the LED pattern changes each time.
 
-**Full-group debrief:**
+**Full-group debrief (5 min):**
 
 - What did each action look like on the LED array?
 - What happened if you ignored Kiku for a while before checking back in?
 - Did anything surprise you about how quickly (or slowly) hunger or energy changed?
 
-### Part 3 — Kiku's Personality: Customize and Reflect (20 min)
+### Part 3 — Kiku's Personality: Customize and Reflect (25 min)
 
-**Activity: Design Your Own Mood Pattern (10 min)**
+**Activity: Design Your Own Mood Pattern (15 min)**
 
 Now it's your turn to make Kiku feel like *your* pet. Modify one or more of the LED patterns in the sketch:
 
@@ -926,7 +1007,7 @@ Now it's your turn to make Kiku feel like *your* pet. Modify one or more of the 
 - Make "hungry" flash faster the longer Kiku goes unfed
 - Add a brand new mood (e.g., "excited" right after playing) with its own pattern
 
-**Reflection: What You Built (5 min)**
+**Reflection: What You Built (10 min)**
 
 Think about what you just created:
 
@@ -938,6 +1019,10 @@ Think about what you just created:
 
 **Discussion prompt:** _"Kiku right now runs entirely on logic you can read and predict. How is that different from 'AI'? Why or why not? What would have to change for Kiku to actually need AI?"_
 
+Congratulations! Now you have a pet!
+
+![kiku](/kiku.png)
+
 ## Take-Home
 
 **Check Your Understanding**
@@ -945,6 +1030,10 @@ Think about what you just created:
 1. What are the two essential functions in every Arduino sketch? What does each one do?
 2. Name Kiku's three state variables. What causes each one to change?
 3. Is Kiku's current behavior an example of AI? Why or why not?
+
+**Quick Knowledge Check**
+
+<Quiz id="week3-knowledge-check" title="Post-Session Knowledge Check" :questions="knowledgeCheckQuestions" />
 
 **Assignment**
 

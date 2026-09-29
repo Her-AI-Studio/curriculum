@@ -4,7 +4,7 @@ outline: deep
 
 # Kiku Wakes Up: Giving Your Pet Eyes, Ears, and a Face
 
-_Sketchnote coming soon_
+![Sketchnote coming soon](/coming-soon.png)
 
 | **Lesson Goal**            | Give Kiku real AI senses: a screen for its face, a microphone that wakes it up, and a camera that teaches it to tell good food from junk food. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
