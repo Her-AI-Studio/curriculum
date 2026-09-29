@@ -6,7 +6,7 @@ outline: deep
 
 ![Sketchnotes, session 3]()
 
-| **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an Arduino LED array for a face, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
+| **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an blinking heartbeat, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **What you'll learn**       | By the end of this week you will be able to:<br>- Set up the Arduino Uno Q with Arduino App Lab and upload your first sketch to your board<br>- Read and edit Arduino code to control the built-in LED array<br>- Pair a Bluetooth keyboard with the board and read key presses in your code<br>- Explain how a simple state machine tracks Kiku's hunger, energy, and mood over time<br>- Use F, P, and S key presses to feed, play with, and put Kiku to sleep, and watch its LED patterns respond |
 | **Tools you'll need**       | Arduino Uno Q board, USB cable, laptop with Arduino App Lab installed, your AI Kit's Bluetooth keyboard, USB Hub, and small monitor |
@@ -51,19 +51,13 @@ void loop() {
 
 ![App Lab](/app-lab.png)
 
-The Uno Q has some built-in LED lights plus a blue **LED array**, a grid of individually controllable LEDs. In App Lab, you control them by writing to specific pins or using the board's LED library. To start, let's use make one of the individual LEDs become Kiku's heartbeat — a proof of life before we give it a personality.
+The Uno Q has some built-in LED lights plus a blue **LED array**, a grid of individually controllable LEDs. In App Lab, you control them by writing to specific pins or using the board's LED library. To start, let's make one of the individual LEDs become Kiku's heartbeat — a proof of life before we build a personality.
 
 **Activity: A Heartbeat (10 min)**
 
 Let's write your first sketch. Once your board is connected to your computer and wifi, you can upload code to it via Arduino App Lab. In App Lab, create a new app called Kiku. Open this new app and take a look at the files that were created. Go to the `sketch.ino` file and overwrite it with the following code:
 
 ```cpp
-// SPDX-FileCopyrightText: Copyright (C) Arduino s.r.l. and/or its affiliated companies
-//
-// SPDX-License-Identifier: MPL-2.0
-
-// Example sketch to blink an LED connected to the board. 
-// The LED_BUILTIN is turned on for 1 second, then off for 1 second, repeatedly.
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);      // initialize digital pin LED_BUILTIN as an output.
@@ -88,7 +82,7 @@ You can turn Kiku's heartbeat green by changing the sketch and re-running it:
 
 ```cpp
 void setup() {
-  pinMode(LED3_G, OUTPUT);      // initialize the LED3 green pin as an output
+  pinMode(LED3_G, OUTPUT);      // initialize the LED3 green pin
 }
 
 void loop() {
@@ -912,39 +906,6 @@ Facilitator-led discussion:
 - This is the last piece of "plumbing" before Kiku gets a personality. What do you think happens next? 
 - We'll be adding AI elements into this app in the next session. What would you add, and how could AI enhance it?
 
-### Part 3 — Kiku's Needs: Feed, Play, Sleep (25 min)
-
-**Mini-lecture: How a Tamagotchi State Machine Works (5 min)**
-
-A Tamagotchi-style pet is really just a **state machine**: a small set of variables that change over time and in response to input.
-
-Kiku tracks (at least) three things:
-- **Hunger**: rises the longer Kiku goes unfed
-- **Energy**: drops the longer Kiku stays awake
-- **Mood**: reacts to both of the above, plus how recently you've played with it
-
-The `loop()` function checks how much time has passed (using `millis()`, which counts milliseconds since the board powered on) and slowly adjusts these variables. Pressing `F`, `P`, or `S` on your paired keyboard is the only way to intervene: feed Kiku, play with Kiku, or put Kiku to sleep.
-
-**Activity: Load Kiku's Starter Sketch (15 min)**
-
-> **Note for facilitators:** This section is a placeholder. Open Arduino App Lab and load the actual Kiku starter sketch (exported from App Lab) here — it should define hunger/energy/mood variables that decay over time, map `F`/`P`/`S` key presses (relayed from Python over the Bridge) to feed/play/sleep actions, and drive LED color/pattern changes for each state.
-
-```cpp
-// TODO: Replace this placeholder with the real Kiku starter sketch
-// exported from Arduino App Lab. It should include:
-//   - hunger, energy, and mood variables that change over time
-//   - F/P/S key-press logic (relayed from Python via the Bridge) that maps to feed / play / sleep actions
-//   - LED color/pattern changes representing each state
-//
-// Paste the actual sketch here once it's ready.
-```
-
-Once you've loaded the real sketch, read through it with a partner and answer:
-
-1. Where are Kiku's state variables (hunger, energy, mood) defined?
-2. How does the code decide what to do when it reads an `F`, `P`, or `S` key press?
-3. Which LED patterns correspond to which state?
-
 **Activity: Test All Three Actions (5 min)**
 
 Upload the sketch. Press `F` to feed Kiku, `P` to play with it, and `S` to put it to sleep. Watch how the LED pattern changes each time.
@@ -955,7 +916,7 @@ Upload the sketch. Press `F` to feed Kiku, `P` to play with it, and `S` to put i
 - What happened if you ignored Kiku for a while before checking back in?
 - Did anything surprise you about how quickly (or slowly) hunger or energy changed?
 
-### Part 4 — Kiku's Personality: Customize and Reflect (20 min)
+### Part 3 — Kiku's Personality: Customize and Reflect (20 min)
 
 **Activity: Design Your Own Mood Pattern (10 min)**
 
@@ -969,22 +930,21 @@ Now it's your turn to make Kiku feel like *your* pet. Modify one or more of the 
 
 Think about what you just created:
 
-1. **Body:** LED3's heartbeat on the board, and a real face and stats on the web app running on the monitor
+1. **Body:** LED3's heartbeat on the board, and a real pet whose stats run on the web app
 2. **Input:** A paired Bluetooth keyboard — `F`, `P`, and `S` are your only way to talk to Kiku
 3. **Logic:** A state machine tracking hunger, energy, and mood over time
 
-Everything Kiku does right now comes from `if`/`else` logic you (or the sketch you loaded) wrote by hand. Kiku doesn't perceive anything about the world, and it doesn't learn — it just follows the rules it was given.
+**Everything Kiku does right now comes from `if`/`else` logic you (or the sketch you loaded) wrote by hand. Kiku doesn't perceive anything about the world, and it doesn't learn — it just follows the rules it was given.**
 
-**Discussion prompt:** _"Kiku right now runs entirely on logic you can read and predict. Is that different from 'AI'? Why or why not? What would have to change for Kiku to actually need AI?"_
+**Discussion prompt:** _"Kiku right now runs entirely on logic you can read and predict. How is that different from 'AI'? Why or why not? What would have to change for Kiku to actually need AI?"_
 
 ## Take-Home
 
 **Check Your Understanding**
 
 1. What are the two essential functions in every Arduino sketch? What does each one do?
-2. What does it mean for the Uno Q to act as a Bluetooth "host" reading a keyboard, rather than a "peripheral" that other devices connect to?
-3. Name Kiku's three state variables. What causes each one to change?
-4. Is Kiku's current behavior an example of AI? Why or why not?
+2. Name Kiku's three state variables. What causes each one to change?
+3. Is Kiku's current behavior an example of AI? Why or why not?
 
 **Assignment**
 
@@ -1001,4 +961,4 @@ Everything Kiku does right now comes from `if`/`else` logic you (or the sketch y
 
 ## Next Steps
 
-- [Week 4 — Kiku Wakes Up: Giving Your Pet Eyes, Ears, and a Face](/4-eyes-and-ears)
+- [Week 4 — Kiku Gets Smart: Giving Your Pet Eyes and Ears](/4-eyes-and-ears)
