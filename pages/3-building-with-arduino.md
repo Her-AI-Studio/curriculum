@@ -331,378 +331,392 @@ In `index.html`, build the interface:
     </div>
 
     <script>
-    (function(){
-      // ---------- Game state ----------
-      var state = { hunger: 70, energy: 70, joy: 70, asleep:false };
-      function load(){
-        try{
-          var raw = localStorage.getItem('kiku-state');
-          if(raw){ var s = JSON.parse(raw); Object.assign(state, s); }
-        }catch(e){ /* storage unavailable, start fresh */ }
-      }
-      function save(){
-        try{ localStorage.setItem('kiku-state', JSON.stringify(state)); }catch(e){}
-      }
-      load();
-
-      // ---------- Kiku's pixel-matrix sprite ----------
-      // 16-wide art rows, built with repeat() so counts can't drift.
-      var rep = function(ch,n){ return ch.repeat(n); };
-      var ART = [
-        rep('.',5)+'#'+rep('.',4)+'#'+rep('.',5),               // antenna tips
-        rep('.',4)+'#'+rep('.',6)+'#'+rep('.',4),
-        rep('.',5)+'#'+rep('.',4)+'#'+rep('.',5),
-        rep('.',6)+'#'+rep('.',2)+'#'+rep('.',6),
-        rep('.',6)+'#'+rep('.',2)+'#'+rep('.',6),
-        rep('.',4)+rep('#',8)+rep('.',4),                       // head top
-        rep('.',2)+rep('#',12)+rep('.',2),
-        rep('.',1)+rep('#',14)+rep('.',1),
-        rep('#',3)+rep('.',2)+rep('#',6)+rep('.',2)+rep('#',3), // eyes
-        rep('#',3)+rep('.',2)+rep('#',6)+rep('.',2)+rep('#',3),
-        rep('#',16),
-        rep('#',6)+rep('.',4)+rep('#',6),                       // mouth
-        rep('.',1)+rep('#',14)+rep('.',1),
-        rep('.',3)+rep('#',10)+rep('.',3),
-        rep('.',16),
-        rep('.',3)+rep('#',10)+rep('.',3),
-        rep('.',1)+rep('#',14)+rep('.',1),
-        rep('.',1)+rep('#',14)+rep('.',1),
-        rep('.',3)+rep('#',10)+rep('.',3),
-        rep('.',4)+rep('#',2)+rep('.',4)+rep('#',2)+rep('.',4)
-      ];
-      var WIDTH = 18, HEIGHT = 20; // 16 core + 2 cols reserved for the waving arm
-      var EYE_ROWS = [8,9], EYE_COLS = [[3,4],[11,12]];
-      var ARM_ROWS = [9,10,11], ARM_COLS = [16,17];
-      var ANTENNA_ROWS = [0,1,2,3,4];
-      var ANTENNA_LEFT = [5,6];
-      var ANTENNA_RIGHT = [9,10];
-
-      function setChars(str, indices, ch){
-        var chars = str.split('');
-        indices.forEach(function(i){ chars[i] = ch; });
-        return chars.join('');
-      }
-
-      function buildFrame(eyesClosed, waving, joy, energy, eating, droopy, happyEyes){
-        var rows = ART.map(function(r){ return r + '..'; });
-
-        // sad/cranky antennae droop outward and downward
-        if(droopy){
-          rows[0] = setChars(rows[0], [4,10], '.');
-          rows[1] = setChars(rows[1], [3,11], '#');
-          rows[2] = setChars(rows[2], [4,10], '#');
-          rows[3] = setChars(rows[3], [5,9], '#');
-          rows[4] = setChars(rows[4], [6,8], '#');
+      (function(){
+        // ---------- Game state ----------
+        var state = { hunger: 70, energy: 70, joy: 70, asleep:false };
+        function load(){
+          try{
+            var raw = localStorage.getItem('kiku-state');
+            if(raw){ var s = JSON.parse(raw); Object.assign(state, s); }
+          }catch(e){ /* storage unavailable, start fresh */ }
         }
-
-        // mood: joy shapes the mouth
-        if(joy >= 70){
-          // 2-row arc: corners stay at row11 (default), centre dips to row12
-          rows[11] = setChars(rows[11], [7,8], '#');
-          rows[12] = setChars(rows[12], [7,8], '.');
-        } else if(joy < 30){
-          rows[11] = setChars(rows[11], [6,7,8,9], '#'); // close the smile line
-          rows[12] = setChars(rows[12], [7,8], '.');      // small downturned dip
+        function save(){
+          try{ localStorage.setItem('kiku-state', JSON.stringify(state)); }catch(e){}
         }
-
-        // mood: low energy droops the eyelids
-        if(energy < 30 && !eyesClosed){
-          rows[8] = setChars(rows[8], [3,4,11,12], '#');
+        load();
+      
+        // ---------- Kiku's pixel-matrix sprite ----------
+        // 16-wide art rows, built with repeat() so counts can't drift.
+        var rep = function(ch,n){ return ch.repeat(n); };
+        var ART = [
+          rep('.',5)+'#'+rep('.',4)+'#'+rep('.',5),               // antenna tips
+          rep('.',4)+'#'+rep('.',6)+'#'+rep('.',4),
+          rep('.',5)+'#'+rep('.',4)+'#'+rep('.',5),
+          rep('.',6)+'#'+rep('.',2)+'#'+rep('.',6),
+          rep('.',6)+'#'+rep('.',2)+'#'+rep('.',6),
+          rep('.',4)+rep('#',8)+rep('.',4),                       // head top
+          rep('.',2)+rep('#',12)+rep('.',2),
+          rep('.',1)+rep('#',14)+rep('.',1),
+          rep('#',3)+rep('.',2)+rep('#',6)+rep('.',2)+rep('#',3), // eyes
+          rep('#',3)+rep('.',2)+rep('#',6)+rep('.',2)+rep('#',3),
+          rep('#',16),
+          rep('#',6)+rep('.',4)+rep('#',6),                       // mouth
+          rep('.',1)+rep('#',14)+rep('.',1),
+          rep('.',3)+rep('#',10)+rep('.',3),
+          rep('.',16),
+          rep('.',3)+rep('#',10)+rep('.',3),
+          rep('.',1)+rep('#',14)+rep('.',1),
+          rep('.',1)+rep('#',14)+rep('.',1),
+          rep('.',3)+rep('#',10)+rep('.',3),
+          rep('.',4)+rep('#',2)+rep('.',4)+rep('#',2)+rep('.',4)
+        ];
+        var WIDTH = 18, HEIGHT = 20; // 16 core + 2 cols reserved for the (unused) arm slot
+        var EYE_ROWS = [8,9], EYE_COLS = [[3,4],[11,12]];
+        var ARM_ROWS = [9,10,11], ARM_COLS = [16,17];
+      
+        function setChars(str, indices, ch){
+          var chars = str.split('');
+          indices.forEach(function(i){ chars[i] = ch; });
+          return chars.join('');
         }
-
-        if(eyesClosed){
-          EYE_ROWS.forEach(function(r){
-            EYE_COLS.forEach(function(pair){ rows[r] = setChars(rows[r], pair, '#'); });
-          });
+      
+        function buildFrame(eyesClosed, waving, joy, energy, eating, droopy, happyEyes, angryEyes, excited){
+          var rows = ART.map(function(r){ return r + '..'; });
+          var blank = rep('.', WIDTH);
+      
+          // antennae: excited (straight up, alert) beats droopy (curled — angry or asleep)
+          if(excited){
+            rows[0] = setChars(blank, [6,9], '#');
+            rows[1] = setChars(blank, [6,9], '#');
+            rows[2] = setChars(blank, [6,9], '#');
+            rows[3] = setChars(blank, [6,9], '#');
+          } else if(droopy){
+            rows[0] = blank;
+            rows[1] = setChars(blank, [7,8], '#');
+            rows[2] = setChars(blank, [7,8], '#');
+            rows[3] = setChars(blank, [6,9], '#');
+          }
+      
+          // mood: joy shapes the mouth
+          if(joy >= 70){
+            // 2-row arc: corners stay at row11 (default), centre dips to row12 — a clear smile
+            rows[11] = setChars(rows[11], [7,8], '#');
+            rows[12] = setChars(rows[12], [7,8], '.');
+          } else if(joy < 30){
+            // inverted arc: centre stays at row11, corners droop down to row12 — a clear frown
+            rows[11] = setChars(rows[11], [6,9], '#');
+            rows[12] = setChars(rows[12], [6,9], '.');
+          }
+      
+          // mood: low energy droops the eyelids
+          if(energy < 30 && !eyesClosed){
+            rows[8] = setChars(rows[8], [3,4,11,12], '#');
+          }
+      
+          if(eyesClosed){
+            EYE_ROWS.forEach(function(r){
+              EYE_COLS.forEach(function(pair){ rows[r] = setChars(rows[r], pair, '#'); });
+            });
+          } else if(happyEyes){
+            // Tiny pixel hearts: each eye becomes a compact heart shape.
+            rows[8] = setChars(rows[8], [2,3,4,5,10,11,12,13], '.');
+            rows[9] = setChars(rows[9], [2,3,4,5,10,11,12,13], '.');
+            rows[8] = setChars(rows[8], [3,4,11,12], '#');
+            rows[9] = setChars(rows[9], [2,3,4,5,10,11,12,13], '#');
+            rows[10] = setChars(rows[10], [3,4,11,12], '#');
+          } else if(angryEyes){
+            // furrowed inner corners, angled toward the nose
+            rows[8] = setChars(rows[8], [4,11], '#');
+          }
+      
+          if(waving){
+            ARM_ROWS.forEach(function(r){ rows[r] = setChars(rows[r], ARM_COLS, '#'); });
+          }
+          if(eating){
+            // open round "O" mouth, overriding whatever mood shape was there
+            rows[11] = setChars(rows[11], [7,8], '.');
+            rows[12] = setChars(rows[12], [7,8], '.');
+          }
+      
+          if(state.asleep){
+            // sleeping mouth alternates between a tiny O and a dot
+            var snorePhase = Math.floor(Date.now() / 650) % 2;
+            rows[11] = setChars(rows[11], [7,8], '.');
+            rows[12] = setChars(rows[12], [7,8], snorePhase ? '#' : '.');
+          }
+          return rows;
         }
-        if(happyEyes && !eyesClosed){
-          // Tiny pixel hearts: each eye becomes a compact heart shape.
-          rows[8] = setChars(rows[8], [2,3,4,5,10,11,12,13], '.');
-          rows[9] = setChars(rows[9], [2,3,4,5,10,11,12,13], '.');
-          rows[8] = setChars(rows[8], [3,4,11,12], '#');
-          rows[9] = setChars(rows[9], [2,3,4,5,10,11,12,13], '#');
-          rows[10] = setChars(rows[10], [3,4,11,12], '#');
-        }
-
-        if(waving){
-          ARM_ROWS.forEach(function(r){ rows[r] = setChars(rows[r], ARM_COLS, '#'); });
-        }
-        if(eating){
-          // open round "O" mouth, overriding whatever mood shape was there
-          rows[11] = setChars(rows[11], [7,8], '.');
-          rows[12] = setChars(rows[12], [7,8], '.');
-        }
-
-        if(state.asleep){
-          // sleeping mouth alternates between a tiny O and a dot
-          var snorePhase = Math.floor(Date.now() / 650) % 2;
-          rows[11] = setChars(rows[11], [7,8], '.');
-          rows[12] = setChars(rows[12], [7,8], snorePhase ? '#' : '.');
-        }
-        return rows;
-      }
-
-      var matrixEl = document.getElementById('matrix');
-      var cells = [];
-      for(var r=0;r<HEIGHT;r++){
-        var rowCells = [];
-        for(var c=0;c<WIDTH;c++){
-          var d = document.createElement('div');
-          d.className = 'px';
-          matrixEl.appendChild(d);
-          rowCells.push(d);
-        }
-        cells.push(rowCells);
-      }
-
-      var blinking = false, waving = false, laughing = false, forceFrown = false, eating = false, happyEyes = false;
-      function drawFrame(){
-        var eyesClosed = blinking || laughing || state.asleep;
-        var effectiveJoy = forceFrown ? 10 : state.joy;
-        var droopy = forceFrown || state.joy < 30 || state.energy < 25;
-        var rows = buildFrame(eyesClosed, waving, effectiveJoy, state.energy, eating, droopy);
+      
+        var matrixEl = document.getElementById('matrix');
+        var cells = [];
         for(var r=0;r<HEIGHT;r++){
+          var rowCells = [];
           for(var c=0;c<WIDTH;c++){
-            cells[r][c].classList.toggle('lit', rows[r][c] === '#');
+            var d = document.createElement('div');
+            d.className = 'px';
+            matrixEl.appendChild(d);
+            rowCells.push(d);
+          }
+          cells.push(rowCells);
+        }
+      
+        var blinking = false, waving = false, laughing = false, forceFrown = false,
+            eating = false, happyEyes = false, forceSmile = false, antennaExcited = false;
+      
+        function drawFrame(){
+          var eyesClosed = blinking || laughing || state.asleep;
+          var effectiveJoy = forceFrown ? 10 : (forceSmile ? 90 : state.joy);
+          var droopy = forceFrown || state.joy < 30 || state.asleep;
+          var angry = (forceFrown || state.joy < 30) && !happyEyes;
+          var rows = buildFrame(eyesClosed, waving, effectiveJoy, state.energy, eating, droopy, happyEyes, angry, antennaExcited);
+          for(var r=0;r<HEIGHT;r++){
+            for(var c=0;c<WIDTH;c++){
+              cells[r][c].classList.toggle('lit', rows[r][c] === '#');
+            }
           }
         }
-      }
-      drawFrame();
-
-      // Kiku wanders around the horizontal stage instead of staying centered.
-      var wanderTarget = 50;
-      function moveKiku(){
-        if(state.asleep) return;
-        // Keep enough room for the 18-column sprite on either side.
-        wanderTarget = 18 + Math.random() * 64;
-        wrapEl.style.left = wanderTarget + '%';
-      }
-      setInterval(moveKiku, 2600);
-      setTimeout(moveKiku, 700);
-
-      setInterval(function(){
-        blinking = true; drawFrame();
-        setTimeout(function(){ blinking = false; drawFrame(); }, 160);
-      }, 4200);
-
-      function showArm(){
-        waving = true; drawFrame();
-        setTimeout(function(){ waving = false; drawFrame(); }, 650);
-      }
-
-      function happyReaction(){
-        happyEyes = true;
-        wrapEl.classList.remove('bob');
-        void wrapEl.offsetWidth;
-        wrapEl.classList.add('bob');
         drawFrame();
-        setTimeout(function(){
-          happyEyes = false;
-          wrapEl.classList.remove('bob');
+      
+        // Kiku wanders around the horizontal stage instead of staying centered.
+        var wanderTarget = 50;
+        function moveKiku(){
+          if(state.asleep) return;
+          // Keep enough room for the 18-column sprite on either side.
+          wanderTarget = 18 + Math.random() * 64;
+          wrapEl.style.left = wanderTarget + '%';
+        }
+        setInterval(moveKiku, 2600);
+        setTimeout(moveKiku, 700);
+      
+        setInterval(function(){
+          blinking = true; drawFrame();
+          setTimeout(function(){ blinking = false; drawFrame(); }, 160);
+        }, 4200);
+      
+        var wrapEl = document.getElementById('matrix-wrap');
+        var statusEl = document.getElementById('status');
+        var stage = document.querySelector('.stage');
+      
+        function clamp(v){ return Math.max(0, Math.min(100, v)); }
+        function colorFor(v){
+          if(v < 30) return 'var(--low)';
+          if(v < 60) return 'var(--happy)';
+          return 'var(--pixel)';
+        }
+      
+        function render(){
+          document.getElementById('bar-hunger').style.width = state.hunger + '%';
+          document.getElementById('bar-hunger').style.background = colorFor(state.hunger);
+          document.getElementById('bar-energy').style.width = state.energy + '%';
+          document.getElementById('bar-energy').style.background = colorFor(state.energy);
+          document.getElementById('bar-joy').style.width = state.joy + '%';
+          document.getElementById('bar-joy').style.background = colorFor(state.joy);
+      
+          wrapEl.classList.toggle('asleep', state.asleep);
+          if(!state.asleep && !wanderTarget) moveKiku();
+      
+          var avg = (state.hunger + state.energy + state.joy) / 3;
+          if(state.asleep) statusEl.textContent = 'sleeping';
+          else if(state.joy < 30) statusEl.textContent = 'cranky';
+          else if(state.energy < 25) statusEl.textContent = 'sleepy';
+          else if(avg > 70) statusEl.textContent = 'delighted';
+          else if(avg > 40) statusEl.textContent = 'feeling okay';
+          else statusEl.textContent = 'not great';
           drawFrame();
-        }, 900);
-      }
-
-      var wrapEl = document.getElementById('matrix-wrap');
-      var statusEl = document.getElementById('status');
-      var stage = document.querySelector('.stage');
-
-      function clamp(v){ return Math.max(0, Math.min(100, v)); }
-      function colorFor(v){
-        if(v < 30) return 'var(--low)';
-        if(v < 60) return 'var(--happy)';
-        return 'var(--pixel)';
-      }
-
-      function render(){
-        document.getElementById('bar-hunger').style.width = state.hunger + '%';
-        document.getElementById('bar-hunger').style.background = colorFor(state.hunger);
-        document.getElementById('bar-energy').style.width = state.energy + '%';
-        document.getElementById('bar-energy').style.background = colorFor(state.energy);
-        document.getElementById('bar-joy').style.width = state.joy + '%';
-        document.getElementById('bar-joy').style.background = colorFor(state.joy);
-
-        wrapEl.classList.toggle('asleep', state.asleep);
-        if(!state.asleep && !wanderTarget) moveKiku();
-
-        var avg = (state.hunger + state.energy + state.joy) / 3;
-        if(state.asleep) statusEl.textContent = 'sleeping';
-        else if(state.joy < 30) statusEl.textContent = 'cranky';
-        else if(state.energy < 25) statusEl.textContent = 'sleepy';
-        else if(avg > 70) statusEl.textContent = 'delighted';
-        else if(avg > 40) statusEl.textContent = 'feeling okay';
-        else statusEl.textContent = 'not great';
-        drawFrame();
-        save();
-      }
-
-      function burst(color){
-        for(var i=0;i<8;i++){
+          save();
+        }
+      
+        function burst(color){
+          for(var i=0;i<8;i++){
+            var p = document.createElement('div');
+            p.className = 'particle';
+            var angle = (Math.PI*2*i)/8;
+            var dist = 40 + Math.random()*20;
+            p.style.setProperty('--dx', Math.cos(angle)*dist + 'px');
+            p.style.setProperty('--dy', Math.sin(angle)*dist + 'px');
+            p.style.left = '50%'; p.style.top = '46%';
+            p.style.background = color || 'var(--happy)';
+            stage.appendChild(p);
+            setTimeout(function(el){ return function(){ el.remove(); }; }(p), 750);
+          }
+        }
+      
+        function spawnPellet(){
           var p = document.createElement('div');
-          p.className = 'particle';
-          var angle = (Math.PI*2*i)/8;
-          var dist = 40 + Math.random()*20;
-          p.style.setProperty('--dx', Math.cos(angle)*dist + 'px');
-          p.style.setProperty('--dy', Math.sin(angle)*dist + 'px');
-          p.style.left = '50%'; p.style.top = '46%';
-          p.style.background = color || 'var(--happy)';
+          p.className = 'pellet';
+      
+          // Start above Kiku and use the same horizontal position as Kiku.
+          // The target is the mouth, around 94px below the sprite's top.
+          var stageRect = stage.getBoundingClientRect();
+          var wrapRect = wrapEl.getBoundingClientRect();
+          var x = (wrapRect.left + wrapRect.width / 2) - stageRect.left;
+          var y = (wrapRect.top - stageRect.top) + 92;
+      
+          p.style.left = x + 'px';
+          p.style.top = '14px';
+      
+          // CSS animation ends at the mouth's position.
+          var distance = y - 14;
+          p.style.setProperty('--food-distance', distance + 'px');
+          p.style.animationName = 'eatDropToMouth';
+      
           stage.appendChild(p);
-          setTimeout(function(el){ return function(){ el.remove(); }; }(p), 750);
+          setTimeout(function(){ p.remove(); }, 480);
         }
-      }
-
-      function spawnPellet(){
-        var p = document.createElement('div');
-        p.className = 'pellet';
-
-        // Start above Kiku and use the same horizontal position as Kiku.
-        // The target is the mouth, around 94px below the sprite's top.
-        var stageRect = stage.getBoundingClientRect();
-        var wrapRect = wrapEl.getBoundingClientRect();
-        var x = (wrapRect.left + wrapRect.width / 2) - stageRect.left;
-        var y = (wrapRect.top - stageRect.top) + 92;
-
-        p.style.left = x + 'px';
-        p.style.top = '14px';
-
-        // CSS animation ends at the mouth's position.
-        var distance = y - 14;
-        p.style.setProperty('--food-distance', distance + 'px');
-        p.style.animationName = 'eatDropToMouth';
-
-        stage.appendChild(p);
-        setTimeout(function(){ p.remove(); }, 480);
-      }
-
-      function bounce(){
-        wrapEl.classList.remove('bounce');
-        void wrapEl.offsetWidth;
-        wrapEl.classList.add('bounce');
-      }
-      function jumpMove(){
-        wrapEl.classList.remove('jump');
-        void wrapEl.offsetWidth;
-        wrapEl.classList.add('jump');
-      }
-      function shakeMove(){
-        wrapEl.classList.remove('shake');
-        void wrapEl.offsetWidth;
-        wrapEl.classList.add('shake');
-      }
-      function frownReaction(message){
-        forceFrown = true;
-        statusEl.textContent = message;
-        shakeMove();
-        drawFrame();
-        setTimeout(function(){ forceFrown = false; render(); }, 900);
-      }
-
-      function feed(){
-        if(state.asleep) return;
-        if(state.hunger >= 100){ frownReaction('too full to eat more'); return; }
-        spawnPellet();
-        eating = true;
-        wrapEl.classList.remove('bob');
-        void wrapEl.offsetWidth;
-        wrapEl.classList.add('bob');
-        drawFrame();
-        setTimeout(function(){
-          eating = false;
+      
+        function bounce(){
+          wrapEl.classList.remove('bounce');
+          void wrapEl.offsetWidth;
+          wrapEl.classList.add('bounce');
+        }
+        function jumpMove(){
+          wrapEl.classList.remove('jump');
+          void wrapEl.offsetWidth;
+          wrapEl.classList.add('jump');
+        }
+        function shakeMove(){
+          wrapEl.classList.remove('shake');
+          void wrapEl.offsetWidth;
+          wrapEl.classList.add('shake');
+        }
+        function frownReaction(message){
+          forceFrown = true;
+          statusEl.textContent = message;
+          shakeMove();
+          drawFrame();
+          setTimeout(function(){ forceFrown = false; render(); }, 900);
+        }
+      
+        function petReaction(){
+          forceSmile = true;
+          wrapEl.classList.remove('wiggle');
+          void wrapEl.offsetWidth;
+          wrapEl.classList.add('wiggle');
+          drawFrame();
+          setTimeout(function(){
+            forceSmile = false;
+            wrapEl.classList.remove('wiggle');
+            drawFrame();
+          }, 900);
+        }
+      
+        function playReaction(){
+          happyEyes = true;
+          antennaExcited = true;
+          drawFrame();
+          setTimeout(function(){
+            happyEyes = false;
+            antennaExcited = false;
+            drawFrame();
+          }, 700);
+        }
+      
+        function feed(){
+          if(state.asleep) return;
+          if(state.hunger >= 100){ frownReaction('too full to eat more'); return; }
+          spawnPellet();
+          eating = true;
           wrapEl.classList.remove('bob');
-          state.hunger = clamp(state.hunger + 25);
-          state.joy = clamp(state.joy + 5);
-          bounce(); burst('var(--gold)'); render();
-        }, 420);
-      }
-      function play(){
-        if(state.asleep) return;
-        if(state.joy >= 100 || state.energy <= 0){ frownReaction('too tired to play'); return; }
-        state.joy = clamp(state.joy + 20);
-        state.energy = clamp(state.energy - 10);
-        happyReaction(); showArm(); burst('var(--pixel)'); render();
-      }
-      function pet(){
-        if(state.asleep) return;
-        if(state.joy >= 100){ frownReaction('enough petting for now'); return; }
-        state.joy = clamp(state.joy + 12);
-        happyReaction(); showArm(); burst('var(--happy)'); render();
-      }
-      // ---------- Snoring while asleep ----------
-      var audioCtx = null, snoreTimer = null;
-      setInterval(function(){
-        if(state.asleep) drawFrame();
-      }, 325);
-      function ensureAudio(){
-        if(!audioCtx){
-          try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-          catch(e){ audioCtx = null; }
+          void wrapEl.offsetWidth;
+          wrapEl.classList.add('bob');
+          drawFrame();
+          setTimeout(function(){
+            eating = false;
+            wrapEl.classList.remove('bob');
+            state.hunger = clamp(state.hunger + 25);
+            state.joy = clamp(state.joy + 5);
+            bounce(); burst('var(--gold)'); render();
+          }, 420);
         }
-        if(audioCtx && audioCtx.state === 'suspended'){
-          audioCtx.resume().catch(function(){});
+        function play(){
+          if(state.asleep) return;
+          if(state.joy >= 100 || state.energy <= 0){ frownReaction('too tired to play'); return; }
+          state.joy = clamp(state.joy + 20);
+          state.energy = clamp(state.energy - 10);
+          playReaction(); jumpMove(); burst('var(--pixel)'); render();
         }
-      }
-      function playSnore(){
-        if(!audioCtx) return;
-        try{
-          var now = audioCtx.currentTime;
-          var osc = audioCtx.createOscillator();
-          var gain = audioCtx.createGain();
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(90, now);
-          osc.frequency.linearRampToValueAtTime(48, now + 0.55);
-          osc.frequency.linearRampToValueAtTime(130, now + 0.8);
-          gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.16, now + 0.2);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
-          osc.connect(gain).connect(audioCtx.destination);
-          osc.start(now);
-          osc.stop(now + 0.9);
-        }catch(e){}
-      }
-      function startSnoring(){
-        ensureAudio();
-        playSnore();
-        snoreTimer = setInterval(playSnore, 2600);
-      }
-      function stopSnoring(){
-        if(snoreTimer){ clearInterval(snoreTimer); snoreTimer = null; }
-      }
-
-      function toggleSleep(){
-        state.asleep = !state.asleep;
-        if(state.asleep){
-          startSnoring();
-        } else {
-          stopSnoring();
-          state.energy = clamp(state.energy + 30);
-          bounce();
+        function pet(){
+          if(state.asleep) return;
+          if(state.joy >= 100){ frownReaction('enough petting for now'); return; }
+          state.joy = clamp(state.joy + 12);
+          petReaction(); burst('var(--happy)'); render();
         }
+        // ---------- Snoring while asleep ----------
+        var audioCtx = null, snoreTimer = null;
+        setInterval(function(){
+          if(state.asleep) drawFrame();
+        }, 325);
+        function ensureAudio(){
+          if(!audioCtx){
+            try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+            catch(e){ audioCtx = null; }
+          }
+          if(audioCtx && audioCtx.state === 'suspended'){
+            audioCtx.resume().catch(function(){});
+          }
+        }
+        function playSnore(){
+          if(!audioCtx) return;
+          try{
+            var now = audioCtx.currentTime;
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(90, now);
+            osc.frequency.linearRampToValueAtTime(48, now + 0.55);
+            osc.frequency.linearRampToValueAtTime(130, now + 0.8);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.16, now + 0.2);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+            osc.connect(gain).connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.9);
+          }catch(e){}
+        }
+        function startSnoring(){
+          ensureAudio();
+          playSnore();
+          snoreTimer = setInterval(playSnore, 2600);
+        }
+        function stopSnoring(){
+          if(snoreTimer){ clearInterval(snoreTimer); snoreTimer = null; }
+        }
+      
+        function toggleSleep(){
+          state.asleep = !state.asleep;
+          if(state.asleep){
+            startSnoring();
+          } else {
+            stopSnoring();
+            state.energy = clamp(state.energy + 30);
+            bounce();
+          }
+          render();
+        }
+      
+        document.getElementById('btn-feed').addEventListener('click', feed);
+        document.getElementById('btn-play').addEventListener('click', play);
+        document.getElementById('btn-pet').addEventListener('click', pet);
+        document.getElementById('btn-sleep').addEventListener('click', toggleSleep);
+      
+        setInterval(function(){
+          if(state.asleep){
+            state.energy = clamp(state.energy + 3);
+          } else {
+            state.hunger = clamp(state.hunger - 2);
+            state.energy = clamp(state.energy - 1);
+            state.joy = clamp(state.joy - 1.5);
+          }
+          render();
+        }, 4000);
+      
         render();
-      }
-
-      document.getElementById('btn-feed').addEventListener('click', feed);
-      document.getElementById('btn-play').addEventListener('click', play);
-      document.getElementById('btn-pet').addEventListener('click', pet);
-      document.getElementById('btn-sleep').addEventListener('click', toggleSleep);
-
-      setInterval(function(){
-        if(state.asleep){
-          state.energy = clamp(state.energy + 3);
-        } else {
-          state.hunger = clamp(state.hunger - 2);
-          state.energy = clamp(state.energy - 1);
-          state.joy = clamp(state.joy - 1.5);
-        }
-        render();
-      }, 4000);
-
-      render();
-
-      // Expose these so app.js (loaded after this script) can call them
-      window.feed = feed;
-      window.play = play;
-      window.toggleSleep = toggleSleep;
-    })();
+      
+        // Expose these so app.js (loaded after this script) can call them
+        window.feed = feed;
+        window.play = play;
+        window.toggleSleep = toggleSleep;
+      })();
     </script>
 
     <script src="libs/socket.io.min.js"></script>
@@ -710,12 +724,11 @@ In `index.html`, build the interface:
     <script src="app.js"></script>
   </body>
 </html>
-
 ```
 and in `style.css`, add:
 
 ```cpp
-  :root{
+    :root{
     --bg-deep:#0a0d1c;
     --bg-mid:#121935;
     --pixel:#4da3ff;
@@ -745,7 +758,13 @@ and in `style.css`, add:
     padding:28px 16px calc(28px + env(safe-area-inset-bottom,0px));
   }
   .app{width:100%;max-width:920px;}
-  header{text-align:center;margin-bottom:14px;}
+  header{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
   .layout{
     display:grid;
     grid-template-columns:minmax(320px,1.15fr) minmax(280px,0.85fr);
@@ -761,7 +780,7 @@ and in `style.css`, add:
     letter-spacing:0.02em;
     margin:0;
   }
-  .status{color:var(--muted);font-size:0.9rem;margin:4px 0 0;min-height:1.2em;}
+  .status{color:var(--muted);font-size:0.9rem;margin:0;min-height:1.2em;}
   .stage{
     position:relative;
     background:var(--card);
@@ -819,6 +838,14 @@ and in `style.css`, add:
     25%{transform:translate(-50%,-50%) translateY(-3px) rotate(-1deg);}
     50%{transform:translate(-50%,-50%) translateY(0) rotate(0deg);}
     75%{transform:translate(-50%,-50%) translateY(-3px) rotate(1deg);}
+  }
+  .matrix-wrap.wiggle{animation:petWiggle 0.6s ease-in-out infinite;}
+  @keyframes petWiggle{
+    0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(0deg);}
+    20%{transform:translate(-50%,-50%) translateY(-5px) rotate(-4deg);}
+    40%{transform:translate(-50%,-50%) translateY(0) rotate(4deg);}
+    60%{transform:translate(-50%,-50%) translateY(-5px) rotate(-4deg);}
+    80%{transform:translate(-50%,-50%) translateY(0) rotate(4deg);}
   }
   .matrix-wrap.shake{animation:shakeNo 0.5s ease;}
   @keyframes shakeNo{
@@ -941,7 +968,7 @@ and in `style.css`, add:
     .stage{height:240px;}
   }
   @media (prefers-reduced-motion: reduce){
-    .matrix-wrap,.aura,.matrix-wrap.bounce,.matrix-wrap.jump,.matrix-wrap.shake,.matrix-wrap.bob,.zzz{animation:none !important;}
+    .matrix-wrap,.aura,.matrix-wrap.bounce,.matrix-wrap.jump,.matrix-wrap.shake,.matrix-wrap.bob,.matrix-wrap.wiggle,.zzz{animation:none !important;}
   }
   :focus-visible{outline:2px solid var(--pixel);outline-offset:2px;}
 ```
