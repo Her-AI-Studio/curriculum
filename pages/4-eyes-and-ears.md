@@ -6,28 +6,28 @@ outline: deep
 
 ![Sketchnote coming soon](/coming-soon.png)
 
-| **Lesson Goal**            | Give Kiku real AI senses: a screen for its face, a microphone that wakes it up, and a camera that teaches it to tell good food from junk food. |
+| **Lesson Goal**            | Give Kiku real AI senses: a microphone that wakes it up with local AI and a wakeword, and a camera that teaches it to tell good food from junk food. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **What you'll learn**       | By the end of this week you will be able to:<br>- Move Kiku's display from the LED array to the screen that ships with your AI kit<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Connect a camera and train a lightweight local classifier to recognize "good food" vs. "junk food"<br>- Combine screen, microphone, and camera into Kiku's full multi-sensory pipeline<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
-| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen that ships with your AI kit, a USB microphone, a USB camera, laptop with Arduino App Lab installed |
-| **End result**              | Kiku v2 — a pet with a face on screen, ears that listen for its name, and eyes that can tell good food from junk food |
+| **What you'll learn**       | By the end of this week you will be able to:<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Connect a camera and train a lightweight local classifier to recognize "good food" vs. "junk food"<br>- Combine screen, microphone, and camera into Kiku's full multi-sensory pipeline<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
+| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen, USB microphone, and USB camera that ships with your AI kit, and your laptop with Arduino App Lab installed |
+| **End result**              | Kiku v2 — a pet on screen, ears that listen for its name, and eyes that can tell good food from junk food |
 | **Time needed to complete** | 90 minutes |
 
 ## Session Plan
 
-### Part 1 — From LEDs to a Face: Giving Kiku a Screen (20 min)
+### Part 1 — Kiku's Full Capability (20 min)
 
 **Mini-lecture: Two Brains, One Pet (5 min)**
 
 Recall from Week 3: the Uno Q actually has two "brains" on one board — an STM32 microcontroller that runs your sketch (real-time, hardware-focused), and a Qualcomm processor running a full Linux environment, capable of running Python apps and graphics.
 
-Last week, Kiku's only "face" was the LED array, driven by the microcontroller. Today we move Kiku's face to the screen that ships with your kit — driven by the Linux side, which can draw much richer graphics than a grid of LEDs.
+Last week, you built Kiku, your pet who lives on the mini monitor and with which you can interact with your mini keyboard. Its behavior is based on logic in code that you loaded onto your board.
 
-**Activity: Connect Your Cyberdeck (10 min)**
+**Activity: Connect All Your Cyberdeck Peripherals (10 min)**
 
-This is the week Kiku becomes a real cyberdeck. Connect the pieces:
+This is the week you connect all the pieces of your cyberdeck.
 
-1. Connect the USB hub to your Uno Q.
+1. Connect the USB hub to your Uno Q and to a power source, as you did in the last session.
 2. Connect the monitor to the hub.
 3. Make sure your Bluetooth keyboard (paired back in Week 3) is on and ready — you'll use it both to log in and to keep controlling Kiku.
 4. Power everything on. You should see the Arduino login/desktop appear on the monitor.
@@ -35,23 +35,16 @@ This is the week Kiku becomes a real cyberdeck. Connect the pieces:
 
 > **Troubleshooting:** If the monitor stays blank, check the hub's power connection first — a hub that isn't getting enough power often fails to pass video through to a display.
 
-**Activity: Build Kiku's Face (5 min)**
+6. Plug in the mini microphone to the hub
+7. Plug in the mini camera to the hub
 
-In App Lab, add a new **Python app** alongside your sketch — this is Kiku's UI, running on the Linux side of the board.
+**Activity: Add AI Bricks (5 min)**
 
-> **Note for facilitators:** This section is a placeholder. Paste the actual Kiku UI code here — it should render Kiku's face/expression based on its current mood (happy, hungry, sleepy, etc.) and update whenever that mood changes.
+In App Lab, add two AI bricks to your Kiku app: **Video Image Classification** and **Keyword Spotting**. We're going to use these to make Kiku "see" and "hear."
 
-```python
-# TODO: Replace this placeholder with the real Kiku UI code.
-# It should:
-#   - draw Kiku's face on screen, with a different expression per mood
-#   - read Kiku's current mood (via the Bridge, from the sketch)
-#   - redraw whenever the mood changes
-#
-# Paste the actual UI code here once it's ready.
-```
+![Adding a brick](/add-brick.png)
 
-**How does the sketch tell this app what mood Kiku is in?** App Lab includes a built-in Bridge for passing values between the microcontroller side and the Linux side. Check your App Lab version's docs for the current Bridge syntax — the idea is: your Kiku sketch updates a `mood` value whenever hunger, energy, or an `F`/`P`/`S` key press changes it, and this Python app reads that value and redraws Kiku's face whenever it changes.
+We'll wire each one up properly in the parts that follow — for now, just get both bricks added to the project.
 
 ### Part 2 — Kiku Wakes Up: Microphone and Wake Word (25 min)
 
@@ -61,44 +54,70 @@ Devices like "Hey Siri" or "OK Google" aren't listening to everything you say an
 
 This connects directly to what you learned about data sovereignty in Week 2: because this wake-word detection runs entirely on the Uno Q's own Linux side, your voice never has to leave the device to figure out whether you said "Kiku."
 
-**Activity: Connect the Microphone (5 min)**
+**Activity: Train and Deploy a Custom Wake Word Model (10 min)**
 
-Plug your USB microphone into the Uno Q (via the hub, if needed). Confirm it's detected as an audio input device on the Linux side.
+The Keyword Spotting brick needs a model that knows what "Hey Kiku" sounds like. That model comes from **Edge Impulse**, a service affiliated with Arduino's App Lab. We've created a pre-trained model for you that can listen for "Kiku" or "Hey Kiku" — let's make it available to your device.
 
-**Activity: Detect a Wake Word (15 min)**
+> 💡 You can use the free Developer plan in Edge Impulse Studio to train your own model on your own data, but for now let's save time by using this pretrained one.
 
-We'll use [openWakeWord](https://github.com/dscripka/openWakeWord), an open-source, fully local wake-word engine.
+1. Create an account at https://studio.edgeimpulse.com and login
+2. Clone the model by opening its page: https://studio.edgeimpulse.com/public/1124727/live
+3. Click `Clone this project` in the top-right corner of the page. You can keep it personal and private if you like.
+4. Once cloned, navigate to Deployment in the left sidebar of your cloned project.
+5. Select your target deployment option: Arduino Library. Make sure the Target at the top is Arduino Uno Q
 
-```bash
-pip install openwakeword sounddevice
-```
+![Library](/arduino-lib-edge-impulse.png)
+
+6. Click Build
+7. Connect your device to your Edge account by returning to App Lab and clicking the AI models tab in your Kiku app's Keyword Spotting brick. Once logged in, App Lab is connected to Edge Impulse and you can find your models.
+8. Click `download` and install the model to App Lab.
+
+![Model in App Lab](/model-in-app-lab.png)
+
+**Activity: Wire Up the Wake Word (10 min)**
+
+Now let's make "Hey Kiku" actually do something. In the `python` folder, find `main.py` and add this code under the keypress function:
 
 ```python
-from openwakeword.model import Model
-import sounddevice as sd
-import numpy as np
+from arduino.app_utils import *
+from arduino.app_bricks.keyword_spotting import KeywordSpotting
 
-# openWakeWord ships with several pre-trained wake words.
-# For class, pick the closest available one and treat it as "Kiku's name"
-# — check the current openWakeWord docs if you want to train a real custom "Hey Kiku" model.
-model = Model(wakeword_models=["hey_jarvis"])
+spotting = KeywordSpotting()
 
-def audio_callback(indata, frames, time, status):
-    prediction = model.predict(indata[:, 0])
-    if prediction["hey_jarvis"] > 0.5:
-        print("Kiku is awake!")
-        # TODO: update Kiku's mood/state (e.g. from "sleepy" to "happy")
-        # and tell the face app to redraw
+def on_wake_word():
+    print("Hey Kiku detected!")
+    ui.send_message("wake_up", {})
 
-with sd.InputStream(channels=1, samplerate=16000, callback=audio_callback):
-    print("Listening for Kiku's wake word...")
-    while True:
-        pass
+spotting.on_detect("Hey_Kiku", on_wake_word)
+
+App.run()
 ```
 
-> **Note:** Installing audio libraries can take a few minutes the first time. If your kit's image comes with these pre-installed, skip straight to running the script.
+In `index.html`, dig into the code and find `function pet()`. Under that, add another function to wake up Kiku:
 
-Try it: put Kiku to sleep (from Week 3's sleep action), then say the wake word. Kiku's face should wake up.
+```javascript
+function wakeUp(){
+          if (!state.asleep) return;
+          state.asleep = false;
+          state.joy = 70;
+          stopSnoring();
+          petReaction(); burst('var(--happy)'); render();
+          statusEl.textContent = 'hello there!';
+        }
+
+// Expose it so app.js (loaded after this script) can call it
+window.wakeUp = wakeUp;
+```
+
+in `app.js` add this code to line 3:
+
+```javascript
+ui.on_message('wake_up', () => {
+  window.wakeUp();
+});
+```
+
+Try it: put Kiku to sleep (from Week 3's sleep action), then say "Hey Kiku." Kiku should wake up.
 
 **Full-group debrief:**
 
