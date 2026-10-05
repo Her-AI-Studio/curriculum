@@ -27,6 +27,8 @@ Last week, you built Kiku, your pet who lives on the mini monitor and with which
 
 This is the week you connect all the pieces of your cyberdeck.
 
+> If you don't have a Her AI Studio AI Kit, you can still do this activity using a small microphone and camera connected to your monitor. It won't be quite as fun but it will still work!
+
 1. Connect the USB hub to your Uno Q and to a power source, as you did in the last session.
 2. Connect the monitor to the hub.
 3. Make sure your Bluetooth keyboard (paired back in Week 3) is on and ready — you'll use it both to log in and to keep controlling Kiku.

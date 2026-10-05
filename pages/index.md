@@ -18,6 +18,9 @@ hero:
     - theme: brand
       text: "Your Cyberdeck"
       link: /cyberdeck-instructions
+    - theme: brand
+      text: "Mini Workshop"
+      link: /mini-workshop
 
 features:
   - title: Get Started on Your Own Machine
@@ -32,4 +35,8 @@ features:
     details: Design and assemble a cyberdeck, a portable studio for coding, prompting, and creating on the go. This capstone projects brings your skills together in one build you can show off at home, school, or showcase night.
     link: /cyberdeck-instructions
     linkText: Your Cyberdeck
+  - title: Mini Workshop
+    details: In an hour, connect a board and create a small Tamagotchi-style friend
+    link: /mini-workshop
+    linkText: Mini Workshop
 ---

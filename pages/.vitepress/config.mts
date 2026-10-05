@@ -16,6 +16,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Sessions', link: '/week-1' },
+      { text: 'Workshops', link: '/mini-workshop' },
     ],
     sidebar: [
       {
@@ -33,8 +34,18 @@ export default defineConfig({
               { text: 'Session 4: Eyes and Ears', link: '/4-eyes-and-ears' },
             ],
           },
-          { text: 'Capstone', link: '/cyberdeck-instructions',
-            items: [{text: 'Final Project', link: '/cyberdeck-instructions'}],
+          { text: 'Capstone', link: '/5-cyberdeck-instructions',
+            items: [{text: 'Final Project', link: '/5-cyberdeck-instructions'}],
+          }
+        ],
+      },
+      {
+        text: 'Workshops',
+        items: [
+          { text: 'Mini Workshop', link: '/mini-workshop',
+            items: [
+              {text: 'Build a Pet', link: '/mini-workshop'}
+            ],
           }
         ],
       },
