@@ -138,7 +138,7 @@ So far your board can run code, but it can't hear from you. With just the board 
 
 It's time to build a pet! Kiku looks like this on device (when sleeping) - wake them to feed and play.
 
-![kiku](./kiku-board.png)
+![kiku](/kiku-board.jpeg)
 
 Overwrite `sketch.ino` in your app with this code:
 
@@ -331,7 +331,7 @@ Take a minute to understand the code: where are the stat variables? How do they 
 
 Run the sketch, open the Serial Monitor in App Lab, and type `f` to feed Kiku, `p` to play, and `s` to put it to sleep (or wake it back up). Watch its face react on the LED matrix, and leave it running for a few minutes to see hunger, joy, and energy drift on their own.
 
-![serial monitor](./serial-monitor.png)
+![serial monitor](/serial-monitor.png)
 
 ### Part 3 — Make It Yours: Customize & Reflect (10 min)
 
