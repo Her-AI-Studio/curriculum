@@ -98,6 +98,8 @@ const knowledgeCheckQuestions = [
 
 Think about the last time you used ChatGPT, Claude, or any AI tool. Where do you think your question went? Take 30 seconds to draw a simple diagram showing what you imagine happens after you hit "enter."
 
+![Illustration of a person drawing a diagram](/draw-diagram.png)
+
 Share your drawings with a partner. What's similar? What's different?
 
 Now check your instincts against a few quick true/false statements:
@@ -224,6 +226,8 @@ Notice what happens. Does the model refuse? Does it explain the theory but not g
 Now consider: Who decided that this topic should be guarded? What if the guardrail were set by a government, a corporation, or a community? How might those differ?
 
 **Discussion prompt:** _"Is a model with guardrails truly open? Should open models have guardrails at all, and who should decide what they block?"_
+
+![Sketchnotes, summary of open vs closed model, cloud vs local, and guardrail](/where-does-ai-live.png)
 
 ### Part 3 — "My Room": Train a Vision Model on Your Own Data (25 min)
 
