@@ -2,15 +2,15 @@
 outline: deep
 ---
 
-# Kiku Wakes Up: Giving Your Pet Eyes, Ears, and a Face
+# Kiku Wakes Up: Giving Your Pet a Personality
 
 ![Sketchnote coming soon](/coming-soon.png)
 
-| **Lesson Goal**            | Give Kiku real AI senses: a microphone that wakes it up with local AI and a wakeword, and a camera that teaches it to tell good food from junk food. |
+| **Lesson Goal**            | Give Kiku real AI senses: a microphone that wakes it up with local AI and a wakeword and the ability to chat with you. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **What you'll learn**       | By the end of this week you will be able to:<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Connect a camera and train a lightweight local classifier to recognize "good food" vs. "junk food"<br>- Combine screen, microphone, and camera into Kiku's full multi-sensory pipeline<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
-| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen, USB microphone, and USB camera that ships with your AI kit, and your laptop with Arduino App Lab installed |
-| **End result**              | Kiku v2 — a pet on screen, ears that listen for its name, and eyes that can tell good food from junk food |
+| **What you'll learn**       | By the end of this week you will be able to:<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Chat with your pet on screen via a chat interface and local AI model.<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
+| **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen, USB microphone that ships with your AI kit, and your laptop with Arduino App Lab installed |
+| **End result**              | Kiku v2 — a pet on screen, ears that listen for its name, and a chat interface |
 | **Time needed to complete** | 90 minutes |
 
 ## Session Plan
@@ -23,7 +23,7 @@ Recall from Week 3: the Uno Q actually has two "brains" on one board — an STM3
 
 Last week, you built Kiku, your pet who lives on the mini monitor and with which you can interact with your mini keyboard. Its behavior is based on logic in code that you loaded onto your board.
 
-**Activity: Connect All Your Cyberdeck Peripherals (10 min)**
+**Activity: Connect Your Cyberdeck Peripherals (10 min)**
 
 This is the week you connect all the pieces of your cyberdeck.
 
@@ -38,11 +38,10 @@ This is the week you connect all the pieces of your cyberdeck.
 > **Troubleshooting:** If the monitor stays blank, check the hub's power connection first — a hub that isn't getting enough power often fails to pass video through to a display.
 
 6. Plug in the mini microphone to the hub
-7. Plug in the mini camera to the hub
 
 **Activity: Add AI Bricks (5 min)**
 
-In App Lab, add two AI bricks to your Kiku app: **Video Image Classification** and **Keyword Spotting**. We're going to use these to make Kiku "see" and "hear."
+In App Lab, add two AI bricks to your Kiku app: **Large Language Model (LLM)** and **Keyword Spotting**. We're going to use these to make Kiku have some personality.
 
 ![Adding a brick](/add-brick.png)
 
@@ -127,72 +126,162 @@ Try it: put Kiku to sleep (from Week 3's sleep action), then say "Hey Kiku." Kik
 - Why does it matter that this all happens locally, without sending audio anywhere?
 - What might go wrong with a wake-word model? (Think about accents, background noise, or similar-sounding words.)
 
-### Part 3 — Good Food, Junk Food: Teaching Kiku to See (25 min)
+### Part 3 — Chat with Kiku (25 min)
 
-**Mini-lecture: From My Room to Kiku (5 min)**
+**Mini-lecture: What's in the LLM Brick? (5 min)**
 
-In Week 2, you trained a custom image classifier in the My Room app using MobileNet, a small model designed to run on low-power devices. Today you'll do something very similar, except the classifier will run locally on the Uno Q itself, using its camera, and it'll only need to recognize two categories: **good food** and **junk food**.
+The Large Language Model (LLM) brick you added earlier runs a small language model locally on the Uno Q's Linux side — the same "no data leaves the device" idea as the wake-word model, just applied to conversation instead of audio. We'll give it a short **system prompt** that tells it to act like Kiku rather than a generic assistant, and we'll turn on its built-in memory so it remembers what you said earlier in the conversation.
 
-Instead of retraining all of MobileNet (slow), we'll use it as a **feature extractor** — letting it do what it already knows how to do (recognize shapes and textures) — and train only a small, fast classifier on top, using just a handful of your own example photos. This is the same trick behind "teachable machine"-style tools.
+> Note, this is your opportunity to give Kiku a special personality. Maybe they speak Spanish only? Maybe they only reespond in riddles? Maybe they only respond in one-word phrases? Up to you to decide.
 
-**Activity: Connect the Camera (5 min)**
+**Activity: Build the Chat Interface (20 min)**
 
-Plug your USB camera into the Uno Q. Confirm it's detected on the Linux side.
+We need to touch four files: the HTML (what the chat box looks like), the CSS (how it looks), `app.js` (how the browser talks to the board over the socket connection you've already been using for the wake word), and `main.py` (how the board talks to the LLM brick and sends a reply back).
 
-**Activity: Train a Good-Food/Junk-Food Classifier (15 min)**
+1. In `index.html`, find the closing `</div>` for `<div class="layout">` (the grid that holds Kiku's stage and stat bars). Right after it, and still inside the outer `<div class="app">`, add a new chat section:
 
-```bash
-pip install opencv-python tensorflow scikit-learn
+```html
+<section class="chat-section">
+  <p class="chat-title">Ask Kiku</p>
+  <div class="chat-log" id="chat-log"></div>
+  <form class="chat-form" id="chat-form">
+    <input type="text" id="chat-input" placeholder="Ask Kiku something…" autocomplete="off" maxlength="300" />
+    <button type="submit" id="chat-send">Send</button>
+  </form>
+</section>
 ```
+
+2. In `style.css`, add styles for the new section so it matches Kiku's existing dark, pixel-blue theme. Drop this in near the other `.board-*` rules:
+
+```css
+.chat-section{
+  margin-top:18px;
+  background:var(--card);
+  border-radius:20px;
+  padding:14px 16px 16px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.chat-title{
+  font-family:'Baloo 2',sans-serif;
+  font-weight:700;
+  font-size:0.95rem;
+  margin:0 0 10px;
+  color:var(--text);
+}
+.chat-log{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:220px;
+  overflow-y:auto;
+  margin-bottom:10px;
+}
+.chat-msg{
+  max-width:80%;
+  padding:8px 12px;
+  border-radius:14px;
+  font-size:0.86rem;
+}
+.chat-msg p{margin:0;white-space:pre-wrap;}
+.chat-msg-user{align-self:flex-end;background:var(--pixel-dim);color:var(--text);}
+.chat-msg-kiku{align-self:flex-start;background:var(--track);color:var(--text);}
+.chat-msg-thinking p{color:var(--muted);font-style:italic;}
+.chat-form{display:flex;gap:8px;}
+.chat-form input{flex:1;min-width:0;background:var(--bg-deep);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:9px 12px;color:var(--text);font-family:'Nunito',sans-serif;}
+.chat-form button{flex-shrink:0;background:var(--pixel);color:#071022;border:none;border-radius:12px;padding:9px 16px;font-weight:700;cursor:pointer;}
+.chat-form button:disabled{opacity:0.5;cursor:not-allowed;}
+```
+
+3. In `app.js`, add the logic that sends what you type over the same `ui` connection you used for the wake word, and listens for Kiku's reply:
+
+```javascript
+const chatLog = document.getElementById('chat-log');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+
+function addChatMessage(text, who) {
+  const msg = document.createElement('div');
+  msg.className = `chat-msg chat-msg-${who}`;
+  const p = document.createElement('p');
+  p.textContent = text;
+  msg.appendChild(p);
+  chatLog.appendChild(msg);
+  chatLog.scrollTop = chatLog.scrollHeight;
+  return msg;
+}
+
+let thinkingMsg = null;
+
+chatForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const text = chatInput.value.trim();
+  if (!text || thinkingMsg) return;
+
+  addChatMessage(text, 'user');
+  chatInput.value = '';
+  chatSend.disabled = true;
+  thinkingMsg = addChatMessage('…', 'kiku');
+  thinkingMsg.classList.add('chat-msg-thinking');
+
+  ui.send_message('chat_message', { text });
+});
+
+ui.on_message('chat_message_response', (data) => {
+  if (thinkingMsg) { thinkingMsg.remove(); thinkingMsg = null; }
+  chatSend.disabled = false;
+  addChatMessage((data && data.text) || '...', 'kiku');
+});
+```
+
+> **Troubleshooting:** Kiku's existing keyboard shortcuts (`F`, `P`, `S` for feed/play/sleep) listen for keydown events on the whole page. If you test the chat box and typing those letters makes Kiku feed or play instead of appearing in your message, find that `keydown` listener in `app.js` and add a guard at the top so it ignores keystrokes typed into the chat input:
+
+> ```javascript
+> document.addEventListener('keydown', function (e) {
+>   const isTyping = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+>   if (isTyping) return;
+>   // ...rest of the existing hotkey code
+> });
+> ```
+
+4. In `main.py`, import the LLM brick and create it with a short system prompt that gives it Kiku's personality, then register a handler for messages named `chat_message`:
 
 ```python
-import cv2
-import numpy as np
-from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input
-from sklearn.neighbors import KNeighborsClassifier
+from arduino.app_bricks.llm import LargeLanguageModel
 
-# MobileNet as a feature extractor — we're not retraining the whole network,
-# just reusing what it already knows about shapes and textures
-feature_extractor = MobileNetV2(weights="imagenet", include_top=False, pooling="avg")
+kiku_llm = LargeLanguageModel(
+    system_prompt=(
+        "You are Kiku, a tiny robotic bug-like desk pet. Answer playfully and "
+        "curiously in 1-3 short sentences, like a small companion creature would, "
+        "not like a general-purpose assistant."
+    )
+).with_memory(max_messages=12)
 
-def get_features(frame):
-    img = cv2.resize(frame, (224, 224))
-    img = np.expand_dims(preprocess_input(img.astype(np.float32)), axis=0)
-    return feature_extractor.predict(img, verbose=0)[0]
+def on_chat_message(client, data):
+    text = (data or {}).get("text", "").strip()
+    if not text:
+        return {"text": "..."}
+    try:
+        reply = kiku_llm.chat(text)
+    except Exception as e:
+        print(f"Kiku chat error: {e}")
+        reply = "hmm, my antennae are a little fuzzy right now. try again?"
+    return {"text": reply}
 
-camera = cv2.VideoCapture(0)
-features, labels = [], []
-
-for label in ["good_food", "junk_food"]:
-    input(f"Show the camera 5 examples of {label}, then press Enter...")
-    for i in range(5):
-        ok, frame = camera.read()
-        features.append(get_features(frame))
-        labels.append(label)
-        input(f"  Captured {i + 1}/5 — reposition and press Enter for the next")
-
-# A simple classifier trained on just those features
-classifier = KNeighborsClassifier(n_neighbors=3)
-classifier.fit(features, labels)
-
-def classify_food():
-    ok, frame = camera.read()
-    prediction = classifier.predict([get_features(frame)])[0]
-    print(f"Kiku sees: {prediction}")
-    return prediction
+ui.on_message("chat_message", on_chat_message)
 ```
 
-> **Note:** Loading TensorFlow can take a moment. If class time is tight, ask your facilitator whether this can be pre-loaded before the session.
+Notice the handler just **returns** a dictionary instead of calling `ui.send_message` directly — the WebUI brick automatically sends it back to the browser as `chat_message_response`, which is exactly the event name `app.js` is listening for in step 3.
 
-Now wire the result into Kiku: when `classify_food()` returns `"good_food"`, update Kiku's state so it gets fed and happy; when it returns `"junk_food"`, give Kiku a "sluggish" or "sick" reaction instead. Use the same Bridge approach from Part 1 to update the mood shown on the face.
+**Try it:** type a question into the new box — "What's your favorite food?" or "Are you sleepy?" — and watch Kiku's reply appear after a "…" thinking bubble.
 
 **Full-group debrief:**
 
-- How many examples did it take before the classifier reliably told good food from junk food?
-- Try showing it something it's never seen. What does it predict, and why?
-- What foods do you think it would misclassify, and why?
+- The system prompt is the only thing standing between "generic chatbot" and "Kiku." If you rewrite it, how does Kiku's personality change?
+- This chat still runs entirely on your board, with no internet connection required, just like the wake word. What trade-offs come with running a small, local model instead of a large cloud one (speed, quality, privacy, cost)?
+- `with_memory()` lets Kiku remember earlier turns in the conversation. What happens if you remove it and chat for a few turns — does Kiku's personality still feel consistent?
 
-### Part 4 — Kiku Comes Alive: Eyes, Ears, Screen, and Body (20 min)
+### Part 4 — Kiku Comes Alive (20 min)
 
 **Activity: End-to-End Demo (10 min)**
 
@@ -200,9 +289,10 @@ Put it all together and try the full experience:
 
 1. Kiku starts out asleep (face shows "sleepy," eyes closed)
 2. Say the wake word — Kiku's face wakes up
-3. Hold up a food item to the camera — Kiku classifies it as good or junk food
-4. Kiku's mood updates on screen based on what it "ate"
+3. Press `F` to feed Kiku
+4. Watch Kiku's mood update on screen
 5. Use `P` or `S` on the Bluetooth keyboard from Week 3 to play with Kiku or put it back to sleep
+6. Try a chat!
 
 **Reflection: What You Built**
 
@@ -211,32 +301,26 @@ Think back across all four weeks:
 - **Week 1:** You learned what AI is, and why your perspective on it matters
 - **Week 2:** You trained a model on your own data and understood what "local" really means
 - **Week 3:** You gave Kiku a body, a Bluetooth keyboard, and rule-based logic — no AI yet
-- **Week 4:** You gave Kiku senses — a wake-word model and an image classifier — genuine AI, running entirely on your own hardware
-
-**Discussion prompt:** _"You just trained Kiku's food classifier on only a handful of examples — mostly foods from your own kitchen. What might it misclassify? How is this the same bias mechanism we discussed with big AI models in Week 1, just at a scale small enough to see directly?"_
+- **Week 4:** You gave Kiku senses — a wake-word model and a chatbot — genuine AI, running entirely on your own hardware
 
 ## Take-Home
 
 **Check Your Understanding**
 
 1. What's the difference between a wake-word model and full speech recognition?
-2. Why did we use MobileNet as a "feature extractor" instead of retraining it from scratch?
-3. What is the Bridge doing when it passes Kiku's mood from the sketch to the Python face app?
-4. Which parts of Kiku's Week 4 behavior are "real AI," and which parts are still the rule-based logic from Week 3?
-5. Why does it matter that the wake-word detection and food classification both happen locally, on the board itself?
+2. What is the Bridge doing when it passes Kiku's mood from the sketch to the Python face app?
+3. Which parts of Kiku's Week 4 behavior are "real AI," and which parts are still the rule-based logic from Week 3?
+4. Why does it matter that the wake-word detection and chat both happen locally, on the board itself?
 
 **Assignment**
 
-- Add more training examples to the food classifier and see if it gets more reliable
-- Add a third food category (e.g., "not food") and see how the classifier handles it
+- Connect your camera and create a new Kiku integration of your own design
 - Design a new face expression for a mood not covered in class
-- Write a short reflection: what would you need to add to make Kiku's food classifier trustworthy enough to actually rely on?
+- Write a short reflection: what useful aspect of creating a simple 'pet' stands out to you?
 
 **Optional Supplemental Reading**
 
 - [openWakeWord on GitHub](https://github.com/dscripka/openWakeWord)
-- [MobileNetV2 Paper](https://arxiv.org/abs/1801.04381) — the architecture behind the vision model
-- [Transfer Learning with TensorFlow](https://www.tensorflow.org/tutorials/images/transfer_learning) — the technique behind using MobileNet as a feature extractor
 - [Arduino App Lab Documentation](https://docs.arduino.cc/software/app-lab/)
 
 ## Next Steps
