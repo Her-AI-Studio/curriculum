@@ -63,11 +63,6 @@ Before you touch glue, cardboard, or a drill, spend 10 minutes planning like an 
 
 > 💡 This is the first step of the **engineering design process**: sketch → plan → build → test → refine. You'll come back to this sketch in Part 3, and you can change it once you've actually tried fitting things together.
 
-**Full-group debrief (5 min)**
-
-- What tradeoffs came up when you compared use cases and build options? (Portability vs. screen size, access vs. protection, looks vs. ease of build.)
-- Who is this cyberdeck for, just you, or will other people need to understand how to use it?
-
 ### Part 2 — Add a Sense: Camera and Vision (Optional) (45 min)
 
 > Skip this part if your build doesn't call for a camera — not every project needs one.
@@ -107,11 +102,6 @@ Sketch your reaction the same way you sketched your enclosure in Part 1:
 > When you're ready to actually wire it up, App Lab's Vision brick documentation and its built-in examples walk you through connecting a detection event to whatever output you choose.
 
 **Try it:** stand in front of the camera and see what the brick reports before you build anything on top of it — that raw detection is the foundation your reaction will sit on.
-
-**Full-group debrief (5 min):**
-
-- The vision brick reports a *confidence score*, not a certainty. What might make it less confident — lighting, distance, motion?
-- If your build has more than one input running at once (keyboard, wake word, mic, vision), what happens if two of them fire at nearly the same time?
 
 **Activity: Make It Yours (5 min)**
 
