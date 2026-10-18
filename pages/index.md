@@ -17,7 +17,7 @@ hero:
       link: /week-2
     - theme: brand
       text: "Your Cyberdeck"
-      link: /cyberdeck-instructions
+      link: /5-cyberdeck-instructions
     - theme: brand
       text: "Mini Workshop"
       link: /mini-workshop
@@ -33,7 +33,7 @@ features:
     linkText: Week 2
   - title: Your Cyberdeck
     details: Design and assemble a cyberdeck, a portable studio for coding, prompting, and creating on the go. This capstone projects brings your skills together in one build you can show off at home, school, or showcase night.
-    link: /cyberdeck-instructions
+    link: /5-cyberdeck-instructions
     linkText: Your Cyberdeck
   - title: Mini Workshop
     details: In an hour, connect a board and create a small Tamagotchi-style friend
