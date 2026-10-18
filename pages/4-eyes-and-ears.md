@@ -298,6 +298,8 @@ Put it all together and try the full experience:
 5. Use `P` or `S` on the Bluetooth keyboard from Week 3 to play with Kiku or put it back to sleep
 6. Try a chat!
 
+![chatting with Kiku](/chat-kiku.png)
+
 **Reflection: What You Built**
 
 Think back across all four weeks:
