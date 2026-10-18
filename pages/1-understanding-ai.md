@@ -138,6 +138,8 @@ Nor do they have a moral conscience, since they do not judge good and evil, gras
 
 Read the Pope's encyclical [here](https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html).
 
+![Sketchnotes, summary of the What is a model? section](/what-is-a-model.png)
+
 **Let's talk about all that data**
 
 It takes a lot of data (images, sounds, text) to train one of these big models. This data comes from all over the internet. It's important to know that training data is scraped, not licensed. If a machine can find data, it will probably be ingested into a ML model. 
