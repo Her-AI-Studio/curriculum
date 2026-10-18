@@ -132,11 +132,15 @@ Try it: put Kiku to sleep (from Week 3's sleep action), then say "Hey Kiku." Kik
 
 The Large Language Model (LLM) brick you added earlier runs a small language model locally on the Uno Q's Linux side — the same "no data leaves the device" idea as the wake-word model, just applied to conversation instead of audio. We'll give it a short **system prompt** that tells it to act like Kiku rather than a generic assistant, and we'll turn on its built-in memory so it remembers what you said earlier in the conversation.
 
-> Note, this is your opportunity to give Kiku a special personality. Maybe they speak Spanish only? Maybe they only reespond in riddles? Maybe they only respond in one-word phrases? Up to you to decide.
+> Note, this is your opportunity to give Kiku a special personality. Maybe they speak Spanish only? Maybe they only respond in riddles? Maybe they only respond in one-word phrases? Up to you to decide.
 
 **Activity: Build the Chat Interface (20 min)**
 
 We need to touch four files: the HTML (what the chat box looks like), the CSS (how it looks), `app.js` (how the browser talks to the board over the socket connection you've already been using for the wake word), and `main.py` (how the board talks to the LLM brick and sends a reply back).
+
+> Note: to use the LLM model, you need to download a local model to the board before running the app, so do that in App Lab.
+
+![download model](/download-llm-model.png)
 
 1. In `index.html`, find the closing `</div>` for `<div class="layout">` (the grid that holds Kiku's stage and stat bars). Right after it, and still inside the outer `<div class="app">`, add a new chat section:
 
