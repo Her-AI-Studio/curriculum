@@ -2,6 +2,83 @@
 outline: deep
 ---
 
+<script setup lang="ts">
+const warmupQuestions = [
+  {
+    id: 'ttl-1',
+    prompt: "The wake-word model and the chat LLM in this lesson both send your voice and messages to a cloud server to be processed.",
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — both run entirely on the Uno Q's own Linux side. Nothing you say or type has to leave the board.",
+  },
+  {
+    id: 'ttl-2',
+    prompt: "Kiku's chat personality comes from a system prompt you write, not from retraining the underlying model.",
+    choices: ['True', 'False'],
+    correctIndex: 0,
+    explanation: "True — the system prompt steers an existing model's tone and persona. The model's weights never change.",
+  },
+  {
+    id: 'ttl-3',
+    prompt: "Once you add the wake-word and chat bricks, Kiku's Bluetooth keyboard shortcuts (F, P, S) from Week 3 stop working.",
+    choices: ['True', 'False'],
+    correctIndex: 1,
+    explanation: "False — the keyboard shortcuts keep working alongside the new senses. You'll just need to make sure typing in the chat box doesn't accidentally trigger them.",
+  },
+]
+
+const knowledgeCheckQuestions = [
+  {
+    id: 'kc-1',
+    prompt: "What does the wake-word model actually do?",
+    choices: [
+      'Records everything you say and uploads it periodically',
+      'Runs entirely on-device, listening only for one specific phrase and ignoring everything else',
+      'Transcribes all of your speech to text in the cloud',
+      "Replaces the Bluetooth keyboard entirely",
+    ],
+    correctIndex: 1,
+    explanation: "A wake-word model is small and narrow on purpose — it only has to recognize one phrase, which is what lets it run locally without sending audio anywhere.",
+  },
+  {
+    id: 'kc-2',
+    prompt: "What is a system prompt, in the context of Kiku's chat brick?",
+    choices: [
+      'A line of code that trains a brand new model from scratch',
+      "Instructions given to the existing LLM that shape its persona and tone, without changing its underlying weights",
+      "A network setting for the board's WiFi connection",
+      'The Arduino Bridge function that passes messages to the sketch',
+    ],
+    correctIndex: 1,
+    explanation: "The system prompt is the only thing standing between a generic chatbot and Kiku's personality — it steers behavior without retraining anything.",
+  },
+  {
+    id: 'kc-3',
+    prompt: "Which Week 4 behavior is best described as 'real AI,' as opposed to the rule-based logic from Week 3?",
+    choices: [
+      'The LED reacting to F, P, and S keypresses',
+      'The wake-word detection and chat responses, which come from trained models rather than hand-written if/else logic',
+      'The hunger, energy, and joy stats decaying over time',
+      'The Bluetooth pairing process',
+    ],
+    correctIndex: 1,
+    explanation: "F/P/S and the stat decay are still logic you wrote by hand. The wake word and chat are the first parts of Kiku driven by trained models instead.",
+  },
+  {
+    id: 'kc-4',
+    prompt: "Why does it matter that both the wake-word detection and the chat happen locally, on the board itself?",
+    choices: [
+      "It doesn't matter — cloud and local behave identically in every way",
+      'Your voice and conversation never have to leave your device — the same data-sovereignty idea from Week 2',
+      'It makes the LED blink faster',
+      "It's required for the Bluetooth keyboard to pair",
+    ],
+    correctIndex: 1,
+    explanation: "This is Week 2's data-sovereignty lesson in practice: running the models on-device, not in the cloud, is what keeps your voice and conversation private.",
+  },
+]
+</script>
+
 # Kiku Wakes Up: Giving Your Pet a Personality
 
 ![Sketchnote coming soon](/coming-soon.png)
@@ -11,11 +88,17 @@ outline: deep
 | **What you'll learn**       | By the end of this week you will be able to:<br>- Connect a microphone and use a local wake-word model to wake Kiku up<br>- Chat with your pet on screen via a chat interface and local AI model.<br>- Explain the difference between Kiku's rule-based behavior (Week 3) and its AI-powered behavior (this week) |
 | **Tools you'll need**       | Arduino Uno Q board and Bluetooth keyboard (from Week 3), USB hub, the screen, USB microphone that ships with your AI kit, and your laptop with Arduino App Lab installed |
 | **End result**              | Kiku v2 — a pet on screen, ears that listen for its name, and a chat interface |
-| **Time needed to complete** | 90 minutes |
+| **Time needed to complete** | 95 minutes |
 
 ## Session Plan
 
-### Part 1 — Kiku's Full Capability (20 min)
+### Part 1 — Kiku's Full Capability (25 min)
+
+**Warm-up: True or False? (5 min)**
+
+Before you dive into wake words and chat, check your instincts against a few statements about what you're about to build:
+
+<Quiz id="week4-warmup" title="Warm-up: True or False?" :questions="warmupQuestions" />
 
 **Mini-lecture: Two Brains, One Pet (5 min)**
 
@@ -317,6 +400,10 @@ Think back across all four weeks:
 2. What is the Bridge doing when it passes Kiku's mood from the sketch to the Python face app?
 3. Which parts of Kiku's Week 4 behavior are "real AI," and which parts are still the rule-based logic from Week 3?
 4. Why does it matter that the wake-word detection and chat both happen locally, on the board itself?
+
+**Quick Knowledge Check**
+
+<Quiz id="week4-knowledge-check" title="Post-Session Knowledge Check" :questions="knowledgeCheckQuestions" />
 
 **Assignment**
 
