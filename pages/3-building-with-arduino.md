@@ -81,7 +81,7 @@ const knowledgeCheckQuestions = [
 
 # Building with Arduino: Meet Kiku
 
-![Sketchnote coming soon](/coming-soon.png)
+![Sketchnote, Building with Arduino Uni Q](/building-with-arduino.png)
 
 | **Lesson Goal**            | Bring Kiku, your Tamagotchi-style Arduino pet, to life: an blinking heartbeat, a Bluetooth keyboard for interaction, and code that gives it a personality that needs feeding, playing, and sleep. This lesson gets you familiar with Arduino and the Her AI Studio cyberdeck peripherals |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
