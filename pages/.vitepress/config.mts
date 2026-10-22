@@ -17,6 +17,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Sessions', link: '/week-1' },
       { text: 'Workshops', link: '/mini-workshop' },
+      { text: 'Blog', link: 'https://dev.to/heraistudio' },
     ],
     sidebar: [
       {
