@@ -78,4 +78,4 @@ The progression is intentional: students begin by examining AI critically — as
 
 We believe the field of AI needs more voices, not fewer — and that young women who ask hard questions are exactly who should be building these systems.
 
-![Teaching AI](/teaching.png)
+![Teaching AI](./pages/public/teaching.png)
