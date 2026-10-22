@@ -28,39 +28,45 @@ The curriculum starts not with setup instructions, but with the question that ma
 
 ## Course Structure
 
-| Course | Focus | Outcome |
-|--------|-------|---------|
-| [Understanding AI](pages/1-understanding-ai.md) | AI foundations, critical thinking, and bias in systems | A clear understanding of how models learn and why your perspective matters |
-| [Working with Data](pages/2-working-with-data.md) | Training data, local AI, and responsible model choices | A locally running AI workflow and a small custom image classifier |
-| [Building with Arduino: Meet Kiku](pages/3-building-with-arduino.md) | From software to device with boards, sensors, and hardware | A working Arduino sketch, LED interactions, and a WiFi-connected AI companion |
-| [Kiku Wakes Up](pages/4-eyes-and-ears.md) | Computer vision, cameras, and multimodal AI | A camera-enabled project that sees, classifies, and responds using local AI |
-| [Cyberdeck](pages/5-cyberdeck-instructions.md) | Designing and assembling a portable AI system | A complete cyberdeck build and final showcase |
+Five sessions, grouped into two "weeks" of paired sessions plus a standalone capstone:
+
+| Week | Sessions | Focus | Outcome |
+|------|----------|-------|---------|
+| [Week 1: Discover](pages/week-1.md) | [Session 1 — Understanding AI](pages/1-understanding-ai.md) · [Session 2 — Working with Data](pages/2-working-with-data.md) | AI foundations, critical thinking, bias, training data, local AI | An AI Audit Card, a personal statement, Ollama running locally, and a small custom image classifier trained with the My Room app |
+| [Week 2: Create](pages/week-2.md) | [Session 3 — Building with Arduino](pages/3-building-with-arduino.md) · [Session 4 — Kiku Wakes Up](pages/4-eyes-and-ears.md) | Arduino Uno Q, Bluetooth peripherals, rule-based logic, then real on-device AI (wake word + local LLM chat) | Kiku: a working Arduino pet with a Bluetooth-keyboard-driven personality, a wake word, and a chat interface |
+| Capstone | [Your Cyberdeck](pages/5-cyberdeck-instructions.md) | An open-ended, self-directed build combining every peripheral and skill from the course | A complete, battery-powered, personally-designed cyberdeck ready for showcase |
+
+Two more standalone pages round out the curriculum:
+
+| Page | Purpose |
+|------|---------|
+| [Mini Workshop: Build a Pet](pages/mini-workshop.md) | A 60-minute, board-only taste of the course — flash a sketch, build a tiny on-device Kiku, no extra peripherals required |
+| [CSTA Standards Mapping](pages/csta-standards.md) | Maps every session to 2026 CSTA PK–12 Computer Science Standards, for facilitators |
 
 ---
 
 ## Each Lesson Includes
 
-- Sketchnote
-- Warm-up and Cool-down Quizzes
-- Written lesson
-- Separate facilitator notes
+- Sketchnote (in progress — not every lesson has one yet)
+- Warm-up and knowledge-check quizzes
+- Written lesson with a session plan broken into timed parts
 - Step-by-step project guides (for project-based weeks)
 - Discussion prompts and activities
-- Check your understanding questions
+- Check Your Understanding questions
 - Take-home challenge and supplemental reading
 
 ---
 
 ## Lessons
 
-| Project Name | Concepts Taught | Learning Objectives | Linked Lesson | Sketchnote | Author |
-| ------------ | --------------- | ------------------- | :-----------: | :--------: | ------ |
-| Understanding AI: Who Built It, Who It's For, and Why You Belong Here | What is a model? Women in AI history. Bias as a mirror. Skepticism as a skill. | Describe how a language model learns · Name women who shaped AI · Identify where bias enters a system · Articulate why your perspective matters | [Week 1](pages/week-1.md) | ✅ | Jen Looper |
-| Taking Control: Training Data and Local AI | Training data, data sovereignty, local vs. cloud AI, model guardrails | Explain cloud vs. local AI trade-offs · Install and run a local open-source model · Train a small custom image classifier with the My Room app | [Week 2](pages/week-2.md) |  | Jen Looper |
-| Software to Hardware | Getting used to the hardware | TBD | [Week 3](pages/week-3.md) | | Jen Looper |
-| Hybrid Project Build: App TBD | Building an app using the board | TBD | [Week 4](pages/week-4.md) | | Jen Looper |
-| Working Towards Offline: Creating a Fully Local Computer | TBD | TBD | [Week 5](pages/week-5.md) | | Jen Looper |
-| My Cyberdeck — Final Build | TBD | TBD | [Week 6](pages/week-6.md) | | Jen Looper |
+| Session | Concepts Taught | Learning Objectives | Linked Lesson | Sketchnote | Author |
+| ------- | ---------------- | -------------------- | :------------: | :--------: | ------ |
+| 1 — Understanding AI: Who Built It, Who It's For, and Why You Belong Here | What is a model? Women in AI history. Bias as a mirror. Skepticism as a skill. | Describe how a language model learns · Name women who shaped AI · Identify where bias enters a system · Articulate why your perspective matters | [Lesson](pages/1-understanding-ai.md) | ✅ | Jen Looper |
+| 2 — Understanding Training Data and Models | Cloud vs. local AI, data sovereignty, open vs. closed models, guardrails | Explain cloud vs. local AI trade-offs · Install and run a local open-source model with Ollama · Train a small custom image classifier with the My Room app | [Lesson](pages/2-working-with-data.md) |  | Jen Looper |
+| 3 — Building with Arduino: Meet Kiku | Arduino sketches, the Uno Q's dual MCU/MPU design, Bluetooth pairing, a Web UI brick, state machines | Set up Arduino App Lab and flash a sketch · Control the onboard LED array · Pair a Bluetooth keyboard · Build a rule-based pet with a web interface | [Lesson](pages/3-building-with-arduino.md) | | Jen Looper |
+| 4 — Kiku Wakes Up: Giving Your Pet a Personality | Local wake-word detection, local LLM chat, system prompts, rule-based vs. AI-powered behavior | Connect a microphone and trigger a local wake-word model · Add a chat interface backed by a local LLM · Explain the difference between rule-based and AI-powered behavior | [Lesson](pages/4-eyes-and-ears.md) | | Jen Looper |
+| Capstone — Your Cyberdeck | Engineering design process, vision models, portable battery power, enclosure design, attribution | Scope and build an independent, purpose-driven cyberdeck · Combine every AI Kit peripheral into one enclosure · Present and teach the finished build | [Lesson](pages/5-cyberdeck-instructions.md) | | Jen Looper |
+| Mini Workshop — Build a Pet | Flashing sketches, Serial communication, LED matrix animation, a small state machine | Flash a sketch over USB · Read typed commands over Serial · Build a tiny on-device pet with no extra peripherals | [Lesson](pages/mini-workshop.md) | | Jen Looper |
 
 ---
 
