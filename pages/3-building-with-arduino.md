@@ -188,6 +188,8 @@ void loop() {
 
 Kiku needs a better place to live. Let's move them from the Arduino to your mini monitor. This is the first step in using the peripherals included in your AI kit; you'll set up your Arduino as a "SBC" - a single board computer, the base architecture of a cyberdeck.
 
+![Illustration of a board and peripherals](/connecting-peripherals.png)
+
 Some of your peripherals are simple plugs you need to connect, so let's do those first:
 
 1. Disconnect the Arduino from your computer
