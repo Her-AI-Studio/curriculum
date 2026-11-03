@@ -4,7 +4,7 @@ outline: deep
 
 # Your Cyberdeck: Capstone Build
 
-![Sketchnote coming soon](/coming-soon.png)
+![Sketchnote, Final project with Arduino Uno Q](/final-project.png)
 
 _Capstone — an independent build. You choose the purpose, the peripherals, and the form factor._
 
