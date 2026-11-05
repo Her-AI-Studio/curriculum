@@ -81,7 +81,7 @@ const knowledgeCheckQuestions = [
 
 # Kiku Wakes Up: Giving Your Pet a Personality
 
-![Sketchnote coming soon](/coming-soon.png)
+![Sketchnote, Running local AI on Arduino Uno Q](/llm-on-arduino.png)
 
 | **Lesson Goal**            | Give Kiku real AI senses: a microphone that wakes it up with local AI and a wakeword and the ability to chat with you. |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
