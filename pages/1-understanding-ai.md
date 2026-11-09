@@ -81,7 +81,7 @@ const knowledgeCheckQuestions = [
 
 # Understanding AI: Who Built It, Who It's For, and Why You Belong Here
 
-![Sketchnotes, week 1](/week-1.png)
+![Sketchnotes, women who shaped AI](/women-in-ai.png)
 
 | **Lesson Goal**            | What is AI? Who built it? Why should you care?                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
