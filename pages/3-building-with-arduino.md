@@ -194,7 +194,7 @@ Some of your peripherals are simple plugs you need to connect, so let's do those
 
 1. Disconnect the Arduino from your computer
 2. Connect the USB Hub's built-in USB C cable to the Arduino
-3. Connect your other USB C cable to a power source (could be a plug, or your computer) and to the USB Hub
+3. Connect your other USB C cable to a power source and to the USB Hub
 4. Connect the mini monitor to the USB hub using your HDMI cable and a micro USB to USB cable
 5. Reconnect the board to a power source and boot it. 
 
@@ -202,10 +202,10 @@ Now you need to work with the keyboard, which is [connected to your board via Bl
 
 On your laptop, in App Lab, find your board's name at the bottom left and press the `>` icon next to it to connect to the board's shell, or terminal. This is how you control your board remotely.
 
-1. With your small keyboard powered on, put it in pairing mode. Depending on the model, it may be pressing `function` and `shift` buttons. A light should blink quickly when it's in pairing mode.
+1. With your small keyboard powered on, put it in pairing mode. Depending on the model, it may be pressing `function` and `* (bluetooth button)` buttons, as in the keyboards that ship with our kit. A yellow light should blink quickly when it's in pairing mode.
 2. Once connected, type `bluetoothctl` in the shell you launched from App Lab.
 3. Type `scan on` to scan for pairable devices
-4. Look for the name of your keyboard and copy its ID
+4. Look for the name of your keyboard and copy its ID. For our keyboards, look for `M15`.
 5. Type `pair <the id you just copied>` to pair
 6. You'll see some text, and then hopefully a notice that the pairing was successful. Now you can use your keyboard to login to the mini monitor.
 
