@@ -17,6 +17,22 @@ _Capstone — an independent build. You choose the purpose, the peripherals, and
 
 ## Session Plan
 
+Your Her AI Studio kit requires no soldering and includes the following elements: 
+- An Arduino Uno Q board with 4G of storage, enough to run local AI models with a USB to USB C cable. Use that cable to connect to your power supply (wall or a hub)
+- A USB Hub to plug in all your elements and connect to power. The hub has a built-in USB C hub that you use to connect to your Arduino board
+- A USB camera
+- A small USB microphone (may be already plugged into the USB Hub)
+- A mini-keyboard to pair to your Arduino
+- A mini monitor screen. Use a USB Mini to USB plug to connect the monitor to the hub, and use the short HDMI<>HDMI cable to connect the HDMI plug to the USB Hub.
+
+You'll use App Lab, software that you download from Arduino, to run your either from your computer or the Arduino. This is where you build your apps to customize your cyberdeck.
+
+You need to supply a way to power up your board. Most charging hubs work for this, or connect to your computer or to a wall outlet. You may need to experiment with some cables to see what works best.
+
+The fun part about building a cyberdeck is how you customize it to your own personal needs and the enclosure you build. A purse can work although we recommend not going too small, to make sure everything fits. Good luck!
+
+The next part of this session will cover some ways you can build your deck.
+
 ### Part 1 — Choose Your Build (30 min)
 
 **Mini-lecture: What Is a Cyberdeck? (5 min)**
